@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İnnovativ Təşəbbüslər İctimai Birliyi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navigation Bar */
+        header { background: #fff; padding: 15px 0; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        nav { display: flex; align-items: center; justify-content: space-between; position: relative; }
+        
+        /* Sol tərəf qrupu (Loqo) */
+        .nav-left { display: flex; align-items: center; gap: 15px; }
+        
+        /* Hamburger düyməsi (Kompüterdə gizli, telefonda aktiv) */
+        .menu-toggle { 
+            font-size: 24px; 
+            color: #0b1e3a; 
+            cursor: pointer; 
+            background: #f1f5f9; 
+            padding: 8px 12px; 
+            border-radius: 8px; 
+            transition: 0.2s; 
+            display: none; 
+        }
+        .menu-toggle:hover { background: #e2e8f0; }
+
+        .logo-box { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .logo-box img { width: 45px; height: 45px; object-fit: contain; }
+        .logo-text { font-weight: 800; font-size: 16px; color: #0b1e3a; letter-spacing: 0.5px; text-transform: uppercase; }
+        .logo-text span { color: #1e3a8a; display: block; font-size: 10px; font-weight: 600; }
+        
+        /* Kompüter üçün Standart Menyular (Yan-yana) */
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 5px; 
+            align-items: center;
+        }
+        .nav-links li { width: auto; }
+        .nav-links a { 
+            display: block;
+            text-decoration: none; 
+            color: #334155; 
+            font-size: 14px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .nav-links a:hover, .nav-links a.active { color: #0b1e3a; background: #f1f5f9; border-left: none; }
+
+        /* Səhifə Keçidləri */
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Hero Bölməsi */
+        .hero {
+            background: linear-gradient(rgba(11, 30, 58, 0.90), rgba(11, 30, 58, 0.90)), url('221.jpg') center/cover;
+            color: white; 
+            padding: 85px 20px; 
+            text-align: center; 
+            margin-bottom: 40px;
+        }
+        .hero-content { max-width: 750px; margin: 0 auto; }
+        .hero h1 { font-size: 30px; font-weight: 800; line-height: 1.3; margin-bottom: 15px; }
+        .hero p { font-size: 15px; opacity: 0.9; font-weight: 300; margin-bottom: 25px; }
+        .btn-main { background-color: #1e3a8a; color: white; padding: 12px 28px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.2s; border: none; }
+        .btn-main:hover { background-color: #2563eb; }
+
+        .section-title { font-size: 22px; font-weight: 700; color: #0b1e3a; margin-bottom: 20px; border-left: 4px solid #0b1e3a; padding-left: 10px; }
+
+        /* Haqqında Bölməsi Stili */
+        .about-card { background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 30px; display: flex; gap: 20px; align-items: center; }
+        .about-card img { width: 140px; height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1; }
+        .about-card.logo-card img { width: 130px; height: 130px; object-fit: contain; }
+
+        /* Media Grid */
+        .media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+        .media-card { background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; }
+        .media-card img { width: 100%; height: 180px; object-fit: cover; }
+        .media-card-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .media-card-body h4 { font-size: 13.5px; color: #0b1e3a; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+        .media-card-body p { font-size: 12px; color: #64748b; margin-bottom: 12px; }
+
+        /* Qalereya Slayderi */
+        .slider-container { position: relative; max-width: 850px; margin: 0 auto 40px auto; background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+        .slide { display: none; position: relative; width: 100%; height: 480px; }
+        .slide.active-slide { display: block; animation: fadeIn 0.4s ease-in-out; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.95; }
+        .slide-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(11, 30, 58, 0.95)); color: white; padding: 25px 20px 15px 20px; text-align: center; }
+        .slide-caption h3 { font-size: 16px; font-weight: 700; }
+        
+        .prev-btn, .next-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(11, 30, 58, 0.8); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: 0.3s; z-index: 10; }
+        .prev-btn:hover, .next-btn:hover { background: #1e3a8a; }
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
+
+        .btn-link { display: inline-block; width: 100%; text-align: center; background: #0b1e3a; color: white; padding: 8px 10px; text-decoration: none; font-size: 11.5px; font-weight: 600; border-radius: 4px; transition: 0.2s; border: none; }
+        .btn-link:hover { background: #1e3a8a; }
+
+        /* Əlaqə */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+        .contact-info-box, .contact-box { background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-size: 13.5px; color: #334155; }
+        .contact-item i { font-size: 18px; color: #0b1e3a; width: 24px; }
+        .contact-box input, .contact-box textarea { width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 5px; font-size: 13px; outline: none; }
+        .contact-box button { width: 100%; background: #0b1e3a; color: white; padding: 10px; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; }
+
+        footer { border-top: 1px solid #e2e8f0; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; background: #fff; }
+        footer span { font-size: 13px; color: #64748b; }
+
+        /* MOBİL EKRANLAR ÜÇÜN QAYDALAR (Ekran 768px-dən kiçik olduqda) */
+        @media (max-width: 768px) {
+            .media-grid, .contact-wrapper { grid-template-columns: 1fr; }
+            .about-card { flex-direction: column; text-align: center; }
+            .slide { height: 320px; }
+
+            /* Telefonda hamburgeri göstər */
+            .menu-toggle { display: block; }
+
+            /* Telefonda menyunu sol üstdən açılan qutuya çevir */
+            .nav-links { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 75px; 
+                left: 0; 
+                background: #fff; 
+                width: 280px; 
+                box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+                border-radius: 0 10px 10px 10px; 
+                border: 1px solid #e2e8f0; 
+                padding: 15px 0;
+                z-index: 1001;
+                gap: 0;
+            }
+            .nav-links.show { display: flex; animation: fadeIn 0.2s ease-in-out; }
+            .nav-links li { width: 100%; }
+            .nav-links a { 
+                display: block;
+                padding: 15px 25px; 
+                font-size: 16px; 
+                border-radius: 0;
+            }
+            .nav-links a:hover, .nav-links a.active { border-left: 5px solid #0b1e3a; background: #f8fafc; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Naviqasiya Barı və Logo -->
+    <header>
+        <div class="container">
+            <nav>
+                <!-- Sol tərəf: Hamburger + Loqo -->
+                <div class="nav-left">
+                    <div class="menu-toggle" onclick="toggleMenu()">
+                        <i class="fa-solid fa-bars"></i>
+                    </div>
+                    <div class="logo-box" onclick="openPage('home', document.querySelector('.nav-item'))">
+                        <img src="images.jpg" alt="Logo">
+                        <div class="logo-text">
+                            İnnovativ Təşəbbüslər
+                            <span>İctimai Birliyi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menyu Siyahısı (Kompüterdə yan-yana, telefonda hamburgerlə açılır) -->
+                <ul class="nav-links" id="navLinks">
+                    <li><a class="nav-item active" onclick="openPage('home', this)">Ana Səhifə</a></li>
+                    <li><a class="nav-item" onclick="openPage('haqqinda', this)">Haqqında</a></li>
+                    <li><a class="nav-item" onclick="openPage('tedbirler', this)">Tədbirlər</a></li>
+                    <li><a class="nav-item" onclick="openPage('qalereya', this)">Qalereya</a></li>
+                    <li><a class="nav-item" onclick="openPage('elaqe', this)">Əlaqə</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 1. ANA SƏHİFƏ -->
+    <div id="page-home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>"İnnovativ Təşəbbüslər"<br>Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</h1>
+                <p>Gənclərin milli-mənəvi ruhda tərbiyəsi, vətənpərvərlik və innovativ təhsil təşəbbüslərinin dəstəklənməsi platforması.</p>
+                <a onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])" class="btn-main">Tədbirlərimizlə Tanış Olun</a>
+            </div>
+        </section>
+        <div class="container">
+            <h2 class="section-title">Önə Çıxan Tədbir və Xəbərlər</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <img src="221.jpg" alt="Qərbi Azərbaycan">
+                    <div class="media-card-body">
+                        <div>
+                            <h4>Milli Vətənpərvərlik Tədbirlərimiz</h4>
+                            <p>Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</p>
+                        </div>
+                        <a href="https://qht.az/details/az/28080" target="_blank" class="btn-link">QHT.az Məqaləsi <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <img src="1021010.jpg" alt="Bayrağa Sədaqət Andı">
+                    <div class="media-card-body">
+                        <div>
+                            <h4>Bayrağa Sədaqət Andı Tədbiri</h4>
+                            <p>Məktəblərdə Bayrağa Sədaqət Andı və Sədaqət Möhürünün tətbiqi.</p>
+                        </div>
+                        <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="btn-link">MOD Rəsmi Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <img src="1010.jpg" alt="Sədrin Müsahibəsi">
+                    <div class="media-card-body">
+                        <div>
+                            <h4>Gənclər ilə İnteraktiv Görüşlər</h4>
+                            <p>Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.</p>
+                        </div>
+                        <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link">Day.az Müsahibəsi <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. HAQQINDA SƏHİFƏSİ -->
+    <div id="page-haqqinda" class="page">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Təşkilat Haqqında</h1>
+                <p>"İnnovativ Təşəbbüslər" Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</p>
+            </div>
+        </section>
+        <div class="container">
+            <h2 class="section-title">Bizim Təşkilat</h2>
+            <div class="about-card logo-card">
+                <img src="images.jpg" alt="İnnovativ Təşəbbüslər Loqosu">
+                <div>
+                    <h3 style="color:#0b1e3a; font-size:18px; margin-bottom:8px;">"İnnovativ Təşəbbüslər" İctimai Birliyi</h3>
+                    <p>Cəmiyyətin sosial, elmi və mənəvi inkişafına töhfə vermək, innovativ maarifləndirici fəaliyyətlər icra etmək və gənclərin cəmiyyətdə aktiv iştirakını təmin etmək ana hədəfimizdir.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Təşkilatın Sədri</h2>
+            <div class="about-card">
+                <img src="indir.jpg" alt="Əşrəf Əhmədov">
+                <div>
+                    <h3 style="color:#0b1e3a; font-size:18px; margin-bottom:5px;">Əşrəf Əhmədov</h3>
+                    <p style="margin-bottom:10px; font-weight:600; color:#1e3a8a;">"İnnovativ Təşəbbüslər" İctimai Birliyinin sədri</p>
+                    <p style="margin-bottom:12px;">Təşkilatımız sədr Əşrəf Əhmədovun rəhbərliyi ilə gənclər arasında vətənpərvərlik ruhunun yüksəldilməsi, tarixi həqiqətlərin və milli dəyərlərin çatdırılması istiqamətində uğurlu layihələr həyata keçirir.</p>
+                    <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link" style="display:inline-block; width:auto; padding:8px 16px;">Sədrin Müsahibəsini Oxu <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. TƏDBİRLƏR SƏHİFƏSİ -->
+    <div id="page-tedbirler" class="page">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Birliyin Tədbirləri</h1>
+                <p>Müdafiə Nazirliyi, media və təhsil müəssisələri ilə birgə keçirilən tədbirlər</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="media-grid">
+                <div class="media-card">
+                    <img src="1021010.jpg" alt="Bayrağa Sədaqət Andı">
+                    <div class="media-card-body">
+                        <div>
+                            <h4>Bayrağa Sədaqət Andı və Sədaqət Möhürü</h4>
+                            <p>Məktəblərdə keçirilən vətənpərvərlik tədbiri və möhür tətbiqi.</p>
+                        </div>
+                        <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="btn-link">MOD Tədbir Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <img src="221.jpg" alt="Cocuq Mərcanlı">
+                    <div class="media-card-body">
+                        <div>
+                            <h4>Tarixi Məkanlara və Məktəblərə Səfərlər</h4>
+                            <p>Şagird və gənclərin tarixi məkanlara maarifləndirici səfərləri.</p>
+                        </div>
+                        <a href="https://mod.gov.az/az/pre/22264.html" target="_blank" class="btn-link">Ekskursiya Tədbiri <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <img src="1010.jpg" alt="Bakı Məktəbləri">
+                    <div class="media-card-body">
+                        <div>
+                            <h4>Gənclərlə Maarifləndirici Proqramlar</h4>
+                            <p>Təhsil müəssisələrində keçirilən sosial-maarifləndirmə tədbirləri.</p>
+                        </div>
+                        <a href="https://bakimektebleri.edu.az/229/az/news/read/59965" target="_blank" class="btn-link">Bakı Məktəbləri Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. QALEREYA SƏHİFƏSİ -->
+    <div id="page-qalereya" class="page">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Foto Qalereya</h1>
+                <p>Oxlar vasitəsilə tədbir və fəaliyyətlərimizdən olan fotoşəkilləri vərəqləyin</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="slider-container">
+                <button class="prev-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="next-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+                <div class="slide active-slide">
+                    <img src="221.jpg" alt="Foto 1">
+                    <div class="slide-caption">
+                        <h3>Məktəblilərlə Keçirilən Maarifləndirmə Tədbiri</h3>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="1010.jpg" alt="Foto 2">
+                    <div class="slide-caption">
+                        <h3>Gənclər və Tələbələrlə İnteraktiv Görüş</h3>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="1021010.jpg" alt="Foto 3">
+                    <div class="slide-caption">
+                        <h3>Bayrağa Sədaqət Andı Mərasimindən Foto</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. ƏLAQƏ SƏHİFƏSİ -->
+    <div id="page-elaqe" class="page">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Bizimlə Əlaqə</h1>
+                <p>"İnnovativ Təşəbbüslər" İctimai Birliyi ilə əlaqə saxlayın</p>
+            </div>
+        </section>
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info-box">
+                    <h2 class="section-title" style="border:none; padding:0; margin-bottom:15px;">Əlaqə Məlumatları</h2>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span>Sədr: Əşrəf Əhmədov</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Bakı şəhəri, Azərbaycan</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-newspaper"></i>
+                        <span><a href="https://qht.az/details/az/28080" target="_blank" style="color:#334155; text-decoration:none;">QHT.az Rəsmi Keçidi</a></span>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <form onsubmit="event.preventDefault(); alert('Mesajınız İnnovativ Təşəbbüslər İB-yə göndərildi!'); this.reset();">
+                        <input type="text" placeholder="Ad və Soyadınız" required>
+                        <input type="email" placeholder="E-poçt ünvanınız" required>
+                        <textarea rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
+                        <button type="submit">Göndər</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container">
+        <footer>
+            <span>© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi. Bütün hüquqlar qorunur.</span>
+        </footer>
+    </div>
+
+    <!-- JS Naviqasiya, Hamburger və Slayder -->
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show');
+        }
+
+        function openPage(pageName, element) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            const selectedPage = document.getElementById('page-' + pageName);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            }
+            
+            document.getElementById('navLinks').classList.remove('show');
+            window.scrollTo(0, 0);
+        }
+
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("slide");
+
+        function moveSlide(n) {
+            slideIndex += n;
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slides.length - 1; }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active-slide");
+            }
+            slides[slideIndex].classList.add("active-slide");
+        }
+    </script>
+</body>
+</html>
