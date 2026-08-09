@@ -26,7 +26,6 @@
         .nav-links a { display: block; text-decoration: none; color: #334155; font-size: 14px; font-weight: 600; cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: #0b1e3a; background: #f1f5f9; }
 
-        /* Axtarış sətri stili */
         .search-container { margin: 20px 0; display: flex; justify-content: flex-end; }
         .search-container input { width: 250px; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; }
 
@@ -60,11 +59,26 @@
         .event-title-link { font-size: 16px; font-weight: 700; color: #1d4ed8; text-decoration: none; }
         .event-desc { font-size: 13px; color: #64748b; }
 
-        /* Sosial paylaşım düymələri */
         .share-box { margin-top: 10px; display: flex; gap: 8px; }
         .share-btn { padding: 4px 10px; border-radius: 4px; font-size: 11px; text-decoration: none; color: white; display: inline-flex; align-items: center; gap: 4px; }
         .share-whatsapp { background: #25d366; }
         .share-telegram { background: #0088cc; }
+
+        /* İdeya Generatoru Dizaynı */
+        .idea-generator-box { background: linear-gradient(135deg, #1e3a8a, #0b1e3a); color: white; padding: 30px; border-radius: 12px; margin-bottom: 40px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .idea-generator-box h3 { font-size: 20px; margin-bottom: 10px; }
+        .idea-generator-box p { font-size: 14px; opacity: 0.9; margin-bottom: 20px; }
+        .idea-output { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; font-size: 16px; font-weight: 600; margin-bottom: 20px; min-height: 60px; display: flex; align-items: center; justify-content: center; border: 1px dashed rgba(255,255,255,0.3); }
+        .btn-idea { background: #25d366; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .btn-idea:hover { background: #16a34a; }
+
+        /* Günün Sualı Bölməsi */
+        .daily-question-box { background: #fff; border: 1px solid #e2e8f0; padding: 25px; border-radius: 10px; margin-bottom: 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .daily-question-box h3 { font-size: 18px; color: #0b1e3a; margin-bottom: 10px; }
+        .daily-question-box p { font-size: 14px; color: #64748b; margin-bottom: 15px; font-weight: 600; }
+        .daily-question-box textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 10px; font-size: 13px; outline: none; }
+        .daily-question-box button { background: #0b1e3a; color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .q-success { display: none; color: #16a34a; font-size: 13px; margin-top: 8px; font-weight: 600; }
 
         .slider-container { position: relative; max-width: 850px; margin: 0 auto 40px auto; background: #000; border-radius: 10px; overflow: hidden; }
         .slide { display: none; position: relative; width: 100%; height: 480px; }
@@ -96,6 +110,9 @@
         .btn-delete-item { background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600; }
         .btn-delete-item:hover { background: #b91c1c; }
 
+        /* İstifadəçi Cavabları Siyahısı (Admin Üçün) */
+        .admin-answer-card { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 13px; }
+
         footer { border-top: 1px solid #e2e8f0; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; background: #fff; width: 100%; margin-top: auto; }
         footer span { font-size: 13px; color: #64748b; }
         .social-link { font-size: 26px; color: #1877f2; text-decoration: none; }
@@ -112,27 +129,7 @@
     </style>
 </head>
 <body>
-<!-- WhatsApp Sürətli Əlaqə Düyməsi -->
-<a href="https://wa.me/994103933218" target="_blank" style="
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25d366;
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    z-index: 9999;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-">
-    <i class="fa-brands fa-whatsapp"></i>
-</a>
+
     <div class="content-wrap">
         <header>
             <div class="container">
@@ -164,7 +161,25 @@
                     <a onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])" class="btn-main">Tədbirlərimizlə Tanış Olun</a>
                 </div>
             </section>
+            
             <div class="container">
+                <!-- Gələcəyin İdeya Generatoru -->
+                <div class="idea-generator-box">
+                    <h3>💡 Gələcəyin İdeya Generatoru</h3>
+                    <p>Düyməni bas və təşkilatımız üçün unikal innovativ layihə ideyası kəşf et!</p>
+                    <div class="idea-output" id="ideaOutputText">İdeya yaratmaq üçün aşağıdakı düyməni klikləyin...</div>
+                    <button class="btn-idea" onclick="generateIdea()"><i class="fa-solid fa-wand-magic-sparkles"></i> Yeni İdeya yarat</button>
+                </div>
+
+                <!-- Günün Sualı Bölməsi -->
+                <div class="daily-question-box">
+                    <h3>❓ Günün Sualı</h3>
+                    <p id="displayDailyQuestion">Məktəblilərdə kitaba və mütaliəyə marağı necə artıra bilərik?</p>
+                    <textarea id="userAnswerInput" rows="3" placeholder="Sənin fikrin və ya təklifin..."></textarea>
+                    <button onclick="submitUserAnswer()">Fikrimi Göndər</button>
+                    <div class="q-success" id="qSuccessMsg">Fikriniz uğurla qeydə alındı! (Yalnız sədr tərəfindən oxunacaq)</div>
+                </div>
+
                 <h2 class="section-title">Önə Çıxan Tədbir və Xəbərlər</h2>
                 <div class="media-grid">
                     <div class="media-card">
@@ -203,7 +218,7 @@
             <div class="container">
                 <h2 class="section-title">Haqqımızda</h2>
                 <div class="about-text-content" id="about-text-view">
-                    İnnovativ Təşəbbüslər Platforması — bütün inkişafı sürətləndirən yeniliklər, yaradıcı düşüncəni və praktiki halları bir araya gətirən müstəqil təşəbbüsdür. Fəaliyyətimizin ideyalarının gücünə, insan potensialının sərhədsizliyinə və sosial fayda yaradan layihələrin dəyərinə inam dayanır. Bu platformalar üçün elmi, yaradıcı və təşkilati mühitin formalaşdırılmasına qarşı məqsəd qoyur. Bizim üçün innovasiya yalnız texnologiya deyil. İnnovasiya - düşüncə tərzi, problemlərə yeni baxış, cəmiyyət üçün fayda yaradan dizaynlı. Platformuzun istiqamətləri üzrə iş layihələri: Yenilikçi layihələrin hazırlanması Sosial, elmi, təhsil, mədəniyyət və texnologoji praktiki yardıma malik layihələrin işlənməsi. Təqdimat və məzmun istehsalı təhsil, maarifləndirmə və sosial təsir məqsədli materialların, video, mətn və vizual materialların hazırlanması. İctimai təşəbbüslər Milli dəyərlərin qorunmasına, dövlətçilik şüurunun gücləndirilməsinə və ictimai inkişafa yönəlmiş layihələrin təşkili. Gənclərin potensialının inkişafı Yaradıcı, və idarəetmə idarələrinə malik gənclərin intellektual potensialını inkişaf etdirir. Bizim missiya - cəmiyyət üçün faydalı olan ideyanı real layihəyə çevirmək, yenilikçi yanaşmaları yaratmaq və yaradan insanların bir araya dayanlıqlı platforma yaratmaqdır.
+                    İnnovativ Təşəbbüslər Platforması — bütün inkişafı sürətləndirən yeniliklər, yaradıcı düşüncəni və praktiki halları bir araya gətirən müstəqil təşəbbüsdür. Fəaliyyətimizin ideyalarının gücünə, insan potensialının sərhədsizliyinə və sosial fayda yaradan layihələrin dəyərinə inam dayanır. Bu platformalar üçün elmi, yaradıcı və təşkilati mühitin formalaşdırılmasına qarşı məqsəd qoyur. Bizim üçün innovasiya yalnız texnologiya deyil. İnnovasiya - düşüncə tərzi, problemlərə yeni baxış, cəmiyyət üçün fayda yaradan dizaynlı.
                 </div>
                 <h2 class="section-title">Təşkilatın Sədri</h2>
                 <div class="about-card">
@@ -217,7 +232,7 @@
             </div>
         </div>
 
-        <!-- 3. TƏDBİRLƏR SƏHİFƏSİ (Axtarış və Paylaşım ilə) -->
+        <!-- 3. TƏDBİRLƏR SƏHİFƏSİ -->
         <div id="page-tedbirler" class="page">
             <section class="hero">
                 <div class="hero-content">
@@ -226,7 +241,6 @@
                 </div>
             </section>
             <div class="container">
-                <!-- Axtarış Sətri -->
                 <div class="search-container">
                     <input type="text" id="searchInput" placeholder="Tədbirlərdə axtarış..." onkeyup="searchEvents()">
                 </div>
@@ -239,7 +253,7 @@
                             <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="event-title-link">Bayrağa sədaqət andı</a>
                             <span class="event-desc">Məktəblərdə vətənpərvərlik ruhunun aşılanması məqsədilə keçirilən tədbir.</span>
                             <div class="share-box">
-                                <a href="https://api.whatsapp.com/send?text=Bayrağa+sədaqət+andı+-+İnnovativ+Təşəbbüslər+İB" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                                <a href="https://api.whatsapp.com/send?text=Bayrağa+sədaqət+andı" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
                                 <a href="https://t.me/share/url?url=https://mod.gov.az/az/pre/22951.html&text=Bayrağa+sədaqət+andı" target="_blank" class="share-btn share-telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
                             </div>
                         </div>
@@ -252,17 +266,6 @@
                             <div class="share-box">
                                 <a href="https://api.whatsapp.com/send?text=Milli+Vətənpərvərlik+Tədbirlərimiz" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
                                 <a href="https://t.me/share/url?url=https://qht.az/details/az/28080&text=Milli+Vətənpərvərlik+Tədbirlərimiz" target="_blank" class="share-btn share-telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event-row">
-                        <img src="1010.jpg" alt="Gənclər ilə İnteraktiv Görüşlər">
-                        <div class="event-info">
-                            <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="event-title-link">Gənclər ilə İnteraktiv Görüşlər</a>
-                            <span class="event-desc">Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.</span>
-                            <div class="share-box">
-                                <a href="https://api.whatsapp.com/send?text=Gənclər+ilə+İnteraktiv+Görüşlər" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                                <a href="https://t.me/share/url?url=https://news.day.az/azerinews/1086906.html&text=Gənclər+ilə+İnteraktiv+Görüşlər" target="_blank" class="share-btn share-telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
                             </div>
                         </div>
                     </div>
@@ -324,12 +327,12 @@
             </div>
         </div>
 
-        <!-- 6. GİZLİ ADMIN PANEL (Tədbir və Qalereya Silmə İmkanı ilə) -->
+        <!-- 6. GİZLİ ADMIN PANEL -->
         <div id="page-admin" class="page">
             <section class="hero" style="padding: 40px 20px; margin-bottom: 20px;">
                 <div class="hero-content">
-                    <h1>Ayrı-Ayrı İdarəetmə Paneli</h1>
-                    <p>Hər səhifəni öz bölməsindən idarə edin və dəyişdirin</p>
+                    <h1>Admin Paneli</h1>
+                    <p>Saytı və Günün Sualını idarə edin</p>
                 </div>
             </section>
             
@@ -339,24 +342,29 @@
                 </div>
 
                 <div class="admin-tabs">
-                    <button class="admin-tab-btn active-tab" onclick="openAdminTab('home-tab', this)">🏠 Ana Səhifə</button>
-                    <button class="admin-tab-btn" onclick="openAdminTab('about-tab', this)">📖 Haqqında</button>
+                    <button class="admin-tab-btn active-tab" onclick="openAdminTab('question-tab', this)">❓ Günün Sualı və Cavablar</button>
+                    <button class="admin-tab-btn" onclick="openAdminTab('home-tab', this)">🏠 Ana Səhifə</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('events-tab', this)">📅 Tədbirlər</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('gallery-tab', this)">🖼️ Qalereya</button>
-                    <button class="admin-tab-btn" onclick="openAdminTab('contact-tab', this)">📞 Əlaqə</button>
                 </div>
 
-                <div id="home-tab" class="admin-section active-admin-sec contact-box">
+                <!-- Günün Sualı Admin Bölməsi -->
+                <div id="question-tab" class="admin-section active-admin-sec contact-box">
+                    <h3 class="section-title" style="font-size:16px;">Günün Sualını Dəyişdir</h3>
+                    <input type="text" id="adminNewQuestionInput" placeholder="Yeni sualı bura yazın...">
+                    <button onclick="saveNewQuestion()" style="margin-bottom: 25px;">Sualı Yenilə</button>
+
+                    <h3 class="section-title" style="font-size:16px;">İstifadəçilərin Yazdığı Cavablar (Yalnız Sədrə Görünür)</h3>
+                    <div id="adminAnswersContainer">
+                        <p style="font-size:13px; color:#64748b;">Hələ heç bir cavab yazılmayıb.</p>
+                    </div>
+                </div>
+
+                <div id="home-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Ana Səhifəni Redaktə Et</h3>
                     <input type="text" id="admin-home-title" placeholder="Ana səhifə başlığı">
                     <textarea id="admin-home-desc" rows="3" placeholder="Ana səhifə alt mətni"></textarea>
                     <button onclick="saveHomeData()">Ana Səhifəni Yenilə</button>
-                </div>
-
-                <div id="about-tab" class="admin-section contact-box">
-                    <h3 class="section-title" style="font-size:16px;">Haqqında Səhifəsini Redaktə Et</h3>
-                    <textarea id="admin-about-text" rows="6" placeholder="Haqqında mətnini bura yaz..."></textarea>
-                    <button onclick="saveAboutData()">Haqqında Mətnini Yenilə</button>
                 </div>
 
                 <div id="events-tab" class="admin-section contact-box">
@@ -366,30 +374,43 @@
                     <textarea id="admin-ev-desc" rows="3" placeholder="Tədbir haqqında qısa məlumat"></textarea>
                     <button onclick="addNewEventAdmin()" style="margin-bottom: 25px;">Tədbir Əlavə Et</button>
 
-                    <h3 class="section-title" style="font-size:16px;">Əlavə Olunmuş Tədbirlərin Siyahısı (Silmək üçün)</h3>
+                    <h3 class="section-title" style="font-size:16px;">Əlavə Olunmuş Tədbirlərin Siyahısı</h3>
                     <div id="admin-events-list-container"></div>
                 </div>
 
                 <div id="gallery-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Qalereyaya Şəkil Əlavə Et</h3>
-                    <input type="text" id="admin-gal-img" placeholder="Şəkil fayl adı (məsələn: 1010.jpg)">
-                    <input type="text" id="admin-gal-caption" placeholder="Şəkil yazısı / başlıq">
-                    <button onclick="addGalleryImageAdmin()" style="margin-bottom: 25px;">Qalereyaya Şəkil Əlavə Et</button>
-
-                    <h3 class="section-title" style="font-size:16px;">Əlavə Olunmuş Şəkillərin Siyahısı</h3>
+                    <input type="text" id="admin-gal-img" placeholder="Şəkil fayl adı">
+                    <input type="text" id="admin-gal-caption" placeholder="Şəkil yazısı">
+                    <button onclick="addGalleryImageAdmin()" style="margin-bottom: 25px;">Əlavə Et</button>
                     <div id="admin-gallery-list-container"></div>
-                </div>
-
-                <div id="contact-tab" class="admin-section contact-box">
-                    <h3 class="section-title" style="font-size:16px;">Əlaqə Məlumatlarını Yenilə</h3>
-                    <input type="text" id="admin-contact-leader" placeholder="Sədrin adı">
-                    <input type="text" id="admin-contact-address" placeholder="Ünvan">
-                    <button onclick="saveContactData()">Əlaqə Məlumatlarını Yenilə</button>
                 </div>
             </div>
         </div>
 
     </div>
+
+    <!-- WhatsApp Sürətli Əlaqə Düyməsi -->
+    <a href="https://wa.me/994103933218" target="_blank" style="
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #25d366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        z-index: 9999;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    ">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <footer>
         <div class="container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
@@ -420,23 +441,84 @@
             document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active-tab'));
             btn.classList.add('active-tab');
 
+            if(tabId === 'question-tab') renderAdminAnswers();
             if(tabId === 'gallery-tab') renderAdminGalleryList();
             if(tabId === 'events-tab') renderAdminEventsList();
         }
 
-        // Axtarış funksiyası
+        // Gələcəyin İdeya Generatoru funksiyası
+        function generateIdea() {
+            let subjects = [
+                "Məktəblilər arasında", "Gənclər üçün", "Tələbələr arasında", "Bölgələrdə", "Onlayn platformada"
+            ];
+            let actions = [
+                "süni intellekt yönümlü", "vətənpərvərlik mövzusunda", "ekoloji təmiz", "intellektual bilik yarışması", "könüllü sosial layihə"
+            ];
+            let results = [
+                "intellektual inkişafa təkan verəcək", "liderlik bacarıqlarını artıracaq", "milli-mənəvi dəyərləri gücləndirəcək", "yenilikçi düşüncəni formalaşdıracaq"
+            ];
+
+            let rand1 = subjects[Math.floor(Math.random() * subjects.length)];
+            let rand2 = actions[Math.floor(Math.random() * actions.length)];
+            let rand3 = results[Math.floor(Math.random() * results.length)];
+
+            let fullIdea = `Sənin İdeyan: ${rand1} ${rand2} təşkil etmək və bu layihə gənclərdə ${rand3}!`;
+            document.getElementById("ideaOutputText").innerText = fullIdea;
+        }
+
+        // Günün Sualı cavabını göndərmək
+        function submitUserAnswer() {
+            let val = document.getElementById("userAnswerInput").value.trim();
+            if(!val) { alert("Zəhmət olmasa fikrinizi yazın!"); return; }
+
+            let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            answers.push({ text: val, date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() });
+            localStorage.setItem("savedAnswers", JSON.stringify(answers));
+
+            document.getElementById("userAnswerInput").value = "";
+            let msg = document.getElementById("qSuccessMsg");
+            msg.style.display = "block";
+            setTimeout(() => { msg.style.display = "none"; }, 4000);
+        }
+
+        // Admin üçün cavabları göstərmək
+        function renderAdminAnswers() {
+            let container = document.getElementById("adminAnswersContainer");
+            let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            
+            if(answers.length === 0) {
+                container.innerHTML = "<p style='font-size:13px; color:#64748b;'>Hələ heç bir cavab yazılmayıb.</p>";
+                return;
+            }
+
+            let html = "";
+            answers.forEach((ans, index) => {
+                html += `
+                    <div class="admin-answer-card">
+                        <p><strong>${index + 1}. Fikir:</strong> ${ans.text}</p>
+                        <span style="font-size:11px; color:#64748b; display:block; margin-top:4px;">Tarix: ${ans.date}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function saveNewQuestion() {
+            let q = document.getElementById("adminNewQuestionInput").value.trim();
+            if(!q) { alert("Yeni sual yazın!"); return; }
+            localStorage.setItem("dailyQuestion", q);
+            document.getElementById("displayDailyQuestion").innerText = q;
+            document.getElementById("adminNewQuestionInput").value = "";
+            alert("Günün sualı yeniləndi!");
+        }
+
         function searchEvents() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let rows = document.querySelectorAll('#events-container-view .event-row');
-            
             rows.forEach(row => {
                 let title = row.querySelector('.event-title-link').innerText.toLowerCase();
                 let desc = row.querySelector('.event-desc').innerText.toLowerCase();
-                if(title.includes(input) || desc.includes(input)) {
-                    row.style.display = 'flex';
-                } else {
-                    row.style.display = 'none';
-                }
+                if(title.includes(input) || desc.includes(input)) { row.style.display = 'flex'; } else { row.style.display = 'none'; }
             });
         }
 
@@ -447,7 +529,6 @@
             slideIndex += n;
             if (slideIndex >= slides.length) slideIndex = 0;
             if (slideIndex < 0) slideIndex = slides.length - 1;
-            
             slides.forEach(s => s.classList.remove("active-slide"));
             slides[slideIndex].classList.add("active-slide");
         }
@@ -457,6 +538,7 @@
             if(localStorage.getItem("homeDesc")) document.getElementById("home-hero-desc").innerText = localStorage.getItem("homeDesc");
             if(localStorage.getItem("aboutText")) document.getElementById("about-text-view").innerText = localStorage.getItem("aboutText");
             if(localStorage.getItem("savedEvents")) document.getElementById("events-container-view").innerHTML = localStorage.getItem("savedEvents");
+            if(localStorage.getItem("dailyQuestion")) document.getElementById("displayDailyQuestion").innerText = localStorage.getItem("dailyQuestion");
             
             if(localStorage.getItem("savedGallery")) {
                 let slider = document.getElementById("dynamic-slider");
@@ -480,6 +562,7 @@
                 let pass = prompt("Admin şifrəsini daxil edin:");
                 if (pass === "Eldar12345@_*") {
                     openPage('admin', null);
+                    renderAdminAnswers();
                     renderAdminGalleryList();
                     renderAdminEventsList();
                     alert("Admin panelə xoş gəldiniz!");
@@ -500,15 +583,6 @@
             if(t) { document.getElementById("home-hero-title").innerHTML = t; localStorage.setItem("homeTitle", t); }
             if(d) { document.getElementById("home-hero-desc").innerText = d; localStorage.setItem("homeDesc", d); }
             alert("Ana səhifə yeniləndi!");
-        }
-
-        function saveAboutData() {
-            let text = document.getElementById("admin-about-text").value;
-            if(text) {
-                document.getElementById("about-text-view").innerText = text;
-                localStorage.setItem("aboutText", text);
-                alert("Haqqında mətni yeniləndi!");
-            }
         }
 
         function addNewEventAdmin() {
@@ -544,15 +618,9 @@
             let listContainer = document.getElementById("admin-events-list-container");
             let rows = document.querySelectorAll("#events-container-view .event-row");
             let html = "";
-
             rows.forEach((row, index) => {
                 let title = row.querySelector(".event-title-link").innerText;
-                html += `
-                    <div class="admin-event-item">
-                        <span>${title}</span>
-                        <button class="btn-delete-item" onclick="deleteEventItem(${index})">Sil</button>
-                    </div>
-                `;
+                html += `<div class="admin-event-item"><span>${title}</span><button class="btn-delete-item" onclick="deleteEventItem(${index})">Sil</button></div>`;
             });
             listContainer.innerHTML = html;
         }
@@ -561,8 +629,7 @@
             let rows = document.querySelectorAll("#events-container-view .event-row");
             if(rows[index]) {
                 rows[index].remove();
-                let container = document.getElementById("events-container-view");
-                localStorage.setItem("savedEvents", container.innerHTML);
+                localStorage.setItem("savedEvents", document.getElementById("events-container-view").innerHTML);
                 renderAdminEventsList();
                 alert("Tədbir silindi!");
             }
@@ -571,7 +638,7 @@
         function addGalleryImageAdmin() {
             let img = document.getElementById("admin-gal-img").value;
             let cap = document.getElementById("admin-gal-caption").value;
-            if(!img || !cap) { alert("Şəkil fayl adı və başlıq yazın!"); return; }
+            if(!img || !cap) { alert("Şəkil və başlıq yazın!"); return; }
 
             let slider = document.getElementById("dynamic-slider");
             let newSlide = document.createElement("div");
@@ -581,65 +648,39 @@
 
             let customSlides = "";
             let allSlides = slider.querySelectorAll(".slide");
-            for(let i = 2; i < allSlides.length; i++) {
-                customSlides += allSlides[i].outerHTML;
-            }
+            for(let i = 2; i < allSlides.length; i++) { customSlides += allSlides[i].outerHTML; }
             localStorage.setItem("savedGallery", customSlides);
 
             document.getElementById("admin-gal-img").value = "";
             document.getElementById("admin-gal-caption").value = "";
             renderAdminGalleryList();
-            alert("Qalereyaya şəkil əlavə olundu!");
+            alert("Şəkil əlavə olundu!");
         }
 
         function renderAdminGalleryList() {
             let listContainer = document.getElementById("admin-gallery-list-container");
             let slider = document.getElementById("dynamic-slider");
             let slides = slider.querySelectorAll(".slide");
-            
             let html = "";
             for(let i = 2; i < slides.length; i++) {
                 let imgSrc = slides[i].querySelector("img").getAttribute("src");
-                let captionText = slides[i].querySelector("h3") ? slides[i].querySelector("h3").innerText : "Başlıqsız";
-                
-                html += `
-                    <div class="admin-gallery-item">
-                        <div class="admin-gallery-info">
-                            <img src="${imgSrc}" alt="">
-                            <span>${captionText}</span>
-                        </div>
-                        <button class="btn-delete-item" onclick="deleteGalleryItem(${i})">Sil</button>
-                    </div>
-                `;
+                let captionText = slides[i].querySelector("h3").innerText;
+                html += `<div class="admin-gallery-item"><div class="admin-gallery-info"><img src="${imgSrc}" alt=""><span>${captionText}</span></div><button class="btn-delete-item" onclick="deleteGalleryItem(${i})">Sil</button></div>`;
             }
-
-            if(html === "") {
-                html = "<p style='font-size:13px; color:#64748b;'>Hələ əlavə edilmiş xüsusi şəkil yoxdur.</p>";
-            }
-            listContainer.innerHTML = html;
+            listContainer.innerHTML = html || "<p style='font-size:13px; color:#64748b;'>Hələ şəkil yoxdur.</p>";
         }
 
         function deleteGalleryItem(index) {
             let slider = document.getElementById("dynamic-slider");
             let slides = slider.querySelectorAll(".slide");
-            
             if(slides[index]) {
                 slides[index].remove();
-                
                 let customSlides = "";
                 let remainingSlides = slider.querySelectorAll(".slide");
-                for(let i = 2; i < remainingSlides.length; i++) {
-                    customSlides += remainingSlides[i].outerHTML;
-                }
-                
-                if(customSlides === "") {
-                    localStorage.removeItem("savedGallery");
-                } else {
-                    localStorage.setItem("savedGallery", customSlides);
-                }
-
+                for(let i = 2; i < remainingSlides.length; i++) { customSlides += remainingSlides[i].outerHTML; }
+                if(customSlides === "") { localStorage.removeItem("savedGallery"); } else { localStorage.setItem("savedGallery", customSlides); }
                 renderAdminGalleryList();
-                alert("Şəkil qalereyadan silindi!");
+                alert("Şəkil silindi!");
             }
         }
 
