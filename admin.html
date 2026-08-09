@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İdarəetmə Paneli - Admin</title>
+    <!-- Əgər əlavə CSS faylın varsa, bura əlavə edə bilərsən -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+        .admin-header {
+            background-color: #1e293b;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-header h1 {
+            font-size: 20px;
+        }
+        .logout-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .logout-btn:hover {
+            background-color: #dc2626;
+        }
+        .admin-container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        /* Sənin digər admin panel stillərin bura əlavə olunacaq */
+    </style>
+
+    <!-- TƏHLÜKƏSİZLİK QORUMASI: Giriş edilməyibsə, birbaşa login.html-ə atır -->
+    <script>
+        if (sessionStorage.getItem("isAdmin") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+</head>
+<body>
+
+    <header class="admin-header">
+        <h1>Admin İdarəetmə Paneli</h1>
+        <button class="logout-btn" onclick="logout()">Çıxış Et</button>
+    </header>
+
+    <div class="admin-container">
+        <!-- Sənin köhnə admin panelinin HTML elementləri bura gələcək -->
+        <div id="admin-content">
+            <h2>Xoş gəldiniz!</h2>
+            <p>Admin panelin məlumatları uğurla yükləndi.</p>
+        </div>
+    </div>
+
+    <!-- Sənin admin panelin üçün lazım olan bütün JavaScript funksiyaları -->
+    <script>
+        // Çıxış etmək üçün funksiya
+        function logout() {
+            sessionStorage.removeItem("isAdmin");
+            window.location.href = "login.html";
+        }
+
+        // SAYT YÜKLƏNƏNDƏ İŞLƏYƏN FUNKSİYALAR
+        window.onload = function() {
+            // Əvvəlki admin panelində olan bütün render funksiyalarını bura əlavə edirsən:
+            if (typeof renderAdminAnswers === "function") renderAdminAnswers();
+            if (typeof renderAdminGalleryList === "function") renderAdminGalleryList();
+            if (typeof renderAdminEventsList === "function") renderAdminEventsList();
+        };
+
+        // --- BURA SƏNİN KÖHNƏ ADMIN PANELİNDƏKİ BÜTÜN FUNKSİYALARINI (openPage və s.) ƏLAVƏ EDƏCƏKSƏN ---
+        
+        function openPage(pageName, elmnt) {
+            // Sənin mövcud səhifə keçid kodların...
+        }
+
+        // Digər funksiyalarını da bu blokun içinə yaza bilərsən:
+        
+    </script>
+
+</body>
+</html>
