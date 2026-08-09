@@ -7,17 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; }
+        body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        .content-wrap { flex: 1; }
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
         /* Navigation Bar */
         header { background: #fff; padding: 15px 0; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         nav { display: flex; align-items: center; justify-content: space-between; position: relative; }
         
-        /* Sol tərəf qrupu (Loqo) */
         .nav-left { display: flex; align-items: center; gap: 15px; }
         
-        /* Hamburger düyməsi (Kompüterdə gizli, telefonda aktiv) */
         .menu-toggle { 
             font-size: 24px; 
             color: #0b1e3a; 
@@ -35,7 +34,6 @@
         .logo-text { font-weight: 800; font-size: 16px; color: #0b1e3a; letter-spacing: 0.5px; text-transform: uppercase; }
         .logo-text span { color: #1e3a8a; display: block; font-size: 10px; font-weight: 600; }
         
-        /* Kompüter üçün Standart Menyular (Yan-yana) */
         .nav-links { 
             display: flex; 
             list-style: none; 
@@ -56,12 +54,10 @@
         }
         .nav-links a:hover, .nav-links a.active { color: #0b1e3a; background: #f1f5f9; border-left: none; }
 
-        /* Səhifə Keçidləri */
         .page { display: none; }
         .page.active { display: block; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hero Bölməsi */
         .hero {
             background: linear-gradient(rgba(11, 30, 58, 0.90), rgba(11, 30, 58, 0.90)), url('221.jpg') center/cover;
             color: white; 
@@ -77,12 +73,23 @@
 
         .section-title { font-size: 22px; font-weight: 700; color: #0b1e3a; margin-bottom: 20px; border-left: 4px solid #0b1e3a; padding-left: 10px; }
 
-        /* Haqqında Bölməsi Stili */
         .about-card { background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 30px; display: flex; gap: 20px; align-items: center; }
         .about-card img { width: 140px; height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1; }
         .about-card.logo-card img { width: 130px; height: 130px; object-fit: contain; }
 
-        /* Media Grid */
+        .about-text-content { 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 8px; 
+            border: 1px solid #e2e8f0; 
+            line-height: 1.8; 
+            text-align: justify; 
+            font-size: 14.5px; 
+            color: #334155; 
+            margin-bottom: 40px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
         .media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
         .media-card { background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; }
         .media-card img { width: 100%; height: 180px; object-fit: cover; }
@@ -90,7 +97,44 @@
         .media-card-body h4 { font-size: 13.5px; color: #0b1e3a; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
         .media-card-body p { font-size: 12px; color: #64748b; margin-bottom: 12px; }
 
-        /* Qalereya Slayderi */
+        .events-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 50px; }
+        .event-row {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .event-row img {
+            width: 140px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .event-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .event-title-link {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1d4ed8;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .event-title-link:hover {
+            color: #1e40af;
+            text-decoration: underline;
+        }
+        .event-desc {
+            font-size: 13px;
+            color: #64748b;
+        }
+
         .slider-container { position: relative; max-width: 850px; margin: 0 auto 40px auto; background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
         .slide { display: none; position: relative; width: 100%; height: 480px; }
         .slide.active-slide { display: block; animation: fadeIn 0.4s ease-in-out; }
@@ -106,7 +150,6 @@
         .btn-link { display: inline-block; width: 100%; text-align: center; background: #0b1e3a; color: white; padding: 8px 10px; text-decoration: none; font-size: 11.5px; font-weight: 600; border-radius: 4px; transition: 0.2s; border: none; }
         .btn-link:hover { background: #1e3a8a; }
 
-        /* Əlaqə */
         .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
         .contact-info-box, .contact-box { background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; }
         .contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-size: 13.5px; color: #334155; }
@@ -114,19 +157,20 @@
         .contact-box input, .contact-box textarea { width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 5px; font-size: 13px; outline: none; }
         .contact-box button { width: 100%; background: #0b1e3a; color: white; padding: 10px; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; }
 
-        footer { border-top: 1px solid #e2e8f0; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; background: #fff; }
+        footer { border-top: 1px solid #e2e8f0; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; margin-top: auto; background: #fff; width: 100%; }
         footer span { font-size: 13px; color: #64748b; }
+        .social-link { font-size: 26px; color: #1877f2; text-decoration: none; transition: 0.2s; }
+        .social-link:hover { color: #0b1e3a; }
 
-        /* MOBİL EKRANLAR ÜÇÜN QAYDALAR (Ekran 768px-dən kiçik olduqda) */
         @media (max-width: 768px) {
             .media-grid, .contact-wrapper { grid-template-columns: 1fr; }
             .about-card { flex-direction: column; text-align: center; }
             .slide { height: 320px; }
+            .event-row { flex-direction: column; align-items: flex-start; }
+            .event-row img { width: 100%; height: 160px; }
 
-            /* Telefonda hamburgeri göstər */
             .menu-toggle { display: block; }
 
-            /* Telefonda menyunu sol üstdən açılan qutuya çevir */
             .nav-links { 
                 display: none; 
                 flex-direction: column; 
@@ -156,240 +200,241 @@
 </head>
 <body>
 
-    <!-- Naviqasiya Barı və Logo -->
-    <header>
-        <div class="container">
-            <nav>
-                <!-- Sol tərəf: Hamburger + Loqo -->
-                <div class="nav-left">
-                    <div class="menu-toggle" onclick="toggleMenu()">
-                        <i class="fa-solid fa-bars"></i>
-                    </div>
-                    <div class="logo-box" onclick="openPage('home', document.querySelector('.nav-item'))">
-                        <img src="images.jpg" alt="Logo">
-                        <div class="logo-text">
-                            İnnovativ Təşəbbüslər
-                            <span>İctimai Birliyi</span>
+    <div class="content-wrap">
+        <header>
+            <div class="container">
+                <nav>
+                    <div class="nav-left">
+                        <div class="menu-toggle" onclick="toggleMenu()">
+                            <i class="fa-solid fa-bars"></i>
+                        </div>
+                        <div class="logo-box" onclick="openPage('home', document.querySelector('.nav-item'))">
+                            <img src="images.jpg" alt="Logo">
+                            <div class="logo-text">
+                                İnnovativ Təşəbbüslər
+                                <span>İctimai Birliyi</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Menyu Siyahısı (Kompüterdə yan-yana, telefonda hamburgerlə açılır) -->
-                <ul class="nav-links" id="navLinks">
-                    <li><a class="nav-item active" onclick="openPage('home', this)">Ana Səhifə</a></li>
-                    <li><a class="nav-item" onclick="openPage('haqqinda', this)">Haqqında</a></li>
-                    <li><a class="nav-item" onclick="openPage('tedbirler', this)">Tədbirlər</a></li>
-                    <li><a class="nav-item" onclick="openPage('qalereya', this)">Qalereya</a></li>
-                    <li><a class="nav-item" onclick="openPage('elaqe', this)">Əlaqə</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+                    <ul class="nav-links" id="navLinks">
+                        <li><a class="nav-item active" onclick="openPage('home', this)">Ana Səhifə</a></li>
+                        <li><a class="nav-item" onclick="openPage('haqqinda', this)">Haqqında</a></li>
+                        <li><a class="nav-item" onclick="openPage('tedbirler', this)">Tədbirlər</a></li>
+                        <li><a class="nav-item" onclick="openPage('qalereya', this)">Qalereya</a></li>
+                        <li><a class="nav-item" onclick="openPage('elaqe', this)">Əlaqə</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-    <!-- 1. ANA SƏHİFƏ -->
-    <div id="page-home" class="page active">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>"İnnovativ Təşəbbüslər"<br>Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</h1>
-                <p>Gənclərin milli-mənəvi ruhda tərbiyəsi, vətənpərvərlik və innovativ təhsil təşəbbüslərinin dəstəklənməsi platforması.</p>
-                <a onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])" class="btn-main">Tədbirlərimizlə Tanış Olun</a>
-            </div>
-        </section>
-        <div class="container">
-            <h2 class="section-title">Önə Çıxan Tədbir və Xəbərlər</h2>
-            <div class="media-grid">
-                <div class="media-card">
-                    <img src="221.jpg" alt="Qərbi Azərbaycan">
-                    <div class="media-card-body">
-                        <div>
-                            <h4>Milli Vətənpərvərlik Tədbirlərimiz</h4>
-                            <p>Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</p>
+        <!-- 1. ANA SƏHİFƏ -->
+        <div id="page-home" class="page active">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>"İnnovativ Təşəbbüslər"<br>Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</h1>
+                    <p>Gənclərin milli-mənəvi ruhda tərbiyəsi, vətənpərvərlik və innovativ təhsil təşəbbüslərinin dəstəklənməsi platforması.</p>
+                    <a onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])" class="btn-main">Tədbirlərimizlə Tanış Olun</a>
+                </div>
+            </section>
+            <div class="container">
+                <h2 class="section-title">Önə Çıxan Tədbir və Xəbərlər</h2>
+                <div class="media-grid">
+                    <div class="media-card">
+                        <img src="221.jpg" alt="Qərbi Azərbaycan">
+                        <div class="media-card-body">
+                            <div>
+                                <h4>Milli Vətənpərvərlik Tədbirlərimiz</h4>
+                                <p>Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</p>
+                            </div>
+                            <a href="https://qht.az/details/az/28080" target="_blank" class="btn-link">QHT.az Məqaləsi <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
-                        <a href="https://qht.az/details/az/28080" target="_blank" class="btn-link">QHT.az Məqaləsi <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
-                </div>
-                <div class="media-card">
-                    <img src="1021010.jpg" alt="Bayrağa Sədaqət Andı">
-                    <div class="media-card-body">
-                        <div>
-                            <h4>Bayrağa Sədaqət Andı Tədbiri</h4>
-                            <p>Məktəblərdə Bayrağa Sədaqət Andı və Sədaqət Möhürünün tətbiqi.</p>
+                    <div class="media-card">
+                        <img src="1021010.jpg" alt="Bayrağa Sədaqət Andı">
+                        <div class="media-card-body">
+                            <div>
+                                <h4>Bayrağa Sədaqət Andı Tədbiri</h4>
+                                <p>Məktəblərdə Bayrağa Sədaqət Andı və Sədaqət Möhürünün tətbiqi.</p>
+                            </div>
+                            <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="btn-link">MOD Rəsmi Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
-                        <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="btn-link">MOD Rəsmi Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
-                </div>
-                <div class="media-card">
-                    <img src="1010.jpg" alt="Sədrin Müsahibəsi">
-                    <div class="media-card-body">
-                        <div>
-                            <h4>Gənclər ilə İnteraktiv Görüşlər</h4>
-                            <p>Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.</p>
+                    <div class="media-card">
+                        <img src="1010.jpg" alt="Sədrin Müsahibəsi">
+                        <div class="media-card-body">
+                            <div>
+                                <h4>Gənclər ilə İnteraktiv Görüşlər</h4>
+                                <p>Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.</p>
+                            </div>
+                            <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link">Day.az Müsahibəsi <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
-                        <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link">Day.az Müsahibəsi <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2. HAQQINDA SƏHİFƏSİ -->
-    <div id="page-haqqinda" class="page">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Təşkilat Haqqında</h1>
-                <p>"İnnovativ Təşəbbüslər" Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</p>
-            </div>
-        </section>
-        <div class="container">
-            <h2 class="section-title">Bizim Təşkilat</h2>
-            <div class="about-card logo-card">
-                <img src="images.jpg" alt="İnnovativ Təşəbbüslər Loqosu">
-                <div>
-                    <h3 style="color:#0b1e3a; font-size:18px; margin-bottom:8px;">"İnnovativ Təşəbbüslər" İctimai Birliyi</h3>
-                    <p>Cəmiyyətin sosial, elmi və mənəvi inkişafına töhfə vermək, innovativ maarifləndirici fəaliyyətlər icra etmək və gənclərin cəmiyyətdə aktiv iştirakını təmin etmək ana hədəfimizdir.</p>
-                </div>
-            </div>
-
-            <h2 class="section-title">Təşkilatın Sədri</h2>
-            <div class="about-card">
-                <img src="indir.jpg" alt="Əşrəf Əhmədov">
-                <div>
-                    <h3 style="color:#0b1e3a; font-size:18px; margin-bottom:5px;">Əşrəf Əhmədov</h3>
-                    <p style="margin-bottom:10px; font-weight:600; color:#1e3a8a;">"İnnovativ Təşəbbüslər" İctimai Birliyinin sədri</p>
-                    <p style="margin-bottom:12px;">Təşkilatımız sədr Əşrəf Əhmədovun rəhbərliyi ilə gənclər arasında vətənpərvərlik ruhunun yüksəldilməsi, tarixi həqiqətlərin və milli dəyərlərin çatdırılması istiqamətində uğurlu layihələr həyata keçirir.</p>
-                    <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link" style="display:inline-block; width:auto; padding:8px 16px;">Sədrin Müsahibəsini Oxu <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. TƏDBİRLƏR SƏHİFƏSİ -->
-    <div id="page-tedbirler" class="page">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Birliyin Tədbirləri</h1>
-                <p>Müdafiə Nazirliyi, media və təhsil müəssisələri ilə birgə keçirilən tədbirlər</p>
-            </div>
-        </section>
-        <div class="container">
-            <div class="media-grid">
-                <div class="media-card">
-                    <img src="1021010.jpg" alt="Bayrağa Sədaqət Andı">
-                    <div class="media-card-body">
-                        <div>
-                            <h4>Bayrağa Sədaqət Andı və Sədaqət Möhürü</h4>
-                            <p>Məktəblərdə keçirilən vətənpərvərlik tədbiri və möhür tətbiqi.</p>
-                        </div>
-                        <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="btn-link">MOD Tədbir Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <img src="221.jpg" alt="Cocuq Mərcanlı">
-                    <div class="media-card-body">
-                        <div>
-                            <h4>Tarixi Məkanlara və Məktəblərə Səfərlər</h4>
-                            <p>Şagird və gənclərin tarixi məkanlara maarifləndirici səfərləri.</p>
-                        </div>
-                        <a href="https://mod.gov.az/az/pre/22264.html" target="_blank" class="btn-link">Ekskursiya Tədbiri <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <img src="1010.jpg" alt="Bakı Məktəbləri">
-                    <div class="media-card-body">
-                        <div>
-                            <h4>Gənclərlə Maarifləndirici Proqramlar</h4>
-                            <p>Təhsil müəssisələrində keçirilən sosial-maarifləndirmə tədbirləri.</p>
-                        </div>
-                        <a href="https://bakimektebleri.edu.az/229/az/news/read/59965" target="_blank" class="btn-link">Bakı Məktəbləri Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- 4. QALEREYA SƏHİFƏSİ -->
-    <div id="page-qalereya" class="page">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Foto Qalereya</h1>
-                <p>Oxlar vasitəsilə tədbir və fəaliyyətlərimizdən olan fotoşəkilləri vərəqləyin</p>
-            </div>
-        </section>
-        <div class="container">
-            <div class="slider-container">
-                <button class="prev-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                <button class="next-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        <!-- 2. HAQQINDA SƏHİFƏSİ -->
+        <div id="page-haqqinda" class="page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Təşkilat Haqqında</h1>
+                    <p>"İnnovativ Təşəbbüslər" Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</p>
+                </div>
+            </section>
+            <div class="container">
+                <h2 class="section-title">Haqqımızda</h2>
+                <div class="about-text-content">
+                    <strong>İnnovativ Təşəbbüslər Platforması</strong> – bütün inkişafı sürətləndirən yeniliklər, yaradıcı düşüncəni və praktiki halləri bir araya gətirən müstəqil təşəbbüsdür. Fəaliyyətimizin ideyalarının gücünə, insan potensialının sərhədsizliyinə və sosial fayda yaradan layihələrin dəyərinə inam dayanır. Bu platformalar üçün elmi, yaradıcı və təşkilati mühitin formalaşdırılmasına qarşı məqsəd qoyur. Bizim üçün innovasiya yalnız texnologiya deyil. İnnovasiya - düşüncə tərzi, problemə yeni baxış, cəmiyyət üçün fayda yaradan dizaynlı. Platformanın istiqamətləri tizra iş layihələri: Yenilikçi layihələrin hazırlanması Sosial, elmi, təhsil, mədəniyyət və texnoloji praktiki yardıma malik layihələrin işlənməsi. Təqdimat və məzmun istehsalı təhsil, maarifləndirmə və sosial təsir məqsədli materialların, video, mətn və vizual materialların hazırlanması. İctimai təşəbbüslər Milli dəyərlərin qorunmasına, dövlətçilik şüurunun gücləndirilməsinə və ictimai inkişafa yönəlmiş layihələrin təşkili. Gənclərin potensialının inkişafı Yaradıcı, və idarəetmə idarələrinə malik gənclərin intellektual potensialını inkişaf etdirir. Bizim missiya - cəmiyyət üçün faydalı olan ideyanı real layihəyə çevirmək, yenilikçi yanaşmaları yaratmaq və yaradan insanların bir araya dayanıqlı platforma yaratmaqdır. yenilikçi
+                </div>
 
-                <div class="slide active-slide">
-                    <img src="221.jpg" alt="Foto 1">
-                    <div class="slide-caption">
-                        <h3>Məktəblilərlə Keçirilən Maarifləndirmə Tədbiri</h3>
+                <h2 class="section-title">Bizim Təşkilat</h2>
+                <div class="about-card logo-card">
+                    <img src="images.jpg" alt="İnnovativ Təşəbbüslər Loqosu">
+                    <div>
+                        <h3 style="color:#0b1e3a; font-size:18px; margin-bottom:8px;">"İnnovativ Təşəbbüslər" İctimai Birliyi</h3>
+                        <p>Cəmiyyətin sosial, elmi və mənəvi inkişafına töhfə vermək, innovativ maarifləndirici fəaliyyətlər icra etmək və gənclərin cəmiyyətdə aktiv iştirakını təmin etmək ana hədəfimizdir.</p>
                     </div>
                 </div>
 
-                <div class="slide">
-                    <img src="1010.jpg" alt="Foto 2">
-                    <div class="slide-caption">
-                        <h3>Gənclər və Tələbələrlə İnteraktiv Görüş</h3>
-                    </div>
-                </div>
-
-                <div class="slide">
-                    <img src="1021010.jpg" alt="Foto 3">
-                    <div class="slide-caption">
-                        <h3>Bayrağa Sədaqət Andı Mərasimindən Foto</h3>
+                <h2 class="section-title">Təşkilatın Sədri</h2>
+                <div class="about-card">
+                    <img src="indir.jpg" alt="Əşrəf Əhmədov">
+                    <div>
+                        <h3 style="color:#0b1e3a; font-size:18px; margin-bottom:5px;">Əşrəf Əhmədov</h3>
+                        <p style="margin-bottom:10px; font-weight:600; color:#1e3a8a;">"İnnovativ Təşəbbüslər" İctimai Birliyinin sədri</p>
+                        <p style="margin-bottom:12px;">Təşkilatımız sədr Əşrəf Əhmədovun rəhbərliyi ilə gənclər arasında vətənpərvərlik ruhunun yüksəldilməsi, tarixi həqiqətlərin və milli dəyərlərin çatdırılması istiqamətində uğurlu layihələr həyata keçirir.</p>
+                        <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link" style="display:inline-block; width:auto; padding:8px 16px;">Sədrin Müsahibəsini Oxu <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- 5. ƏLAQƏ SƏHİFƏSİ -->
-    <div id="page-elaqe" class="page">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Bizimlə Əlaqə</h1>
-                <p>"İnnovativ Təşəbbüslər" İctimai Birliyi ilə əlaqə saxlayın</p>
-            </div>
-        </section>
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="contact-info-box">
-                    <h2 class="section-title" style="border:none; padding:0; margin-bottom:15px;">Əlaqə Məlumatları</h2>
-                    <div class="contact-item">
-                        <i class="fa-solid fa-user-tie"></i>
-                        <span>Sədr: Əşrəf Əhmədov</span>
+        <!-- 3. TƏDBİRLƏR SƏHİFƏSİ -->
+        <div id="page-tedbirler" class="page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Birliyin Tədbirləri</h1>
+                    <p>Müdafiə Nazirliyi, media və təhsil müəssisələri ilə birgə keçirilən tədbirlər</p>
+                </div>
+            </section>
+            <div class="container">
+                <h2 class="section-title">Həyata Keçirilən Tədbirlər</h2>
+                
+                <div class="events-list">
+                    <div class="event-row">
+                        <img src="1021010.jpg" alt="Bayrağa sədaqət andı">
+                        <div class="event-info">
+                            <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="event-title-link">Bayrağa sədaqət andı</a>
+                            <span class="event-desc">Məktəblərdə vətənpərvərlik ruhunun aşılanması məqsədilə keçirilən tədbir.</span>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Bakı şəhəri, Azərbaycan</span>
+
+                    <div class="event-row">
+                        <img src="221.jpg" alt="Bakının işğaldan azad olunması">
+                        <div class="event-info">
+                            <a href="https://mod.gov.az/az/pre/22264.html" target="_blank" class="event-title-link">Bakının işğaldan azad olunması</a>
+                            <span class="event-desc">Tarixi Zəfər günlərinə həsr olunmuş xüsusi maarifləndirici layihə.</span>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fa-solid fa-newspaper"></i>
-                        <span><a href="https://qht.az/details/az/28080" target="_blank" style="color:#334155; text-decoration:none;">QHT.az Rəsmi Keçidi</a></span>
+
+                    <div class="event-row">
+                        <img src="1010.jpg" alt="Ordumuzun 100 illiyinə həsr olunmuş tədbir">
+                        <div class="event-info">
+                            <a href="https://bakimektebleri.edu.az/229/az/news/read/59965" target="_blank" class="event-title-link">Ordumuzun 100 illiyinə həsr olunmuş tədbir</a>
+                            <span class="event-desc">Gənclər və şagirdlərin iştirakı ilə təşkil olunan yubiley tədbiri.</span>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="contact-box">
-                    <form onsubmit="event.preventDefault(); alert('Mesajınız İnnovativ Təşəbbüslər İB-yə göndərildi!'); this.reset();">
-                        <input type="text" placeholder="Ad və Soyadınız" required>
-                        <input type="email" placeholder="E-poçt ünvanınız" required>
-                        <textarea rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
-                        <button type="submit">Göndər</button>
-                    </form>
+        <!-- 4. QALEREYA SƏHİFƏSİ -->
+        <div id="page-qalereya" class="page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Foto Qalereya</h1>
+                    <p>Oxlar vasitəsilə tədbir və fəaliyyətlərimizdən olan fotoşəkilləri vərəqləyin</p>
+                </div>
+            </section>
+            <div class="container">
+                <div class="slider-container">
+                    <button class="prev-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="next-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+                    <div class="slide active-slide">
+                        <img src="221.jpg" alt="Foto 1">
+                        <div class="slide-caption">
+                            <h3>Məktəblilərlə Keçirilən Maarifləndirmə Tədbiri</h3>
+                        </div>
+                    </div>
+
+                    <div class="slide">
+                        <img src="1010.jpg" alt="Foto 2">
+                        <div class="slide-caption">
+                            <h3>Gənclər və Tələbələrlə İnteraktiv Görüş</h3>
+                        </div>
+                    </div>
+
+                    <div class="slide">
+                        <img src="1021010.jpg" alt="Foto 3">
+                        <div class="slide-caption">
+                            <h3>Bayrağa Sədaqət Andı Mərasimindən Foto</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. ƏLAQƏ SƏHİFƏSİ -->
+        <div id="page-elaqe" class="page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Bizimlə Əlaqə</h1>
+                    <p>"İnnovativ Təşəbbüslər" İctimai Birliyi ilə əlaqə saxlayın</p>
+                </div>
+            </section>
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info-box">
+                        <h2 class="section-title" style="border:none; padding:0; margin-bottom:15px;">Əlaqə Məlumatları</h2>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span>Sədr: Əşrəf Əhmədov</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Bakı şəhəri, Azərbaycan</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa-solid fa-newspaper"></i>
+                            <span><a href="https://qht.az/details/az/28080" target="_blank" style="color:#334155; text-decoration:none;">QHT.az Rəsmi Keçidi</a></span>
+                        </div>
+                    </div>
+
+                    <div class="contact-box">
+                        <form onsubmit="event.preventDefault(); alert('Mesajınız İnnovativ Təşəbbüslər İB-yə göndərildi!'); this.reset();">
+                            <input type="text" placeholder="Ad və Soyadınız" required>
+                            <input type="email" placeholder="E-poçt ünvanınız" required>
+                            <textarea rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
+                            <button type="submit">Göndər</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <div class="container">
-        <footer>
+    <footer>
+        <div class="container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
             <span>© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi. Bütün hüquqlar qorunur.</span>
-        </footer>
-    </div>
+            <a href="https://www.facebook.com/groups/436968776359919/user/100064714507365/?locale=az_AZ" target="_blank" class="social-link" title="Facebook Hesabımız">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+        </div>
+    </footer>
 
-    <!-- JS Naviqasiya, Hamburger və Slayder -->
     <script>
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
