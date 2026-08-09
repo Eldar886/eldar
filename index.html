@@ -74,7 +74,6 @@
         .contact-box button { width: 100%; background: #0b1e3a; color: white; padding: 10px; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; }
         #success-msg { display: none; color: #16a34a; font-weight: bold; font-size: 14px; text-align: center; margin-top: 12px; }
 
-        /* Admin Panel Tab Stilləri */
         .admin-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
         .admin-tab-btn { background: #e2e8f0; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; color: #334155; transition: 0.2s; }
         .admin-tab-btn.active-tab { background: #0b1e3a; color: white; }
@@ -168,7 +167,7 @@
             <div class="container">
                 <h2 class="section-title">Haqqımızda</h2>
                 <div class="about-text-content" id="about-text-view">
-                    İnnovativ Təşəbbüslər Platforması – bütün inkişafı sürətləndirən yeniliklər, yaradıcı düşüncəni və praktiki halləri bir araya gətirən müstəqil təşəbbüsdür...
+                    İnnovativ Təşəbbüslər Platforması — bütün inkişafı sürətləndirən yeniliklər, yaradıcı düşüncəni və praktiki halları bir araya gətirən müstəqil təşəbbüsdür. Fəaliyyətimizin ideyalarının gücünə, insan potensialının sərhədsizliyinə və sosial fayda yaradan layihələrin dəyərinə inam dayanır. Bu platformalar üçün elmi, yaradıcı və təşkilati mühitin formalaşdırılmasına qarşı məqsəd qoyur. Bizim üçün innovasiya yalnız texnologiya deyil. İnnovasiya - düşüncə tərzi, problemlərə yeni baxış, cəmiyyət üçün fayda yaradan dizaynlı. Platformuzun istiqamətləri üzrə iş layihələri: Yenilikçi layihələrin hazırlanması Sosial, elmi, təhsil, mədəniyyət və texnologoji praktiki yardıma malik layihələrin işlənməsi. Təqdimat və məzmun istehsalı təhsil, maarifləndirmə və sosial təsir məqsədli materialların, video, mətn və vizual materialların hazırlanması. İctimai təşəbbüslər Milli dəyərlərin qorunmasına, dövlətçilik şüurunun gücləndirilməsinə və ictimai inkişafa yönəlmiş layihələrin təşkili. Gənclərin potensialının inkişafı Yaradıcı, və idarəetmə idarələrinə malik gənclərin intellektual potensialını inkişaf etdirir. Bizim missiya - cəmiyyət üçün faydalı olan ideyanı real layihəyə çevirmək, yenilikçi yanaşmaları yaratmaq və yaradan insanların bir araya dayanlıqlı platforma yaratmaqdır.
                 </div>
                 <h2 class="section-title">Təşkilatın Sədri</h2>
                 <div class="about-card">
@@ -198,6 +197,20 @@
                         <div class="event-info">
                             <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="event-title-link">Bayrağa sədaqət andı</a>
                             <span class="event-desc">Məktəblərdə vətənpərvərlik ruhunun aşılanması məqsədilə keçirilən tədbir.</span>
+                        </div>
+                    </div>
+                    <div class="event-row">
+                        <img src="221.jpg" alt="Milli Vətənpərvərlik Tədbirlərimiz">
+                        <div class="event-info">
+                            <a href="https://qht.az/details/az/28080" target="_blank" class="event-title-link">Milli Vətənpərvərlik Tədbirlərimiz</a>
+                            <span class="event-desc">Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</span>
+                        </div>
+                    </div>
+                    <div class="event-row">
+                        <img src="1010.jpg" alt="Gənclər ilə İnteraktiv Görüşlər">
+                        <div class="event-info">
+                            <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="event-title-link">Gənclər ilə İnteraktiv Görüşlər</a>
+                            <span class="event-desc">Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.</span>
                         </div>
                     </div>
                 </div>
@@ -258,7 +271,7 @@
             </div>
         </div>
 
-        <!-- 6. GİZLİ AYRI-AYRI BÖLMƏLƏRİ OLAN ADMIN PANEL -->
+        <!-- 6. GİZLİ ADMIN PANEL -->
         <div id="page-admin" class="page">
             <section class="hero" style="padding: 40px 20px; margin-bottom: 20px;">
                 <div class="hero-content">
@@ -272,7 +285,6 @@
                     <button onclick="adminLogout()" style="background: #dc2626; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600;">Çıxış Et <i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
 
-                <!-- Admin Tab Düymələri -->
                 <div class="admin-tabs">
                     <button class="admin-tab-btn active-tab" onclick="openAdminTab('home-tab', this)">🏠 Ana Səhifə</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('about-tab', this)">📖 Haqqında</button>
@@ -281,7 +293,6 @@
                     <button class="admin-tab-btn" onclick="openAdminTab('contact-tab', this)">📞 Əlaqə</button>
                 </div>
 
-                <!-- 1. ANA SƏHİFƏNİ İDARƏ ET -->
                 <div id="home-tab" class="admin-section active-admin-sec contact-box">
                     <h3 class="section-title" style="font-size:16px;">Ana Səhifəni Redaktə Et</h3>
                     <input type="text" id="admin-home-title" placeholder="Ana səhifə başlığı">
@@ -289,14 +300,12 @@
                     <button onclick="saveHomeData()">Ana Səhifəni Yenilə</button>
                 </div>
 
-                <!-- 2. HAQQINDA SƏHİFƏSİNİ İDARƏ ET -->
                 <div id="about-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Haqqında Səhifəsini Redaktə Et</h3>
                     <textarea id="admin-about-text" rows="6" placeholder="Haqqında mətnini bura yaz..."></textarea>
                     <button onclick="saveAboutData()">Haqqında Mətnini Yenilə</button>
                 </div>
 
-                <!-- 3. TƏDBİRLƏR SƏHİFƏSİNİ İDARƏ ET -->
                 <div id="events-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Yeni Tədbir Əlavə Et</h3>
                     <input type="text" id="admin-ev-title" placeholder="Tədbir başlığı">
@@ -305,7 +314,6 @@
                     <button onclick="addNewEventAdmin()">Tədbir Əlavə Et</button>
                 </div>
 
-                <!-- 4. QALEREYA SƏHİFƏSİNİ İDARƏ ET (Şəkil əlavə etmək) -->
                 <div id="gallery-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Qalereyaya Şəkil Əlavə Et</h3>
                     <input type="text" id="admin-gal-img" placeholder="Şəkil fayl adı (məsələn: 1010.jpg)">
@@ -313,14 +321,12 @@
                     <button onclick="addGalleryImageAdmin()">Qalereyaya Şəkil Əlavə Et</button>
                 </div>
 
-                <!-- 5. ƏLAQƏ SƏHİFƏSİNİ İDARƏ ET -->
                 <div id="contact-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Əlaqə Məlumatlarını Yenilə</h3>
                     <input type="text" id="admin-contact-leader" placeholder="Sədrin adı">
                     <input type="text" id="admin-contact-address" placeholder="Ünvan">
                     <button onclick="saveContactData()">Əlaqə Məlumatlarını Yenilə</button>
                 </div>
-
             </div>
         </div>
 
@@ -348,17 +354,14 @@
             window.scrollTo(0, 0);
         }
 
-        // Admin içərisindəki tabları dəyişmək üçün
         function openAdminTab(tabId, btn) {
             document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active-admin-sec'));
             document.getElementById(tabId).classList.add('active-admin-sec');
 
-            document.querySelectorAll('.admin-tab-btnkval').forEach(b => b.classList.remove('active-tab'));
             document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active-tab'));
             btn.classList.add('active-tab');
         }
 
-        // Slayder məntiqi
         let slideIndex = 0;
         function moveSlide(n) {
             let slides = document.querySelectorAll(".slide");
@@ -371,7 +374,6 @@
             slides[slideIndex].classList.add("active-slide");
         }
 
-        // Sayt açılanda localStorage-dən yadda saxlanılan məlumatları yükləyirik
         window.onload = function() {
             if(localStorage.getItem("homeTitle")) document.getElementById("home-hero-title").innerHTML = localStorage.getItem("homeTitle");
             if(localStorage.getItem("homeDesc")) document.getElementById("home-hero-desc").innerText = localStorage.getItem("homeDesc");
@@ -380,7 +382,6 @@
             if(localStorage.getItem("savedGallery")) document.getElementById("dynamic-slider").innerHTML = localStorage.getItem("savedGallery");
         };
 
-        // --- GİZLİ GİRİŞ (Ctrl + Shift + A) ---
         document.addEventListener("keydown", function(event) {
             if (event.ctrlKey && event.shiftKey && event.code === "KeyA") {
                 event.preventDefault();
@@ -399,12 +400,11 @@
             alert("Çıxış edildi.");
         }
 
-        // --- YENİLƏMƏ VƏ YADDA SAXLAMA FUNKSİYALARI ---
         function saveHomeData() {
             let t = document.getElementById("admin-home-title").value;
             let d = document.getElementById("admin-home-desc").value;
             if(t) { document.getElementById("home-hero-title").innerHTML = t; localStorage.setItem("homeTitle", t); }
-            if(d) { document.getElementById("home-hero-descinnerText", d); localStorage.setItem("homeDesc", d); }
+            if(d) { document.getElementById("home-hero-desc").innerText = d; localStorage.setItem("homeDesc", d); }
             alert("Ana səhifə yeniləndi!");
         }
 
