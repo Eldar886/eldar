@@ -64,7 +64,7 @@
         .share-whatsapp { background: #25d366; }
         .share-telegram { background: #0088cc; }
 
-        /* İdeya Generatoru Dizaynı */
+        /* İdeya Generatoru */
         .idea-generator-box { background: linear-gradient(135deg, #1e3a8a, #0b1e3a); color: white; padding: 30px; border-radius: 12px; margin-bottom: 40px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .idea-generator-box h3 { font-size: 20px; margin-bottom: 10px; }
         .idea-generator-box p { font-size: 14px; opacity: 0.9; margin-bottom: 20px; }
@@ -72,13 +72,17 @@
         .btn-idea { background: #25d366; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s; }
         .btn-idea:hover { background: #16a34a; }
 
-        /* Günün Sualı Bölməsi */
+        /* Günün Sualı və Fikir Bölməsi */
         .daily-question-box { background: #fff; border: 1px solid #e2e8f0; padding: 25px; border-radius: 10px; margin-bottom: 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
         .daily-question-box h3 { font-size: 18px; color: #0b1e3a; margin-bottom: 10px; }
         .daily-question-box p { font-size: 14px; color: #64748b; margin-bottom: 15px; font-weight: 600; }
-        .daily-question-box textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 10px; font-size: 13px; outline: none; }
-        .daily-question-box button { background: #0b1e3a; color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
-        .q-success { display: none; color: #16a34a; font-size: 13px; margin-top: 8px; font-weight: 600; }
+        .daily-question-box input[type="text"], .daily-question-box textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 10px; font-size: 13px; outline: none; }
+        .daily-question-box button { background: #0b1e3a; color: white; border: none; padding: 9px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        
+        .public-answers-list { margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 15px; }
+        .public-answer-item { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 13px; }
+        .public-answer-item strong { color: #0b1e3a; }
+        .public-answer-item span { font-size: 11px; color: #64748b; display: block; margin-top: 3px; }
 
         .slider-container { position: relative; max-width: 850px; margin: 0 auto 40px auto; background: #000; border-radius: 10px; overflow: hidden; }
         .slide { display: none; position: relative; width: 100%; height: 480px; }
@@ -104,14 +108,11 @@
         .admin-section { display: none; }
         .admin-section.active-admin-sec { display: block; }
 
-        .admin-gallery-item, .admin-event-item { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px; margin-bottom: 10px; }
+        .admin-gallery-item, .admin-event-item, .admin-answer-card { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px; margin-bottom: 10px; font-size: 13px; }
         .admin-gallery-info { display: flex; align-items: center; gap: 10px; }
         .admin-gallery-info img { width: 50px; height: 40px; object-fit: cover; border-radius: 4px; }
         .btn-delete-item { background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600; }
         .btn-delete-item:hover { background: #b91c1c; }
-
-        /* İstifadəçi Cavabları Siyahısı (Admin Üçün) */
-        .admin-answer-card { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 13px; }
 
         footer { border-top: 1px solid #e2e8f0; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; background: #fff; width: 100%; margin-top: auto; }
         footer span { font-size: 13px; color: #64748b; }
@@ -171,13 +172,22 @@
                     <button class="btn-idea" onclick="generateIdea()"><i class="fa-solid fa-wand-magic-sparkles"></i> Yeni İdeya yarat</button>
                 </div>
 
-                <!-- Günün Sualı Bölməsi -->
+                <!-- Günün Sualı və Fikir Bildirmə Bölməsi -->
                 <div class="daily-question-box">
                     <h3>❓ Günün Sualı</h3>
                     <p id="displayDailyQuestion">Məktəblilərdə kitaba və mütaliəyə marağı necə artıra bilərik?</p>
+                    
+                    <input type="text" id="userNameInput" placeholder="Ad və Soyadınız...">
                     <textarea id="userAnswerInput" rows="3" placeholder="Sənin fikrin və ya təklifin..."></textarea>
                     <button onclick="submitUserAnswer()">Fikrimi Göndər</button>
-                    <div class="q-success" id="qSuccessMsg">Fikriniz uğurla qeydə alındı! (Yalnız sədr tərəfindən oxunacaq)</div>
+
+                    <!-- Hamının görə biləcəyi rəylər siyahısı -->
+                    <div class="public-answers-list">
+                        <h4 style="font-size:14px; color:#0b1e3a; margin-bottom:10px;">İştirakçıların Fikirləri:</h4>
+                        <div id="publicAnswersContainer">
+                            <p style="font-size:13px; color:#64748b;">Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!</p>
+                        </div>
+                    </div>
                 </div>
 
                 <h2 class="section-title">Önə Çıxan Tədbir və Xəbərlər</h2>
@@ -342,7 +352,7 @@
                 </div>
 
                 <div class="admin-tabs">
-                    <button class="admin-tab-btn active-tab" onclick="openAdminTab('question-tab', this)">❓ Günün Sualı və Cavablar</button>
+                    <button class="admin-tab-btn active-tab" onclick="openAdminTab('question-tab', this)">❓ Günün Sualı və Rəylər</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('home-tab', this)">🏠 Ana Səhifə</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('events-tab', this)">📅 Tədbirlər</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('gallery-tab', this)">🖼️ Qalereya</button>
@@ -354,9 +364,9 @@
                     <input type="text" id="adminNewQuestionInput" placeholder="Yeni sualı bura yazın...">
                     <button onclick="saveNewQuestion()" style="margin-bottom: 25px;">Sualı Yenilə</button>
 
-                    <h3 class="section-title" style="font-size:16px;">İstifadəçilərin Yazdığı Cavablar (Yalnız Sədrə Görünür)</h3>
+                    <h3 class="section-title" style="font-size:16px;">Bütün Rəylər (Admin İdarəetməsi - Silə bilərsən)</h3>
                     <div id="adminAnswersContainer">
-                        <p style="font-size:13px; color:#64748b;">Hələ heç bir cavab yazılmayıb.</p>
+                        <p style="font-size:13px; color:#64748b;">Hələ heç bir rəy yoxdur.</p>
                     </div>
                 </div>
 
@@ -446,48 +456,67 @@
             if(tabId === 'events-tab') renderAdminEventsList();
         }
 
-        // Gələcəyin İdeya Generatoru funksiyası
+        // Gələcəyin İdeya Generatoru
         function generateIdea() {
-            let subjects = [
-                "Məktəblilər arasında", "Gənclər üçün", "Tələbələr arasında", "Bölgələrdə", "Onlayn platformada"
-            ];
-            let actions = [
-                "süni intellekt yönümlü", "vətənpərvərlik mövzusunda", "ekoloji təmiz", "intellektual bilik yarışması", "könüllü sosial layihə"
-            ];
-            let results = [
-                "intellektual inkişafa təkan verəcək", "liderlik bacarıqlarını artıracaq", "milli-mənəvi dəyərləri gücləndirəcək", "yenilikçi düşüncəni formalaşdıracaq"
-            ];
+            let subjects = ["Məktəblilər arasında", "Gənclər üçün", "Tələbələr arasında", "Bölgələrdə", "Onlayn platformada"];
+            let actions = ["süni intellekt yönümlü", "vətənpərvərlik mövzusunda", "ekoloji təmiz", "intellektual bilik yarışması", "könüllü sosial layihə"];
+            let results = ["intellektual inkişafa təkan verəcək", "liderlik bacarıqlarını artıracaq", "milli-mənəvi dəyərləri gücləndirəcək", "yenilikçi düşüncəni formalaşdıracaq"];
 
             let rand1 = subjects[Math.floor(Math.random() * subjects.length)];
             let rand2 = actions[Math.floor(Math.random() * actions.length)];
             let rand3 = results[Math.floor(Math.random() * results.length)];
 
-            let fullIdea = `Sənin İdeyan: ${rand1} ${rand2} təşkil etmək və bu layihə gənclərdə ${rand3}!`;
-            document.getElementById("ideaOutputText").innerText = fullIdea;
+            document.getElementById("ideaOutputText").innerText = `Sənin İdeyan: ${rand1} ${rand2} təşkil etmək və bu layihə gənclərdə ${rand3}!`;
         }
 
-        // Günün Sualı cavabını göndərmək
+        // Günün Sualına Rəy Göndərmək
         function submitUserAnswer() {
+            let name = document.getElementById("userNameInput").value.trim();
             let val = document.getElementById("userAnswerInput").value.trim();
-            if(!val) { alert("Zəhmət olmasa fikrinizi yazın!"); return; }
+            
+            if(!name || !val) { alert("Zəhmət olmasa Ad, Soyad və fikrinizi daxil edin!"); return; }
 
             let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
-            answers.push({ text: val, date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() });
+            answers.push({ name: name, text: val, date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() });
             localStorage.setItem("savedAnswers", JSON.stringify(answers));
 
+            document.getElementById("userNameInput").value = "";
             document.getElementById("userAnswerInput").value = "";
-            let msg = document.getElementById("qSuccessMsg");
-            msg.style.display = "block";
-            setTimeout(() => { msg.style.display = "none"; }, 4000);
+            
+            renderPublicAnswers();
+            alert("Rəfiniz uğurla əlavə olundu!");
         }
 
-        // Admin üçün cavabları göstərmək
+        // Hamının görə biləcəyi rəyləri ekrana yazmaq
+        function renderPublicAnswers() {
+            let container = document.getElementById("publicAnswersContainer");
+            let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            
+            if(answers.length === 0) {
+                container.innerHTML = "<p style='font-size:13px; color:#64748b;'>Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!</p>";
+                return;
+            }
+
+            let html = "";
+            answers.forEach((ans) => {
+                html += `
+                    <div class="public-answer-item">
+                        <strong><i class="fa-solid fa-user-circle"></i> ${ans.name}</strong>
+                        <p style="margin-top:4px; color:#334155;">${ans.text}</p>
+                        <span>${ans.date}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Admin Paneldə rəyləri göstərmək və silmək
         function renderAdminAnswers() {
             let container = document.getElementById("adminAnswersContainer");
             let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
             
             if(answers.length === 0) {
-                container.innerHTML = "<p style='font-size:13px; color:#64748b;'>Hələ heç bir cavab yazılmayıb.</p>";
+                container.innerHTML = "<p style='font-size:13px; color:#64748b;'>Hələ heç bir rəy yoxdur.</p>";
                 return;
             }
 
@@ -495,12 +524,24 @@
             answers.forEach((ans, index) => {
                 html += `
                     <div class="admin-answer-card">
-                        <p><strong>${index + 1}. Fikir:</strong> ${ans.text}</p>
-                        <span style="font-size:11px; color:#64748b; display:block; margin-top:4px;">Tarix: ${ans.date}</span>
+                        <div>
+                            <strong>${index + 1}. ${ans.name}</strong>: ${ans.text}
+                            <span style="font-size:11px; color:#64748b; display:block; margin-top:3px;">Tarix: ${ans.date}</span>
+                        </div>
+                        <button class="btn-delete-item" onclick="deleteAnswerItem(${index})">Sil</button>
                     </div>
                 `;
             });
             container.innerHTML = html;
+        }
+
+        function deleteAnswerItem(index) {
+            let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            answers.splice(index, 1);
+            localStorage.setItem("savedAnswers", JSON.stringify(answers));
+            renderAdminAnswers();
+            renderPublicAnswers();
+            alert("Rəy silindi!");
         }
 
         function saveNewQuestion() {
@@ -540,6 +581,8 @@
             if(localStorage.getItem("savedEvents")) document.getElementById("events-container-view").innerHTML = localStorage.getItem("savedEvents");
             if(localStorage.getItem("dailyQuestion")) document.getElementById("displayDailyQuestion").innerText = localStorage.getItem("dailyQuestion");
             
+            renderPublicAnswers();
+
             if(localStorage.getItem("savedGallery")) {
                 let slider = document.getElementById("dynamic-slider");
                 let controls = slider.querySelector('.prev-btn').outerHTML + slider.querySelector('.next-btn').outerHTML;
