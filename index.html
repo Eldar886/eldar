@@ -18,7 +18,9 @@
         .menu-toggle { font-size: 24px; color: #0b1e3a; cursor: pointer; background: #f1f5f9; padding: 8px 12px; border-radius: 8px; display: none; }
 
         .logo-box { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .logo-text { font-weight: 800; font-size: 16px; color: #0b1e3a; text-transform: uppercase; letter-spacing: 0.5px; }
+        .logo-box img { width: 45px; height: 45px; object-fit: contain; }
+        .logo-text { font-weight: 800; font-size: 16px; color: #0b1e3a; text-transform: uppercase; }
+        .logo-text span { color: #1e3a8a; display: block; font-size: 10px; font-weight: 600; }
         
         .nav-links { display: flex; list-style: none; gap: 5px; align-items: center; }
         .nav-links a { display: block; text-decoration: none; color: #334155; font-size: 14px; font-weight: 600; cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: 0.2s; }
@@ -28,63 +30,64 @@
         .page.active { display: block; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hero Dizaynı */
-        .hero { background: linear-gradient(rgba(11, 30, 58, 0.85), rgba(11, 30, 58, 0.85)), url('221.jpg') center/cover; color: white; padding: 85px 20px; margin-bottom: 40px; }
+        .hero { background: linear-gradient(rgba(11, 30, 58, 0.90), rgba(11, 30, 58, 0.90)), url('221.jpg') center/cover; color: white; padding: 85px 20px; text-align: center; margin-bottom: 40px; }
         .hero-content { max-width: 750px; margin: 0 auto; }
-        .hero h1 { font-size: 30px; font-weight: 800; margin-bottom: 15px; line-height: 1.3; }
+        .hero h1 { font-size: 30px; font-weight: 800; margin-bottom: 15px; }
         .hero p { font-size: 15px; opacity: 0.9; margin-bottom: 25px; }
-        .btn-main { background-color: #0b1e3a; color: white; padding: 12px 28px; border-radius: 6px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; border: none; }
-        .btn-main:hover { background-color: #1e3a8a; }
+        .btn-main { background-color: #1e3a8a; color: white; padding: 12px 28px; border-radius: 6px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; border: none; }
+        .btn-main:hover { background-color: #2563eb; }
 
-        .section-title { font-size: 20px; font-weight: 700; color: #0b1e3a; margin-bottom: 20px; }
+        .section-title { font-size: 22px; font-weight: 700; color: #0b1e3a; margin-bottom: 20px; border-left: 4px solid #0b1e3a; padding-left: 10px; }
+        .about-card { background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 30px; display: flex; gap: 20px; align-items: center; }
+        .about-card img { width: 140px; height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1; }
+        .about-text-content { background: #fff; padding: 30px; border-radius: 8px; border: 1px solid #e2e8f0; line-height: 1.8; text-align: justify; font-size: 14.5px; color: #334155; margin-bottom: 40px; }
 
-        /* Tədbirlər Setkası */
-        .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
-        .project-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: transform 0.2s; }
-        .project-card:hover { transform: translateY(-2px); border-color: #cbd5e1; }
-        .project-card img { width: 110px; height: 75px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; }
-        .project-info h4 { font-size: 14.5px; color: #0b1e3a; font-weight: 700; margin-bottom: 4px; }
-        .project-info p { font-size: 12.5px; color: #64748b; }
+        .media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+        .media-card { background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; }
+        .media-card img { width: 100%; height: 180px; object-fit: cover; }
+        .media-card-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .media-card-body h4 { font-size: 13.5px; color: #0b1e3a; font-weight: 700; margin-bottom: 6px; }
+        .media-card-body p { font-size: 12px; color: #64748b; margin-bottom: 12px; }
 
-        /* Haqqında və Əlaqə Yan-yana */
-        .about-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 50px; }
-        .about-box-mini { background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; gap: 15px; align-items: center; }
-        .about-box-mini img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1; }
-        .about-box-mini h3 { font-size: 16px; color: #0b1e3a; margin-bottom: 4px; }
-        .about-box-mini p { font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 8px; }
-        .about-box-mini span { font-size: 12px; color: #334155; display: block; }
+        .events-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 50px; }
+        .event-row { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; display: flex; align-items: center; gap: 20px; }
+        .event-row img { width: 140px; height: 90px; object-fit: cover; border-radius: 6px; }
+        .event-info { display: flex; flex-direction: column; gap: 5px; }
+        .event-title-link { font-size: 16px; font-weight: 700; color: #1d4ed8; text-decoration: none; }
+        .event-desc { font-size: 13px; color: #64748b; }
 
-        .contact-box-mini { background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; }
-        .contact-box-mini h3 { font-size: 16px; color: #0b1e3a; margin-bottom: 15px; }
-        .contact-box-mini input, .contact-box-mini textarea { width: 100%; padding: 9px 12px; margin-bottom: 10px; border: 1px solid #cbd5e1; border-radius: 5px; font-size: 12.5px; outline: none; }
-        .contact-box-mini button { width: 100%; background: #0b1e3a; color: white; padding: 10px; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; font-size: 13px; }
-        .contact-box-mini button:hover { background: #1e3a8a; }
-        #success-msg { display: none; color: #16a34a; font-weight: bold; font-size: 13px; text-align: center; margin-top: 10px; }
-
-        /* Qalereya Slider */
         .slider-container { position: relative; max-width: 850px; margin: 0 auto 40px auto; background: #000; border-radius: 10px; overflow: hidden; }
-        .slide { display: none; position: relative; width: 100%; height: 450px; }
+        .slide { display: none; position: relative; width: 100%; height: 480px; }
         .slide.active-slide { display: block; }
         .slide img { width: 100%; height: 100%; object-fit: cover; }
-        .slide-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(11, 30, 58, 0.95)); color: white; padding: 20px; text-align: center; }
-        .prev-btn, .next-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(11, 30, 58, 0.8); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
+        .slide-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(11, 30, 58, 0.95)); color: white; padding: 25px 20px 15px 20px; text-align: center; }
+        .prev-btn, .next-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(11, 30, 58, 0.8); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 18px; z-index: 10; display: flex; align-items: center; justify-content: center; }
         .prev-btn { left: 15px; } .next-btn { right: 15px; }
 
-        /* Admin Panel */
+        .btn-link { display: inline-block; width: 100%; text-align: center; background: #0b1e3a; color: white; padding: 8px 10px; text-decoration: none; font-size: 11.5px; font-weight: 600; border-radius: 4px; border: none; }
+        
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+        .contact-info-box, .contact-box { background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-size: 13.5px; color: #334155; }
+        .contact-item i { font-size: 18px; color: #0b1e3a; width: 24px; }
+        .contact-box input, .contact-box textarea { width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 5px; font-size: 13px; outline: none; }
+        .contact-box button { width: 100%; background: #0b1e3a; color: white; padding: 10px; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; }
+        #success-msg { display: none; color: #16a34a; font-weight: bold; font-size: 14px; text-align: center; margin-top: 12px; }
+
+        /* Admin Panel Tab Stilləri */
         .admin-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
-        .admin-tab-btn { background: #e2e8f0; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; color: #334155; }
+        .admin-tab-btn { background: #e2e8f0; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; color: #334155; transition: 0.2s; }
         .admin-tab-btn.active-tab { background: #0b1e3a; color: white; }
-        .admin-section { display: none; background: #fff; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .admin-section { display: none; }
         .admin-section.active-admin-sec { display: block; }
 
-        footer { border-top: 1px solid #e2e8f0; padding: 20px 0; background: #fff; margin-top: auto; }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        footer { border-top: 1px solid #e2e8f0; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; background: #fff; width: 100%; margin-top: auto; }
         footer span { font-size: 13px; color: #64748b; }
-        .social-links { display: flex; gap: 15px; }
-        .social-link { font-size: 20px; color: #0b1e3a; text-decoration: none; }
+        .social-link { font-size: 26px; color: #1877f2; text-decoration: none; }
 
         @media (max-width: 768px) {
-            .projects-grid, .about-contact-grid { grid-template-columns: 1fr; }
+            .media-grid, .contact-wrapper { grid-template-columns: 1fr; }
+            .about-card { flex-direction: column; text-align: center; }
             .menu-toggle { display: block; }
             .nav-links { display: none; flex-direction: column; position: absolute; top: 75px; left: 0; background: #fff; width: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border-radius: 0 10px 10px 10px; border: 1px solid #e2e8f0; padding: 15px 0; z-index: 1001; }
             .nav-links.show { display: flex; }
@@ -102,7 +105,8 @@
                     <div class="nav-left">
                         <div class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
                         <div class="logo-box" onclick="openPage('home', document.querySelector('.nav-item'))">
-                            <div class="logo-text">İnnovativ Təşəbbüslər</div>
+                            <img src="images.jpg" alt="Logo">
+                            <div class="logo-text">İnnovativ Təşəbbüslər<span>İctimai Birliyi</span></div>
                         </div>
                     </div>
                     <ul class="nav-links" id="navLinks">
@@ -120,69 +124,33 @@
         <div id="page-home" class="page active">
             <section class="hero">
                 <div class="hero-content">
-                    <h1 id="home-hero-title">Yeniliyə açılan qapı:<br>Sosial və Elmi Təşəbbüslər</h1>
-                    <p id="home-hero-desc">Maarifləndirmə, yaradıcı düşüncə və milli dəyərlərin inkişafı üçün platforma</p>
-                    <a onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])" class="btn-main">Tədbirlərə baxın</a>
+                    <h1 id="home-hero-title">"İnnovativ Təşəbbüslər"<br>Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</h1>
+                    <p id="home-hero-desc">Gənclərin milli-mənəvi ruhda tərbiyəsi, vətənpərvərlik və innovativ təhsil təşəbbüslərinin dəstəklənməsi platforması.</p>
+                    <a onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])" class="btn-main">Tədbirlərimizlə Tanış Olun</a>
                 </div>
             </section>
-            
             <div class="container">
-                <h2 class="section-title">Tədbirlər</h2>
-                <div class="projects-grid" id="home-events-grid">
-                    <div class="project-card" onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])">
-                        <img src="221.jpg" alt="Tədbir">
-                        <div class="project-info">
-                            <h4>Milli Vətənpərvərlik</h4>
-                            <p>Məktəblilər arasında maarifləndirici görüşlər.</p>
+                <h2 class="section-title">Önə Çıxan Tədbir və Xəbərlər</h2>
+                <div class="media-grid">
+                    <div class="media-card">
+                        <img src="221.jpg" alt="Qərbi Azərbaycan">
+                        <div class="media-card-body">
+                            <div><h4>Milli Vətənpərvərlik Tədbirlərimiz</h4><p>Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</p></div>
+                            <a href="https://qht.az/details/az/28080" target="_blank" class="btn-link">QHT.az Məqaləsi <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
-                    <div class="project-card" onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])">
-                        <img src="1021010.jpg" alt="Tədbir">
-                        <div class="project-info">
-                            <h4>Bayrağa Sədaqət Andı</h4>
-                            <p>Gənclərdə vətənpərvərlik ruhunun yüksəldilməsi.</p>
+                    <div class="media-card">
+                        <img src="1021010.jpg" alt="Bayrağa Sədaqət Andı">
+                        <div class="media-card-body">
+                            <div><h4>Bayrağa Sədaqət Andı Tədbiri</h4><p>Məktəblərdə Bayrağa Sədaqət Andı və Sədaqət Möhürünün tətbiqi.</p></div>
+                            <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="btn-link">MOD Rəsmi Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
-                    <div class="project-card" onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])">
-                        <img src="1010.jpg" alt="Tədbir">
-                        <div class="project-info">
-                            <h4>İnteraktiv Gənclər Görüşü</h4>
-                            <p>İnnovativ təhsil və gənclər siyasəti.</p>
-                        </div>
-                    </div>
-                    <div class="project-card" onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])">
-                        <img src="221.jpg" alt="Tədbir">
-                        <div class="project-info">
-                            <h4>Sosial Aksiyalar</h4>
-                            <p>Cəmiyyətin inkişafına dəstək təşəbbüsləri.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Haqqında və Əlaqə Yan-yana -->
-                <div class="about-contact-grid">
-                    <div>
-                        <h2 class="section-title">Haqqında</h2>
-                        <div class="about-box-mini">
-                            <img src="indir.jpg" alt="Əşrəf Əhmədov">
-                            <div>
-                                <h3 id="home-leader-name">Əşrəf Əhmədov</h3>
-                                <p id="home-leader-title">Hüquqşünas və Direktor</p>
-                                <span id="home-leader-desc">İnnovativ Təşəbbüslər İctimai Birliyinin sədri. Gənclərin inkişafı istiqamətində layihələr həyata keçirir.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h2 class="section-title">Əlaqə</h2>
-                        <div class="contact-box-mini">
-                            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted) { handleFormSuccess(); }"></iframe>
-                            <form id="contact-form" action="https://formspree.io/f/xljrjgpp" method="POST" target="hidden_iframe" onsubmit="isSubmitted=true;">
-                                <input type="text" name="name" placeholder="Ad" required>
-                                <input type="email" name="email" placeholder="Email" required>
-                                <textarea name="message" rows="3" placeholder="Mesaj" required></textarea>
-                                <button type="submit">Göndər</button>
-                            </form>
-                            <p id="success-msg">Mesajınız göndərildi! 🎉</p>
+                    <div class="media-card">
+                        <img src="1010.jpg" alt="Sədrin Müsahibəsi">
+                        <div class="media-card-body">
+                            <div><h4>Gənclər ilə İnteraktiv Görüşlər</h4><p>Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.</p></div>
+                            <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link">Day.az Müsahibəsi <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -191,20 +159,24 @@
 
         <!-- 2. HAQQINDA SƏHİFƏSİ -->
         <div id="page-haqqinda" class="page">
-            <section class="hero" style="padding: 50px 20px;">
+            <section class="hero">
                 <div class="hero-content">
                     <h1>Təşkilat Haqqında</h1>
-                    <p>Ətraflı məlumat və rəhbərlik</p>
+                    <p>"İnnovativ Təşəbbüslər" Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</p>
                 </div>
             </section>
             <div class="container">
-                <h2 class="section-title">Sədr Haqqında</h2>
-                <div class="about-box-mini" style="margin-bottom: 40px; padding: 30px;">
-                    <img src="indir.jpg" alt="Əşrəf Əhmədov" style="width: 130px; height: 130px;">
+                <h2 class="section-title">Haqqımızda</h2>
+                <div class="about-text-content" id="about-text-view">
+                    İnnovativ Təşəbbüslər Platforması – bütün inkişafı sürətləndirən yeniliklər, yaradıcı düşüncəni və praktiki halləri bir araya gətirən müstəqil təşəbbüsdür...
+                </div>
+                <h2 class="section-title">Təşkilatın Sədri</h2>
+                <div class="about-card">
+                    <img src="indir.jpg" alt="Əşrəf Əhmədov">
                     <div>
-                        <h3 style="font-size: 20px; margin-bottom: 8px;">Əşrəf Əhmədov</h3>
-                        <p style="font-size: 14px; margin-bottom: 12px; color: #1e3a8a;">"İnnovativ Təşəbbüslər" İctimai Birliyinin sədri</p>
-                        <span style="font-size: 13.5px; line-height: 1.6;">Təşkilatımız sədr Əşrəf Əhmədovun rəhbərliyi ilə gənclər arasında vətənpərvərlik, təhsil və sosialyönümlü layihələr həyata keçirir.</span>
+                        <h3 style="color:#0b1e3a; font-size:18px; margin-bottom:5px;">Əşrəf Əhmədov</h3>
+                        <p style="margin-bottom:10px; font-weight:600; color:#1e3a8a;">"İnnovativ Təşəbbüslər" İctimai Birliyinin sədri</p>
+                        <p style="margin-bottom:12px;">Təşkilatımız sədr Əşrəf Əhmədovun rəhbərliyi ilə gənclər arasında vətənpərvərlik ruhunun yüksəldilməsi istiqamətində uğurlu layihələr həyata keçirir.</p>
                     </div>
                 </div>
             </div>
@@ -212,20 +184,20 @@
 
         <!-- 3. TƏDBİRLƏR SƏHİFƏSİ -->
         <div id="page-tedbirler" class="page">
-            <section class="hero" style="padding: 50px 20px;">
+            <section class="hero">
                 <div class="hero-content">
-                    <h1>Bütün Tədbirlər</h1>
-                    <p>Həyata keçirilmiş layihələr və tədbirlər xronologiyası</p>
+                    <h1>Birliyin Tədbirləri</h1>
+                    <p>Müdafiə Nazirliyi, media və təhsil müəssisələri ilə birgə keçirilən tədbirlər</p>
                 </div>
             </section>
             <div class="container">
-                <h2 class="section-title">Keçirilən Tədbirlər</h2>
-                <div class="projects-grid" id="full-events-grid" style="margin-bottom: 50px;">
-                    <div class="project-card">
-                        <img src="1021010.jpg" alt="Tədbir">
-                        <div class="project-info">
-                            <h4>Bayrağa sədaqət andı</h4>
-                            <p>Məktəblərdə vətənpərvərlik tədbiri.</p>
+                <h2 class="section-title">Həyata Keçirilən Tədbirlər</h2>
+                <div class="events-list" id="events-container-view">
+                    <div class="event-row">
+                        <img src="1021010.jpg" alt="Bayrağa sədaqət andı">
+                        <div class="event-info">
+                            <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="event-title-link">Bayrağa sədaqət andı</a>
+                            <span class="event-desc">Məktəblərdə vətənpərvərlik ruhunun aşılanması məqsədilə keçirilən tədbir.</span>
                         </div>
                     </div>
                 </div>
@@ -234,10 +206,10 @@
 
         <!-- 4. QALEREYA SƏHİFƏSİ -->
         <div id="page-qalereya" class="page">
-            <section class="hero" style="padding: 50px 20px;">
+            <section class="hero">
                 <div class="hero-content">
                     <h1>Foto Qalereya</h1>
-                    <p>Tədbirlərdən xatirə fotoları</p>
+                    <p>Tədbir və fəaliyyətlərimizdən fotoşəkillər</p>
                 </div>
             </section>
             <div class="container">
@@ -247,11 +219,11 @@
                     
                     <div class="slide active-slide">
                         <img src="221.jpg" alt="Foto 1">
-                        <div class="slide-caption"><h3>Məktəblilərlə Keçirilən Tədbir</h3></div>
+                        <div class="slide-caption"><h3>Məktəblilərlə Keçirilən Maarifləndirmə Tədbiri</h3></div>
                     </div>
                     <div class="slide">
                         <img src="1010.jpg" alt="Foto 2">
-                        <div class="slide-caption"><h3>Gənclərlə İnteraktiv Görüş</h3></div>
+                        <div class="slide-caption"><h3>Gənclər və Tələbələrlə İnteraktiv Görüş</h3></div>
                     </div>
                 </div>
             </div>
@@ -259,79 +231,105 @@
 
         <!-- 5. ƏLAQƏ SƏHİFƏSİ -->
         <div id="page-elaqe" class="page">
-            <section class="hero" style="padding: 50px 20px;">
+            <section class="hero">
                 <div class="hero-content">
                     <h1>Bizimlə Əlaqə</h1>
-                    <p>Sual və təklifləriniz üçün bizə yazın</p>
+                    <p>"İnnovativ Təşəbbüslər" İctimai Birliyi ilə əlaqə saxlayın</p>
                 </div>
             </section>
-            <div class="container" style="max-width: 600px; margin-bottom: 50px;">
-                <div class="contact-box-mini">
-                    <h3>Əlaqə Formu</h3>
-                    <form action="https://formspree.io/f/xljrjgpp" method="POST">
-                        <input type="text" name="name" placeholder="Ad və Soyad" required>
-                        <input type="email" name="email" placeholder="Email ünvanı" required>
-                        <textarea name="message" rows="4" placeholder="Mesajınız" required></textarea>
-                        <button type="submit">Göndər</button>
-                    </form>
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info-box">
+                        <h2 class="section-title" style="border:none; padding:0; margin-bottom:15px;">Əlaqə Məlumatları</h2>
+                        <div class="contact-item"><i class="fa-solid fa-user-tie"></i><span id="contact-leader-view">Sədr: Əşrəf Əhmədov</span></div>
+                        <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span id="contact-address-view">Bakı şəhəri, Azərbaycan</span></div>
+                    </div>
+                    <div class="contact-box">
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted) { handleFormSuccess(); }"></iframe>
+                        <form id="contact-form" action="https://formspree.io/f/xljrjgpp" method="POST" target="hidden_iframe" onsubmit="isSubmitted=true;">
+                            <input type="text" name="name" placeholder="Ad və Soyadınız" required>
+                            <input type="tel" name="phone" placeholder="Əlaqə nömrəniz" required>
+                            <textarea name="message" rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
+                            <button type="submit">Göndər</button>
+                        </form>
+                        <p id="success-msg">Mesajınız uğurla göndərildi! 🎉</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 6. GİZLİ ADMIN PANEL -->
+        <!-- 6. GİZLİ AYRI-AYRI BÖLMƏLƏRİ OLAN ADMIN PANEL -->
         <div id="page-admin" class="page">
             <section class="hero" style="padding: 40px 20px; margin-bottom: 20px;">
                 <div class="hero-content">
-                    <h1>İdarəetmə Paneli</h1>
-                    <p>Məlumatları və şəkilləri yeniləyin</p>
+                    <h1>Ayrı-Ayrı İdarəetmə Paneli</h1>
+                    <p>Hər səhifəni öz bölməsindən idarə edin və dəyişdirin</p>
                 </div>
             </section>
             
-            <div class="container" style="max-width: 800px; margin-bottom: 50px;">
+            <div class="container" style="max-width: 900px; margin-bottom: 50px;">
                 <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
-                    <button onclick="adminLogout()" style="background: #dc2626; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600;">Çıxış Et</button>
+                    <button onclick="adminLogout()" style="background: #dc2626; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600;">Çıxış Et <i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
 
+                <!-- Admin Tab Düymələri -->
                 <div class="admin-tabs">
-                    <button class="admin-tab-btn active-tab" onclick="openAdminTab('home-admin', this)">Ana Səhifə</button>
-                    <button class="admin-tab-btn" onclick="openAdminTab('events-admin', this)">Tədbirlər</button>
-                    <button class="admin-tab-btn" onclick="openAdminTab('gallery-admin', this)">Qalereya</button>
+                    <button class="admin-tab-btn active-tab" onclick="openAdminTab('home-tab', this)">🏠 Ana Səhifə</button>
+                    <button class="admin-tab-btn" onclick="openAdminTab('about-tab', this)">📖 Haqqında</button>
+                    <button class="admin-tab-btn" onclick="openAdminTab('events-tab', this)">📅 Tədbirlər</button>
+                    <button class="admin-tab-btn" onclick="openAdminTab('gallery-tab', this)">🖼️ Qalereya</button>
+                    <button class="admin-tab-btn" onclick="openAdminTab('contact-tab', this)">📞 Əlaqə</button>
                 </div>
 
-                <div id="home-admin" class="admin-section active-admin-sec">
-                    <h3 class="section-title" style="font-size:16px;">Ana Səhifə Başlığı və Sədr Məlumatı</h3>
-                    <input type="text" id="adm-title" placeholder="Əsas Başlıq">
-                    <textarea id="adm-desc" rows="2" placeholder="Alt mətn"></textarea>
-                    <input type="text" id="adm-leader-name" placeholder="Sədrin Adı">
-                    <input type="text" id="adm-leader-title" placeholder="Vəzifəsi">
-                    <button onclick="saveHomeAdmin()" class="btn-main" style="width:100%; margin-top:10px;">Yenilə</button>
+                <!-- 1. ANA SƏHİFƏNİ İDARƏ ET -->
+                <div id="home-tab" class="admin-section active-admin-sec contact-box">
+                    <h3 class="section-title" style="font-size:16px;">Ana Səhifəni Redaktə Et</h3>
+                    <input type="text" id="admin-home-title" placeholder="Ana səhifə başlığı">
+                    <textarea id="admin-home-desc" rows="3" placeholder="Ana səhifə alt mətni"></textarea>
+                    <button onclick="saveHomeData()">Ana Səhifəni Yenilə</button>
                 </div>
 
-                <div id="events-admin" class="admin-section">
+                <!-- 2. HAQQINDA SƏHİFƏSİNİ İDARƏ ET -->
+                <div id="about-tab" class="admin-section contact-box">
+                    <h3 class="section-title" style="font-size:16px;">Haqqında Səhifəsini Redaktə Et</h3>
+                    <textarea id="admin-about-text" rows="6" placeholder="Haqqında mətnini bura yaz..."></textarea>
+                    <button onclick="saveAboutData()">Haqqında Mətnini Yenilə</button>
+                </div>
+
+                <!-- 3. TƏDBİRLƏR SƏHİFƏSİNİ İDARƏ ET -->
+                <div id="events-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Yeni Tədbir Əlavə Et</h3>
-                    <input type="text" id="adm-ev-title" placeholder="Tədbir adı">
-                    <input type="text" id="adm-ev-img" placeholder="Şəkil adı (məsələn: 221.jpg)">
-                    <textarea id="adm-ev-desc" rows="2" placeholder="Qısa məlumat"></textarea>
-                    <button onclick="addEventAdmin()" class="btn-main" style="width:100%; margin-top:10px;">Tədbir Əlavə Et</button>
+                    <input type="text" id="admin-ev-title" placeholder="Tədbir başlığı">
+                    <input type="text" id="admin-ev-img" placeholder="Şəkil adı (məsələn: 221.jpg)">
+                    <textarea id="admin-ev-desc" rows="3" placeholder="Tədbir haqqında qısa məlumat"></textarea>
+                    <button onclick="addNewEventAdmin()">Tədbir Əlavə Et</button>
                 </div>
 
-                <div id="gallery-admin" class="admin-section">
+                <!-- 4. QALEREYA SƏHİFƏSİNİ İDARƏ ET (Şəkil əlavə etmək) -->
+                <div id="gallery-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Qalereyaya Şəkil Əlavə Et</h3>
-                    <input type="text" id="adm-gal-img" placeholder="Şəkil adı (məsələn: 1010.jpg)">
-                    <input type="text" id="adm-gal-cap" placeholder="Şəkil başlığı">
-                    <button onclick="addGalleryAdmin()" class="btn-main" style="width:100%; margin-top:10px;">Şəkil Əlavə Et</button>
+                    <input type="text" id="admin-gal-img" placeholder="Şəkil fayl adı (məsələn: 1010.jpg)">
+                    <input type="text" id="admin-gal-caption" placeholder="Şəkil yazısı / başlıq">
+                    <button onclick="addGalleryImageAdmin()">Qalereyaya Şəkil Əlavə Et</button>
                 </div>
+
+                <!-- 5. ƏLAQƏ SƏHİFƏSİNİ İDARƏ ET -->
+                <div id="contact-tab" class="admin-section contact-box">
+                    <h3 class="section-title" style="font-size:16px;">Əlaqə Məlumatlarını Yenilə</h3>
+                    <input type="text" id="admin-contact-leader" placeholder="Sədrin adı">
+                    <input type="text" id="admin-contact-address" placeholder="Ünvan">
+                    <button onclick="saveContactData()">Əlaqə Məlumatlarını Yenilə</button>
+                </div>
+
             </div>
         </div>
 
     </div>
 
     <footer>
-        <div class="container footer-content">
-            <span>© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi.</span>
-            <div class="social-links">
-                <a href="https://www.facebook.com/groups/436968776359919/user/100064714507365/?locale=az_AZ" target="_blank" class="social-link"><i class="fa-brands fa-facebook"></i></a>
-            </div>
+        <div class="container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+            <span>© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi. Bütün hüquqlar qorunur.</span>
+            <a href="https://www.facebook.com/groups/436968776359919/user/100064714507365/?locale=az_AZ" target="_blank" class="social-link"><i class="fa-brands fa-facebook"></i></a>
         </div>
     </footer>
 
@@ -350,13 +348,17 @@
             window.scrollTo(0, 0);
         }
 
+        // Admin içərisindəki tabları dəyişmək üçün
         function openAdminTab(tabId, btn) {
             document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active-admin-sec'));
             document.getElementById(tabId).classList.add('active-admin-sec');
+
+            document.querySelectorAll('.admin-tab-btnkval').forEach(b => b.classList.remove('active-tab'));
             document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active-tab'));
             btn.classList.add('active-tab');
         }
 
+        // Slayder məntiqi
         let slideIndex = 0;
         function moveSlide(n) {
             let slides = document.querySelectorAll(".slide");
@@ -364,24 +366,25 @@
             slideIndex += n;
             if (slideIndex >= slides.length) slideIndex = 0;
             if (slideIndex < 0) slideIndex = slides.length - 1;
+            
             slides.forEach(s => s.classList.remove("active-slide"));
             slides[slideIndex].classList.add("active-slide");
         }
 
+        // Sayt açılanda localStorage-dən yadda saxlanılan məlumatları yükləyirik
         window.onload = function() {
-            if(localStorage.getItem("hTitle")) document.getElementById("home-hero-title").innerHTML = localStorage.getItem("hTitle");
-            if(localStorage.getItem("hDesc")) document.getElementById("home-hero-desc").innerText = localStorage.getItem("hDesc");
-            if(localStorage.getItem("lName")) document.getElementById("home-leader-name").innerText = localStorage.getItem("lName");
-            if(localStorage.getItem("lTitle")) document.getElementById("home-leader-title").innerText = localStorage.getItem("lTitle");
-            if(localStorage.getItem("homeEvents")) document.getElementById("home-events-grid").innerHTML = localStorage.getItem("homeEvents");
-            if(localStorage.getItem("fullEvents")) document.getElementById("full-events-grid").innerHTML = localStorage.getItem("fullEvents");
-            if(localStorage.getItem("dynGallery")) document.getElementById("dynamic-slider").innerHTML = localStorage.getItem("dynGallery");
+            if(localStorage.getItem("homeTitle")) document.getElementById("home-hero-title").innerHTML = localStorage.getItem("homeTitle");
+            if(localStorage.getItem("homeDesc")) document.getElementById("home-hero-desc").innerText = localStorage.getItem("homeDesc");
+            if(localStorage.getItem("aboutText")) document.getElementById("about-text-view").innerText = localStorage.getItem("aboutText");
+            if(localStorage.getItem("savedEvents")) document.getElementById("events-container-view").innerHTML = localStorage.getItem("savedEvents");
+            if(localStorage.getItem("savedGallery")) document.getElementById("dynamic-slider").innerHTML = localStorage.getItem("savedGallery");
         };
 
+        // --- GİZLİ GİRİŞ (Ctrl + Shift + A) ---
         document.addEventListener("keydown", function(event) {
             if (event.ctrlKey && event.shiftKey && event.code === "KeyA") {
                 event.preventDefault();
-                let pass = prompt("Admin şifrəsi:");
+                let pass = prompt("Admin şifrəsini daxil edin:");
                 if (pass === "Eldar12345@_*") {
                     openPage('admin', null);
                     alert("Admin panelə xoş gəldiniz!");
@@ -393,43 +396,46 @@
 
         function adminLogout() {
             openPage('home', document.querySelector('.nav-item'));
+            alert("Çıxış edildi.");
         }
 
-        function saveHomeAdmin() {
-            let t = document.getElementById("adm-title").value;
-            let d = document.getElementById("adm-desc").value;
-            let ln = document.getElementById("adm-leader-name").value;
-            let lt = document.getElementById("adm-leader-title").value;
-
-            if(t) { document.getElementById("home-hero-title").innerHTML = t; localStorage.setItem("hTitle", t); }
-            if(d) { document.getElementById("home-hero-desc").innerText = d; localStorage.setItem("hDesc", d); }
-            if(ln) { document.getElementById("home-leader-name").innerText = ln; localStorage.setItem("lName", ln); }
-            if(lt) { document.getElementById("home-leader-title").innerText = lt; localStorage.setItem("lTitle", lt); }
-            alert("Yeniləndi!");
+        // --- YENİLƏMƏ VƏ YADDA SAXLAMA FUNKSİYALARI ---
+        function saveHomeData() {
+            let t = document.getElementById("admin-home-title").value;
+            let d = document.getElementById("admin-home-desc").value;
+            if(t) { document.getElementById("home-hero-title").innerHTML = t; localStorage.setItem("homeTitle", t); }
+            if(d) { document.getElementById("home-hero-descinnerText", d); localStorage.setItem("homeDesc", d); }
+            alert("Ana səhifə yeniləndi!");
         }
 
-        function addEventAdmin() {
-            let title = document.getElementById("adm-ev-title").value;
-            let img = document.getElementById("adm-ev-img").value;
-            let desc = document.getElementById("adm-ev-desc").value;
+        function saveAboutData() {
+            let text = document.getElementById("admin-about-text").value;
+            if(text) {
+                document.getElementById("about-text-view").innerText = text;
+                localStorage.setItem("aboutText", text);
+                alert("Haqqında mətni yeniləndi!");
+            }
+        }
+
+        function addNewEventAdmin() {
+            let title = document.getElementById("admin-ev-title").value;
+            let img = document.getElementById("admin-ev-img").value;
+            let desc = document.getElementById("admin-ev-desc").value;
             if(!title || !img || !desc) { alert("Bütün xanaları doldurun!"); return; }
 
-            let cardHTML = `<div class="project-card" onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])"><img src="${img}" alt=""><div class="project-info"><h4>${title}</h4><p>${desc}</p></div></div>`;
-            
-            let hGrid = document.getElementById("home-events-grid");
-            hGrid.insertAdjacentHTML('afterbegin', cardHTML);
-            localStorage.setItem("homeEvents", hGrid.innerHTML);
+            let container = document.getElementById("events-container-view");
+            let newRow = document.createElement("div");
+            newRow.className = "event-row";
+            newRow.innerHTML = `<img src="${img}" alt=""><div class="event-info"><a href="#" class="event-title-link">${title}</a><span class="event-desc">${desc}</span></div>`;
+            container.prepend(newRow);
 
-            let fGrid = document.getElementById("full-events-grid");
-            fGrid.insertAdjacentHTML('afterbegin', cardHTML);
-            localStorage.setItem("fullEvents", fGrid.innerHTML);
-
-            alert("Tədbir əlavə olundu!");
+            localStorage.setItem("savedEvents", container.innerHTML);
+            alert("Yeni tədbir əlavə olundu!");
         }
 
-        function addGalleryAdmin() {
-            let img = document.getElementById("adm-gal-img").value;
-            let cap = document.getElementById("adm-gal-cap").value;
+        function addGalleryImageAdmin() {
+            let img = document.getElementById("admin-gal-img").value;
+            let cap = document.getElementById("admin-gal-caption").value;
             if(!img || !cap) { alert("Şəkil adı və başlığı yazın!"); return; }
 
             let slider = document.getElementById("dynamic-slider");
@@ -438,8 +444,8 @@
             newSlide.innerHTML = `<img src="${img}" alt=""><div class="slide-caption"><h3>${cap}</h3></div>`;
             slider.appendChild(newSlide);
 
-            localStorage.setItem("dynGallery", slider.innerHTML);
-            alert("Şəkil qalereyaya əlavə olundu!");
+            localStorage.setItem("savedGallery", slider.innerHTML);
+            alert("Qalereyaya şəkil əlavə olundu!");
         }
 
         let isSubmitted = false;
@@ -447,7 +453,7 @@
             document.getElementById("contact-form").reset();
             let msg = document.getElementById("success-msg");
             msg.style.display = "block";
-            setTimeout(() => { msg.style.display = "none"; }, 4000);
+            setTimeout(() => { msg.style.display = "none"; }, 5000);
             isSubmitted = false;
         }
     </script>
