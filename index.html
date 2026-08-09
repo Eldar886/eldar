@@ -457,19 +457,21 @@
         }
 
         function sendToWhatsApp(event) {
-            event.preventDefault();
-            
-            let name = document.getElementById('wa-name').value;
-            let email = document.getElementById('wa-email').value;
-            let msg = document.getElementById('wa-msg').value;
-            
-            let phone = "994103933218"; 
-            
-            let text = `Salam, saytdan yeni mesaj var:%0A*Ad:* ${name}%0A*E-poçt:* ${email}%0A*Mesaj:* ${msg}`;
-            
-            let url = `https://wa.me/${phone}?text=${text}`;
-            window.open(url, '_blank');
-        }
+    event.preventDefault();
+    
+    let name = document.getElementById('wa-name').value;
+    let email = document.getElementById('wa-email').value;
+    let msg = document.getElementById('wa-msg').value;
+    
+    let myPhone = "994103933218"; 
+    
+    let text = `Salam, saytdan yeni mesaj var:%0A*Ad:* ${name}%0A*E-poçt:* ${email}%0A*Mesaj:* ${msg}`;
+    
+    let url = `https://wa.me/${myPhone}?text=${text}`;
+    
+    // Yeni pəncərə kimi deyil, birbaşa həmin səhifədə açılması üçün:
+    window.location.href = url;
+}
 
         let slideIndex = 0;
         const slides = document.getElementsByClassName("slide");
