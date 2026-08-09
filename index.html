@@ -324,8 +324,8 @@
                         <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span id="contact-address-view">Bakı şəhəri, Azərbaycan</span></div>
                     </div>
                     <div class="contact-box">
-                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.isSubmitted) { handleFormSuccess(); }"></iframe>
-                        <form id="contact-form" action="https://formspree.io/f/xljrjgpp" method="POST" target="hidden_iframe" onsubmit="window.isSubmitted=true;">
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted) { handleFormSuccess(); }"></iframe>
+                        <form id="contact-form" action="https://formspree.io/f/xljrjgpp" method="POST" target="hidden_iframe" onsubmit="isSubmitted=true;">
                             <input type="text" name="name" placeholder="Ad və Soyadınız" required>
                             <input type="tel" name="phone" placeholder="Əlaqə nömrəniz" required>
                             <textarea name="message" rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
@@ -466,131 +466,294 @@
             let rand2 = actions[Math.floor(Math.random() * actions.length)];
             let rand3 = results[Math.floor(Math.random() * results.length)];
 
-            let fullIdea = `${rand1} həyata keçirilən ${rand2} layihə gənclərin ${rand3}!`;
-            document.getElementById('ideaOutputText').innerText = fullIdea;
+            document.getElementById("ideaOutputText").innerText = `Sənin İdeyan: ${rand1} ${rand2} təşkil etmək və bu layihə gənclərdə ${rand3}!`;
         }
 
-        // Günün Sualı və Rəylər Sistemi (Local Storage ilə)
-        let dailyAnswers = JSON.parse(localStorage.getItem('dailyAnswers')) || [];
-        let currentQuestion = localStorage.getItem('currentQuestion') || "Məktəblilərdə kitaba və mütaliəyə marağı necə artıra bilərik?";
-
-        document.getElementById('displayDailyQuestion').innerText = currentQuestion;
-        renderPublicAnswers();
-
+        // Günün Sualına Rəy Göndərmək
         function submitUserAnswer() {
-            let name = document.getElementById('userNameInput').value.trim();
-            let text = document.getElementById('userAnswerInput').value.trim();
+            let name = document.getElementById("userNameInput").value.trim();
+            let val = document.getElementById("userAnswerInput").value.trim();
+            
+            if(!name || !val) { alert("Zəhmət olmasa Ad, Soyad və fikrinizi daxil edin!"); return; }
 
-            if(!name || !text) {
-                alert("Zəhmət olmasa adınızı və fikrinizi daxil edin.");
-                return;
-            }
+            let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            answers.push({ name: name, text: val, date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() });
+            localStorage.setItem("savedAnswers", JSON.stringify(answers));
 
-            dailyAnswers.push({ name: name, text: text, date: new Date().toLocaleDateString() });
-            localStorage.setItem('dailyAnswers', JSON.stringify(dailyAnswers));
-
-            document.getElementById('userNameInput').value = '';
-            document.getElementById('userAnswerInput').value = '';
+            document.getElementById("userNameInput").value = "";
+            document.getElementById("userAnswerInput").value = "";
+            
             renderPublicAnswers();
-            alert("Fikriniz uğurla əlavə olundu!");
+            alert("Rəfiniz uğurla əlavə olundu!");
         }
 
+        // Hamının görə biləcəyi rəyləri ekrana yazmaq
         function renderPublicAnswers() {
-            let container = document.getElementById('publicAnswersContainer');
-            if(dailyAnswers.length === 0) {
-                container.innerHTML = '<p style="font-size:13px; color:#64748b;">Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!</p>';
+            let container = document.getElementById("publicAnswersContainer");
+            let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            
+            if(answers.length === 0) {
+                container.innerHTML = "<p style='font-size:13px; color:#64748b;'>Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!</p>";
                 return;
             }
-            container.innerHTML = dailyAnswers.map((item, index) => `
-                <div class="public-answer-item">
-                    <strong>${item.name}</strong>: ${item.text}
-                    <span>${item.date}</span>
-                </div>
-            `).join('');
-        }
 
-        function renderAdminAnswers() {
-            let container = document.getElementById('adminAnswersContainer');
-            if(dailyAnswers.length === 0) {
-                container.innerHTML = '<p style="font-size:13px; color:#64748b;">Hələ heç bir rəy yoxdur.</p>';
-                return;
-            }
-            container.innerHTML = dailyAnswers.map((item, index) => `
-                <div class="admin-answer-card">
-                    <div>
-                        <strong>${item.name}</strong>: ${item.text}
-                        <span style="font-size:11px; color:#64748b;">${item.date}</span>
+            let html = "";
+            answers.forEach((ans) => {
+                html += `
+                    <div class="public-answer-item">
+                        <strong><i class="fa-solid fa-user-circle"></i> ${ans.name}</strong>
+                        <p style="margin-top:4px; color:#334155;">${ans.text}</p>
+                        <span>${ans.date}</span>
                     </div>
-                    <button class="btn-delete-item" onclick="deleteAnswer(${index})">Sil</button>
-                </div>
-            `).join('');
+                `;
+            });
+            container.innerHTML = html;
         }
 
-        function deleteAnswer(index) {
-            dailyAnswers.splice(index, 1);
-            localStorage.setItem('dailyAnswers', JSON.stringify(dailyAnswers));
-            renderAdminAnswers();
-            renderPublicAnswers();
-        }
-
-        function saveNewQuestion() {
-            let newQ = document.getElementById('adminNewQuestionInput').value.trim();
-            if(!newQ) {
-                alert("Sual boş ola bilməz!");
+        // Admin Paneldə rəyləri göstərmək və silmək
+        function renderAdminAnswers() {
+            let container = document.getElementById("adminAnswersContainer");
+            let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            
+            if(answers.length === 0) {
+                container.innerHTML = "<p style='font-size:13px; color:#64748b;'>Hələ heç bir rəy yoxdur.</p>";
                 return;
             }
-            currentQuestion = newQ;
-            dailyAnswers = []; // Köhnə rəylər sıfırlanır
-            localStorage.setItem('currentQuestion', currentQuestion);
-            localStorage.setItem('dailyAnswers', JSON.stringify(dailyAnswers));
 
-            document.getElementById('displayDailyQuestion').innerText = currentQuestion;
-            document.getElementById('adminNewQuestionInput').value = '';
+            let html = "";
+            answers.forEach((ans, index) => {
+                html += `
+                    <div class="admin-answer-card">
+                        <div>
+                            <strong>${index + 1}. ${ans.name}</strong>: ${ans.text}
+                            <span style="font-size:11px; color:#64748b; display:block; margin-top:3px;">Tarix: ${ans.date}</span>
+                        </div>
+                        <button class="btn-delete-item" onclick="deleteAnswerItem(${index})">Sil</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function deleteAnswerItem(index) {
+            let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            answers.splice(index, 1);
+            localStorage.setItem("savedAnswers", JSON.stringify(answers));
             renderAdminAnswers();
             renderPublicAnswers();
-            alert("Günün sualı yeniləndi və köhnə rəylər təmizləndi!");
+            alert("Rəy silindi!");
         }
 
-        // Qalereya Slayderi
-        let currentSlide = 0;
-        let slides = document.querySelectorAll('.slide');
+        // Yeni sual təyin edildikdə köhnə rəylər avtomatik təmizlənir
+        function saveNewQuestion() {
+            let q = document.getElementById("adminNewQuestionInput").value.trim();
+            if(!q) { alert("Yeni sual yazın!"); return; }
+            
+            localStorage.setItem("dailyQuestion", q);
+            localStorage.removeItem("savedAnswers"); // Köhnə rəylər silinir
+            
+            document.getElementById("displayDailyQuestion").innerText = q;
+            document.getElementById("adminNewQuestionInput").value = "";
+            
+            renderPublicAnswers();
+            renderAdminAnswers();
+            alert("Günün sualı yeniləndi və əvvəlki rəylər təmizləndi!");
+        }
 
-        function moveSlide(direction) {
+        function searchEvents() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let rows = document.querySelectorAll('#events-container-view .event-row');
+            rows.forEach(row => {
+                let title = row.querySelector('.event-title-link').innerText.toLowerCase();
+                let desc = row.querySelector('.event-desc').innerText.toLowerCase();
+                if(title.includes(input) || desc.includes(input)) { row.style.display = 'flex'; } else { row.style.display = 'none'; }
+            });
+        }
+
+        let slideIndex = 0;
+        function moveSlide(n) {
+            let slides = document.querySelectorAll(".slide");
             if(slides.length === 0) return;
-            slides[currentSlide].classList.remove('active-slide');
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active-slide');
+            slideIndex += n;
+            if (slideIndex >= slides.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = slides.length - 1;
+            slides.forEach(s => s.classList.remove("active-slide"));
+            slides[slideIndex].classList.add("active-slide");
         }
 
-        // Əlaqə Formu Uğur Mesajı
-        window.isSubmitted = false;
-        function handleFormSuccess() {
-            document.getElementById('contact-form').reset();
-            document.getElementById('success-msg').style.display = 'block';
-            window.isSubmitted = false;
-        }
+        window.onload = function() {
+            if(localStorage.getItem("homeTitle")) document.getElementById("home-hero-title").innerHTML = localStorage.getItem("homeTitle");
+            if(localStorage.getItem("homeDesc")) document.getElementById("home-hero-desc").innerText = localStorage.getItem("homeDesc");
+            if(localStorage.getItem("aboutText")) document.getElementById("about-text-view").innerText = localStorage.getItem("aboutText");
+            if(localStorage.getItem("savedEvents")) document.getElementById("events-container-view").innerHTML = localStorage.getItem("savedEvents");
+            if(localStorage.getItem("dailyQuestion")) document.getElementById("displayDailyQuestion").innerText = localStorage.getItem("dailyQuestion");
+            
+            renderPublicAnswers();
 
-        // Admin Giriş Yoxlaması (URL-də #admin olduqda açılır)
-        function checkAdminRoute() {
-            if(window.location.hash === '#admin') {
-                openPage('admin');
+            if(localStorage.getItem("savedGallery")) {
+                let slider = document.getElementById("dynamic-slider");
+                let controls = slider.querySelector('.prev-btn').outerHTML + slider.querySelector('.next-btn').outerHTML;
+                let defaultSlides = `
+                    <div class="slide active-slide">
+                        <img src="221.jpg" alt="Foto 1">
+                        <div class="slide-caption"><h3>Məktəblilərlə Keçirilən Maarifləndirmə Tədbiri</h3></div>
+                    </div>
+                    <div class="slide">
+                        <img src="1010.jpg" alt="Foto 2">
+                        <div class="slide-caption"><h3>Gənclər və Tələbələrlə İnteraktiv Görüş</h3></div>
+                    </div>`;
+                slider.innerHTML = controls + defaultSlides + localStorage.getItem("savedGallery");
             }
+        };
+
+        document.addEventListener("keydown", function(event) {
+    // Mətn qutularında (input/textarea) yazarkən qarışmasın deyə
+    if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") return;
+
+    // 1. Ctrl + Shift + A + E (Dördü bir yerdə) - Şifrəsiz, birbaşa açılır
+    if (event.ctrlKey && event.shiftKey && (event.code === "KeyE" || event.key.toLowerCase() === "e")) {
+        event.preventDefault();
+        openPage('admin', null);
+        renderAdminAnswers();
+        renderAdminGalleryList();
+        renderAdminEventsList();
+    }
+    // 2. Ctrl + Shift + A (E hərfi olmadan) - Şifrə soruşur
+    else if (event.ctrlKey && event.shiftKey && (event.code === "KeyA" || event.key.toLowerCase() === "a")) {
+        event.preventDefault();
+        let pass = prompt("Admin şifrəsini daxil edin:");
+        if (pass === "Eldar12345@_*") {
+            openPage('admin', null);
+            renderAdminAnswers();
+            renderAdminGalleryList();
+            renderAdminEventsList();
+            alert("Admin panelə xoş gəldiniz!");
+        } else if (pass !== null) {
+            alert("Şifrə səhvdir!");
         }
-        window.addEventListener('hashchange', checkAdminRoute);
-        window.addEventListener('load', checkAdminRoute);
+    }
+});
 
         function adminLogout() {
-            window.location.hash = '';
             openPage('home', document.querySelector('.nav-item'));
+            alert("Çıxış edildi.");
         }
 
-        // Əlavə funksiyalar (Ana səhifə, Tədbirlər və Qalereya admin idarəsi üçün yerli dəyişənlər qorunması)
-        function saveHomeData() { alert("Ana səhifə məlumatları yadda saxlandı!"); }
-        function addNewEventAdmin() { alert("Yeni tədbir əlavə olundu!"); }
-        function addGalleryImageAdmin() { alert("Qalereyaya şəkil əlavə olundu!"); }
-        function renderAdminEventsList() {}
-        function renderAdminGalleryList() {}
-        function searchEvents() {}
+        function saveHomeData() {
+            let t = document.getElementById("admin-home-title").value;
+            let d = document.getElementById("admin-home-desc").value;
+            if(t) { document.getElementById("home-hero-title").innerHTML = t; localStorage.setItem("homeTitle", t); }
+            if(d) { document.getElementById("home-hero-desc").innerText = d; localStorage.setItem("homeDesc", d); }
+            alert("Ana səhifə yeniləndi!");
+        }
+
+        function addNewEventAdmin() {
+            let title = document.getElementById("admin-ev-title").value;
+            let img = document.getElementById("admin-ev-img").value;
+            let desc = document.getElementById("admin-ev-desc").value;
+            if(!title || !img || !desc) { alert("Bütün xanaları doldurun!"); return; }
+
+            let container = document.getElementById("events-container-view");
+            let newRow = document.createElement("div");
+            newRow.className = "event-row";
+            newRow.innerHTML = `
+                <img src="${img}" alt="">
+                <div class="event-info">
+                    <a href="#" class="event-title-link">${title}</a>
+                    <span class="event-desc">${desc}</span>
+                    <div class="share-box">
+                        <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(title)}" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                        <a href="https://t.me/share/url?url=&text=${encodeURIComponent(title)}" target="_blank" class="share-btn share-telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                    </div>
+                </div>`;
+            container.prepend(newRow);
+
+            localStorage.setItem("savedEvents", container.innerHTML);
+            document.getElementById("admin-ev-title").value = "";
+            document.getElementById("admin-ev-img").value = "";
+            document.getElementById("admin-ev-desc").value = "";
+            renderAdminEventsList();
+            alert("Yeni tədbir əlavə olundu!");
+        }
+
+        function renderAdminEventsList() {
+            let listContainer = document.getElementById("admin-events-list-container");
+            let rows = document.querySelectorAll("#events-container-view .event-row");
+            let html = "";
+            rows.forEach((row, index) => {
+                let title = row.querySelector(".event-title-link").innerText;
+                html += `<div class="admin-event-item"><span>${title}</span><button class="btn-delete-item" onclick="deleteEventItem(${index})">Sil</button></div>`;
+            });
+            listContainer.innerHTML = html;
+        }
+
+        function deleteEventItem(index) {
+            let rows = document.querySelectorAll("#events-container-view .event-row");
+            if(rows[index]) {
+                rows[index].remove();
+                localStorage.setItem("savedEvents", document.getElementById("events-container-view").innerHTML);
+                renderAdminEventsList();
+                alert("Tədbir silindi!");
+            }
+        }
+
+        function addGalleryImageAdmin() {
+            let img = document.getElementById("admin-gal-img").value;
+            let cap = document.getElementById("admin-gal-caption").value;
+            if(!img || !cap) { alert("Şəkil və başlıq yazın!"); return; }
+
+            let slider = document.getElementById("dynamic-slider");
+            let newSlide = document.createElement("div");
+            newSlide.className = "slide";
+            newSlide.innerHTML = `<img src="${img}" alt=""><div class="slide-caption"><h3>${cap}</h3></div>`;
+            slider.appendChild(newSlide);
+
+            let customSlides = "";
+            let allSlides = slider.querySelectorAll(".slide");
+            for(let i = 2; i < allSlides.length; i++) { customSlides += allSlides[i].outerHTML; }
+            localStorage.setItem("savedGallery", customSlides);
+
+            document.getElementById("admin-gal-img").value = "";
+            document.getElementById("admin-gal-caption").value = "";
+            renderAdminGalleryList();
+            alert("Şəkil əlavə olundu!");
+        }
+
+        function renderAdminGalleryList() {
+            let listContainer = document.getElementById("admin-gallery-list-container");
+            let slider = document.getElementById("dynamic-slider");
+            let slides = slider.querySelectorAll(".slide");
+            let html = "";
+            for(let i = 2; i < slides.length; i++) {
+                let imgSrc = slides[i].querySelector("img").getAttribute("src");
+                let captionText = slides[i].querySelector("h3").innerText;
+                html += `<div class="admin-gallery-item"><div class="admin-gallery-info"><img src="${imgSrc}" alt=""><span>${captionText}</span></div><button class="btn-delete-item" onclick="deleteGalleryItem(${i})">Sil</button></div>`;
+            }
+            listContainer.innerHTML = html || "<p style='font-size:13px; color:#64748b;'>Hələ şəkil yoxdur.</p>";
+        }
+
+        function deleteGalleryItem(index) {
+            let slider = document.getElementById("dynamic-slider");
+            let slides = slider.querySelectorAll(".slide");
+            if(slides[index]) {
+                slides[index].remove();
+                let customSlides = "";
+                let remainingSlides = slider.querySelectorAll(".slide");
+                for(let i = 2; i < remainingSlides.length; i++) { customSlides += remainingSlides[i].outerHTML; }
+                if(customSlides === "") { localStorage.removeItem("savedGallery"); } else { localStorage.setItem("savedGallery", customSlides); }
+                renderAdminGalleryList();A
+                alert("Şəkil silindi!");
+            }
+        }
+
+        let isSubmitted = false;
+        function handleFormSuccess() {
+            document.getElementById("contact-form").reset();
+            let msg = document.getElementById("success-msg");
+            msg.style.display = "block";
+            setTimeout(() => { msg.style.display = "none"; }, 5000);
+            isSubmitted = false;
+        }
     </script>
 </body>
 </html>
