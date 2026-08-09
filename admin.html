@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin İdarəetmə Paneli</title>
     
-    <!-- TƏHLÜKƏSİZLİK QORUMASI: Şifrə yazmadan girməyə çalışsalar, loginə atır -->
+    <!-- TƏHLÜKƏSİZLİK QORUMASI: Şifrə yazmadan girməyə çalışsalar, birbaşa login.html-ə atır -->
     <script>
         if (sessionStorage.getItem("isAdmin") !== "true") {
             window.location.href = "login.html";
@@ -13,7 +13,6 @@
     </script>
 
     <style>
-        /* index.html-dən köçürdüyün admin panelə aid CSS stillərini bura yazırsan */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -49,6 +48,42 @@
             max-width: 1200px;
             margin: 0 auto;
         }
+        .admin-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .admin-section h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #0f172a;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
     </style>
 </head>
 <body>
@@ -59,27 +94,105 @@
     </header>
 
     <div class="admin-container">
-        <!-- index.html-də olan admin panelin bütün HTML elementlərini bura köçürürsən -->
+        
+        <!-- TƏBİRLƏR BÖLMƏSİ -->
+        <div class="admin-section">
+            <h2>Tədbirlərin İdarə Olunması</h2>
+            <div>
+                <input type="text" id="eventTitleInput" placeholder="Tədbirin adı">
+                <input type="date" id="eventDateInput">
+                <button onclick="handleAddNewEvent()">Tədbir Əlavə Et</button>
+            </div>
+            <div id="admin-events-container" style="margin-top: 15px;"></div>
+        </div>
+
+        <!-- DIGƏR BÖLMƏLƏR (Məsələn: Cavablar, Qalereya və s.) -->
+        <div class="admin-section">
+            <h2>Digər Admin Məlumatları</h2>
+            <div id="admin-answers-container"></div>
+            <div id="admin-gallery-container"></div>
+        </div>
+
     </div>
 
     <script>
-        // Çıxış düyməsinin funksiyası
+        // Çıxış düyməsi
         function logout() {
             sessionStorage.removeItem("isAdmin");
             window.location.href = "login.html";
         }
 
-        // --- İNDEX.HTML-DƏN KÖÇÜRÜLDÜKSTƏN SONRA BÜTÜN JAVASCRIPT FUNKSİYALARIN BURADA OLACAQ ---
-        // Məsələn: openPage, renderAdminAnswers, renderAdminGalleryList, renderAdminEventsList və s.
-
-        window.onload = function() {
-            // Səhifə açılan kimi işləməli olan render funksiyaların:
-            if (typeof renderAdminAnswers === "function") renderAdminAnswers();
-            if (typeof renderAdminGalleryList === "function") renderAdminGalleryList();
-            if (typeof renderAdminEventsList === "function") renderAdminEventsList();
+        // --- TƏDBİRLƏRİN İDARƏ OLUNMASI (LocalStorage ilə) ---
+        function getEvents() {
+            let events = localStorage.getItem('adminEvents');
+            return events ? JSON.parse(events) : [];
         }
 
-        // Bütün köhnə admin funksiyalarını bu hissəyə yapışdır:
+        function addEvent(eventTitle, eventDate) {
+            let events = getEvents();
+            let newEvent = {
+                id: Date.now(),
+                title: eventTitle,
+                date: eventDate
+            };
+            events.push(newEvent);
+            localStorage.setItem('adminEvents', JSON.stringify(events));
+            renderAdminEventsList();
+        }
+
+        function deleteEvent(id) {
+            let events = getEvents();
+            events = events.filter(event => event.id !== id);
+            localStorage.setItem('adminEvents', JSON.stringify(events));
+            renderAdminEventsList();
+        }
+
+        function renderAdminEventsList() {
+            let events = getEvents();
+            let container = document.getElementById('admin-events-container');
+            if (!container) return;
+
+            container.innerHTML = "";
+            if (events.length === 0) {
+                container.innerHTML = "<p style='color: #64748b;'>Hələ heç bir tədbir əlavə olunmayıb.</p>";
+                return;
+            }
+
+            events.forEach(event => {
+                container.innerHTML += `
+                    <div class="item-row">
+                        <div>
+                            <strong>${event.title}</strong> — <small>${event.date}</small>
+                        </div>
+                        <button onclick="deleteEvent(${event.id})" style="background: #ef4444; padding: 5px 10px;">Sil</button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleAddNewEvent() {
+            let title = document.getElementById('eventTitleInput').value.trim();
+            let date = document.getElementById('eventDateInput').value;
+
+            if (!title || !date) {
+                alert("Zəhmət olmasa tədbir adını və tarixini daxil edin!");
+                return;
+            }
+
+            addEvent(title, date);
+
+            document.getElementById('eventTitleInput').value = "";
+            document.getElementById('eventDateInput').value = "";
+        }
+
+        // --- SƏHİFƏ YÜKLƏNƏNDƏ İŞLƏYƏN FUNKSİYALAR ---
+        window.onload = function() {
+            renderAdminEventsList();
+            
+            // Əgər köhnə kodunda başqa render funksiyaları varsa, onları da bura əlavə edə bilərsən:
+            if (typeof renderAdminAnswers === "function") renderAdminAnswers();
+            if (typeof renderAdminGalleryList === "function") renderAdminGalleryList();
+        };
     </script>
 
 </body>
