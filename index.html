@@ -360,7 +360,7 @@
 
                 <!-- Günün Sualı Admin Bölməsi -->
                 <div id="question-tab" class="admin-section active-admin-sec contact-box">
-                    <h3 class="section-title" style="font-size:16px;">Günün Sualını Dəyişdir</h3>
+                    <h3 class="section-title" style="font-size:16px;">Günün Sualını Dəyişdir (Köhnə rəylər avtomatik silinəcək)</h3>
                     <input type="text" id="adminNewQuestionInput" placeholder="Yeni sualı bura yazın...">
                     <button onclick="saveNewQuestion()" style="margin-bottom: 25px;">Sualı Yenilə</button>
 
@@ -544,13 +544,20 @@
             alert("Rəy silindi!");
         }
 
+        // Yeni sual təyin edildikdə köhnə rəylər avtomatik təmizlənir
         function saveNewQuestion() {
             let q = document.getElementById("adminNewQuestionInput").value.trim();
             if(!q) { alert("Yeni sual yazın!"); return; }
+            
             localStorage.setItem("dailyQuestion", q);
+            localStorage.removeItem("savedAnswers"); // Köhnə rəylər silinir
+            
             document.getElementById("displayDailyQuestion").innerText = q;
             document.getElementById("adminNewQuestionInput").value = "";
-            alert("Günün sualı yeniləndi!");
+            
+            renderPublicAnswers();
+            renderAdminAnswers();
+            alert("Günün sualı yeniləndi və əvvəlki rəylər təmizləndi!");
         }
 
         function searchEvents() {
