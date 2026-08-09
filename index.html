@@ -157,6 +157,8 @@
         .contact-box input, .contact-box textarea { width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 5px; font-size: 13px; outline: none; }
         .contact-box button { width: 100%; background: #0b1e3a; color: white; padding: 10px; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; }
 
+        #success-msg { display: none; color: #28a745; font-weight: bold; font-size: 13px; text-align: center; margin-top: 10px; }
+
         footer { border-top: 1px solid #e2e8f0; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; margin-top: auto; background: #fff; width: 100%; }
         footer span { font-size: 13px; color: #64748b; }
         .social-link { font-size: 26px; color: #1877f2; text-decoration: none; transition: 0.2s; }
@@ -413,12 +415,13 @@
                     </div>
 
                     <div class="contact-box">
-                        <form action="https://formspree.io/f/xljrjgpp" method="POST">
-    <input type="text" name="name" placeholder="Ad və Soyadınız" required>
-    <input type="tel" name="phone" placeholder="Əlaqə nömrəniz" required>
-    <textarea name="message" rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
-    <button type="submit">Göndər</button>
-</form>
+                        <form id="contact-form" action="https://formspree.io/f/xljrjgpp" method="POST">
+                            <input type="text" name="name" placeholder="Ad və Soyadınız" required>
+                            <input type="tel" name="phone" placeholder="Əlaqə nömrəniz" required>
+                            <textarea name="message" rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
+                            <button type="submit" id="submit-btn">Göndər</button>
+                        </form>
+                        <p id="success-msg">Mesajınız uğurla göndərildi! 🎉</p>
                     </div>
                 </div>
             </div>
@@ -456,23 +459,6 @@
             window.scrollTo(0, 0);
         }
 
-        function sendToWhatsApp(event) {
-    event.preventDefault();
-    
-    let name = document.getElementById('wa-name').value;
-    let email = document.getElementById('wa-email').value;
-    let msg = document.getElementById('wa-msg').value;
-    
-    let myPhone = "994103933218"; 
-    
-    let text = `Salam, saytdan yeni mesaj var:%0A*Ad:* ${name}%0A*E-poçt:* ${email}%0A*Mesaj:* ${msg}`;
-    
-    let url = `https://wa.me/${myPhone}?text=${text}`;
-    
-    // Yeni pəncərə kimi deyil, birbaşa həmin səhifədə açılması üçün:
-    window.location.href = url;
-}
-
         let slideIndex = 0;
         const slides = document.getElementsByClassName("slide");
 
@@ -486,6 +472,41 @@
             }
             slides[slideIndex].classList.add("active-slide");
         }
+
+        // Formspree AJAX Göndərmə Skripti
+        const form = document.getElementById("contact-form");
+        const successMsg = document.getElementById("success-msg");
+        const submitBtn = document.getElementById("submit-btn");
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault(); // Səhifənin dəyişməsinə mane olur
+            
+            submitBtn.innerText = "Göndərilir...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: { "Accept": "application/json" }
+                });
+
+                if (response.ok) {
+                    form.reset(); // Xanaları təmizləyir
+                    successMsg.style.display = "block"; // Uğur mesajını göstərir
+                    setTimeout(() => { successMsg.style.display = "none"; }, 5000);
+                } else {
+                    alert("Xəta baş verdi, zəhmət olmasa yenidən cəhd edin.");
+                }
+            } catch (error) {
+                alert("İnternet bağlantısında xəta var.");
+            } finally {
+                submitBtn.innerText = "Göndər";
+                submitBtn.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>
