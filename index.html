@@ -416,10 +416,10 @@
                     </div>
 
                     <div class="contact-box">
-                        <!-- Görünməz çərçivə: Formspree-nin başqa sayta yönləndirməsini saxlayır -->
+                        <!-- Gizli iframe: Formspree rus səhifəsinin görünməsinə mane olur -->
                         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted) { handleFormSuccess(); }"></iframe>
 
-                        <!-- Form: Birbaşa Formspree-yə göndərir (100% işləyir və mesaj çatır) -->
+                        <!-- Form: Birbaşa Formspree-yə göndərir -->
                         <form id="contact-form" action="https://formspree.io/f/xljrjgpp" method="POST" target="hidden_iframe" onsubmit="isSubmitted=true;">
                             <input type="text" name="name" placeholder="Ad və Soyadınız" required>
                             <input type="tel" name="phone" placeholder="Əlaqə nömrəniz" required>
@@ -432,6 +432,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- 6. GİZLİ ADMIN PANEL SƏHİFƏSİ -->
+        <div id="page-admin" class="page">
+            <section class="hero" style="padding: 50px 20px; margin-bottom: 20px;">
+                <div class="hero-content">
+                    <h1>İdarəetmə Paneli</h1>
+                    <p>Saytın məzmununu idarə etmək üçün gizli panel</p>
+                </div>
+            </section>
+            <div class="container" style="max-width: 800px; margin-bottom: 50px;">
+                
+                <!-- Çıxış düyməsi -->
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+                    <button onclick="adminLogout()" style="background: #dc2626; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600;">Çıxış Et <i class="fa-solid fa-right-from-bracket"></i></button>
+                </div>
+
+                <!-- Tədbir Əlavə Etmə Modulu -->
+                <div class="contact-box" style="margin-bottom: 30px;">
+                    <h3 style="color: #0b1e3a; margin-bottom: 15px; font-size: 16px;"><i class="fa-solid fa-plus-circle"></i> Yeni Tədbir / Xəbər Əlavə Et</h3>
+                    <input type="text" id="new-event-title" placeholder="Tədbirin başlığı">
+                    <input type="text" id="new-event-img" placeholder="Şəkil adı (məsələn: 221.jpg)">
+                    <textarea id="new-event-desc" rows="3" placeholder="Tədbir haqqında qısa məlumat"></textarea>
+                    <button onclick="addNewEvent()">Tədbiri Əlavə Et</button>
+                </div>
+
+                <!-- Haqqında Mətnini Dəyişmək Modulu -->
+                <div class="contact-box">
+                    <h3 style="color: #0b1e3a; margin-bottom: 15px; font-size: 16px;"><i class="fa-solid fa-pen-to-square"></i> Haqqında Mətnini Redaktə Et</h3>
+                    <textarea id="edit-about-text" rows="6" placeholder="Haqqında səhifəsindəki mətn..."></textarea>
+                    <button onclick="saveAboutText()">Mətni Yenilə</button>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
     <!-- Footer -->
@@ -479,19 +514,90 @@
             slides[slideIndex].classList.add("active-slide");
         }
 
-        // Formspree göndərmə idarəetməsi
+        // Formspree gizli iframe idarəetməsi
         let isSubmitted = false;
 
         function handleFormSuccess() {
-            document.getElementById("contact-form").reset(); // Xanaları təmizləyir
+            document.getElementById("contact-form").reset(); 
             const successMsg = document.getElementById("success-msg");
-            successMsg.style.display = "block"; // Yaşıl uğur mesajını göstərir
+            successMsg.style.display = "block"; 
             
             setTimeout(() => { 
                 successMsg.style.display = "none"; 
             }, 5000);
 
             isSubmitted = false;
+        }
+
+        // --- GİZLİ ADMIN PANEL SKRİPTLƏRİ ---
+
+        // Klaviaturadan Ctrl + Shift + A basanda işə düşür
+        document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey && event.shiftKey && event.code === "KeyA") {
+                event.preventDefault();
+                checkAdminLogin();
+            }
+        });
+
+        function checkAdminLogin() {
+            let password = prompt("Zəhmət olmasa admin şifrəsini daxil edin:");
+            
+            if (password === "Eldar12345@_*") {
+                localStorage.setItem("isAdminLoggedIn", "true");
+                openPage('admin', null);
+                alert("Xoş gəldiniz, Eldar! Admin panelə daxil oldunuz.");
+            } else if (password !== null) {
+                alert("Şifrə səhvdir!");
+            }
+        }
+
+        function adminLogout() {
+            localStorage.removeItem("isAdminLoggedIn");
+            openPage('home', document.querySelector('.nav-item'));
+            alert("Admin paneldən çıxış edildi.");
+        }
+
+        function addNewEvent() {
+            let title = document.getElementById("new-event-title").value;
+            let img = document.getElementById("new-event-img").value;
+            let desc = document.getElementById("new-event-desc").value;
+
+            if(!title || !img || !desc) {
+                alert("Zəhmət olmasa bütün xanaları doldurun!");
+                return;
+            }
+
+            let eventsListContainer = document.querySelector(".events-list");
+            let newRow = document.createElement("div");
+            newRow.className = "event-row";
+            newRow.innerHTML = `
+                <img src="${img}" alt="${title}">
+                <div class="event-info">
+                    <a href="#" class="event-title-link">${title}</a>
+                    <span class="event-desc">${desc}</span>
+                </div>
+            `;
+            eventsListContainer.prepend(newRow);
+
+            document.getElementById("new-event-title").value = "";
+            document.getElementById("new-event-img").value = "";
+            document.getElementById("new-event-desc").value = "";
+
+            alert("Yeni tədbir uğurla əlavə olundu!");
+        }
+
+        function saveAboutText() {
+            let newText = document.getElementById("edit-about-text").value;
+            if(!newText) {
+                alert("Mətn boş ola bilməz!");
+                return;
+            }
+            
+            let aboutContentBox = document.querySelector(".about-text-content");
+            if(aboutContentBox) {
+                aboutContentBox.innerText = newText;
+                alert("Haqqında mətni uğurla yeniləndi!");
+            }
         }
     </script>
 </body>
