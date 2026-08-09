@@ -413,10 +413,10 @@
                     </div>
 
                     <div class="contact-box">
-                        <form onsubmit="event.preventDefault(); alert('Mesajınız İnnovativ Təşəbbüslər İB-yə göndərildi!'); this.reset();">
-                            <input type="text" placeholder="Ad və Soyadınız" required>
-                            <input type="email" placeholder="E-poçt ünvanınız" required>
-                            <textarea rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
+                        <form action="https://formspree.io/f/xljrjgpp" method="POST">
+                            <input type="text" name="name" placeholder="Ad və Soyadınız" required>
+                            <input type="email" name="email" placeholder="E-poçt ünvanınız" required>
+                            <textarea name="message" rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
                             <button type="submit">Göndər</button>
                         </form>
                     </div>
