@@ -356,16 +356,17 @@
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('show'); }
 
         function openPage(pageName, element) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            let target = document.getElementById('page-' + pageName);
-            if(target) target.classList.add('active');
-            
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            if(element) element.classList.add('active');
-            
-            document.getElementById('navLinks').classList.remove('show');
-            window.scrollTo(0, 0);
-        }
+    // Əgər admin səhifəsindəyiksə və başqa səhifəyə keçiriksə, admini gizlətməyək və ya çıxış etməyək
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    let target = document.getElementById('page-' + pageName);
+    if(target) target.classList.add('active');
+    
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    if(element) element.classList.add('active');
+    
+    document.getElementById('navLinks').classList.remove('show');
+    window.scrollTo(0, 0);
+}
 
         function openAdminTab(tabId, btn) {
             document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active-admin-sec'));
