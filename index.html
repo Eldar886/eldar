@@ -80,13 +80,6 @@
         .admin-section { display: none; }
         .admin-section.active-admin-sec { display: block; }
 
-        /* Admin Panel Şəkil Siyahısı Üçün Stizlər */
-        .admin-gallery-item { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px; margin-bottom: 10px; }
-        .admin-gallery-info { display: flex; align-items: center; gap: 10px; }
-        .admin-gallery-info img { width: 50px; height: 40px; object-fit: cover; border-radius: 4px; }
-        .btn-delete-item { background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600; }
-        .btn-delete-item:hover { background: #b91c1c; }
-
         footer { border-top: 1px solid #e2e8f0; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; background: #fff; width: 100%; margin-top: auto; }
         footer span { font-size: 13px; color: #64748b; }
         .social-link { font-size: 26px; color: #1877f2; text-decoration: none; }
@@ -163,7 +156,7 @@
             </div>
         </div>
 
-        <!-- 2. HAqqında SƏHİFƏSİ -->
+        <!-- 2. HAQQINDA SƏHİFƏSİ -->
         <div id="page-haqqinda" class="page">
             <section class="hero">
                 <div class="hero-content">
@@ -296,7 +289,7 @@
                     <button class="admin-tab-btn active-tab" onclick="openAdminTab('home-tab', this)">🏠 Ana Səhifə</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('about-tab', this)">📖 Haqqında</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('events-tab', this)">📅 Tədbirlər</button>
-                    <button class="admin-tab-btn" onclick="openAdminTab('gallery-tab', this)" onclick="renderAdminGalleryList()">🖼️ Qalereya</button>
+                    <button class="admin-tab-btn" onclick="openAdminTab('gallery-tab', this)">🖼️ Qalereya</button>
                     <button class="admin-tab-btn" onclick="openAdminTab('contact-tab', this)">📞 Əlaqə</button>
                 </div>
 
@@ -321,17 +314,11 @@
                     <button onclick="addNewEventAdmin()">Tədbir Əlavə Et</button>
                 </div>
 
-                <!-- QALEREYA İDARƏETMƏSİ (ŞƏKİL ƏLAVƏ ET VƏ SİL) -->
                 <div id="gallery-tab" class="admin-section contact-box">
                     <h3 class="section-title" style="font-size:16px;">Qalereyaya Şəkil Əlavə Et</h3>
                     <input type="text" id="admin-gal-img" placeholder="Şəkil fayl adı (məsələn: 1010.jpg)">
                     <input type="text" id="admin-gal-caption" placeholder="Şəkil yazısı / başlıq">
-                    <button onclick="addGalleryImageAdmin()" style="margin-bottom: 25px;">Qalereyaya Şəkil Əlavə Et</button>
-
-                    <h3 class="section-title" style="font-size:16px;">Əlavə Olunmuş Şəkillərin Siyahısı</h3>
-                    <div id="admin-gallery-list-container">
-                        <!-- Burada əlavə edilən şəkillər siyahı şəklində görünəcək -->
-                    </div>
+                    <button onclick="addGalleryImageAdmin()">Qalereyaya Şəkil Əlavə Et</button>
                 </div>
 
                 <div id="contact-tab" class="admin-section contact-box">
@@ -356,17 +343,16 @@
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('show'); }
 
         function openPage(pageName, element) {
-    // Əgər admin səhifəsindəyiksə və başqa səhifəyə keçiriksə, admini gizlətməyək və ya çıxış etməyək
-    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-    let target = document.getElementById('page-' + pageName);
-    if(target) target.classList.add('active');
-    
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    if(element) element.classList.add('active');
-    
-    document.getElementById('navLinks').classList.remove('show');
-    window.scrollTo(0, 0);
-}
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            let target = document.getElementById('page-' + pageName);
+            if(target) target.classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if(element) element.classList.add('active');
+            
+            document.getElementById('navLinks').classList.remove('show');
+            window.scrollTo(0, 0);
+        }
 
         function openAdminTab(tabId, btn) {
             document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active-admin-sec'));
@@ -374,10 +360,6 @@
 
             document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active-tab'));
             btn.classList.add('active-tab');
-
-            if(tabId === 'gallery-tab') {
-                renderAdminGalleryList();
-            }
         }
 
         let slideIndex = 0;
@@ -397,12 +379,7 @@
             if(localStorage.getItem("homeDesc")) document.getElementById("home-hero-desc").innerText = localStorage.getItem("homeDesc");
             if(localStorage.getItem("aboutText")) document.getElementById("about-text-view").innerText = localStorage.getItem("aboutText");
             if(localStorage.getItem("savedEvents")) document.getElementById("events-container-view").innerHTML = localStorage.getItem("savedEvents");
-            if(localStorage.getItem("savedGallery")) {
-                let slider = document.getElementById("dynamic-slider");
-                // Düymələri qoruyub saxlamaq üçün əvvəlcə onları yazaq
-                let controls = slider.querySelector('.prev-btn').outerHTML + slider.querySelector('.next-btn').outerHTML;
-                slider.innerHTML = controls + localStorage.getItem("savedGallery");
-            }
+            if(localStorage.getItem("savedGallery")) document.getElementById("dynamic-slider").innerHTML = localStorage.getItem("savedGallery");
         };
 
         document.addEventListener("keydown", function(event) {
@@ -411,7 +388,6 @@
                 let pass = prompt("Admin şifrəsini daxil edin:");
                 if (pass === "Eldar12345@_*") {
                     openPage('admin', null);
-                    renderAdminGalleryList();
                     alert("Admin panelə xoş gəldiniz!");
                 } else if(pass !== null) {
                     alert("Şifrə səhvdir!");
@@ -457,7 +433,6 @@
             alert("Yeni tədbir əlavə olundu!");
         }
 
-        // QALEREYAYA ŞƏKİL ƏLAVƏ ETMƏK
         function addGalleryImageAdmin() {
             let img = document.getElementById("admin-gal-img").value;
             let cap = document.getElementById("admin-gal-caption").value;
@@ -469,74 +444,8 @@
             newSlide.innerHTML = `<img src="${img}" alt=""><div class="slide-caption"><h3>${cap}</h3></div>`;
             slider.appendChild(newSlide);
 
-            // Yalnız əlavə edilən slaydların HTML-ni localStorage-də saxlayırıq
-            let customSlides = "";
-            let allSlides = slider.querySelectorAll(".slide");
-            // İlk 2 orijinal slayd istisna olmaqla qalanları yığılır
-            for(let i = 2; i < allSlides.length; i++) {
-                customSlides += allSlides[i].outerHTML;
-            }
-            localStorage.setItem("savedGallery", customSlides);
-
-            document.getElementById("admin-gal-img").value = "";
-            document.getElementById("admin-gal-caption").value = "";
-            renderAdminGalleryList();
+            localStorage.setItem("savedGallery", slider.innerHTML);
             alert("Qalereyaya şəkil əlavə olundu!");
-        }
-
-        // ADMIN PANELDƏ ŞƏKİLLƏRİN SİYAHISINI GÖSTƏRMƏK VƏ SİLMƏK
-        function renderAdminGalleryList() {
-            let listContainer = document.getElementById("admin-gallery-list-container");
-            let slider = document.getElementById("dynamic-slider");
-            let slides = slider.querySelectorAll(".slide");
-            
-            let html = "";
-            // İlk 2 orijinal slayd admin siyahısında silinməsin deyə 2-dən başlayırıq
-            for(let i = 2; i < slides.length; i++) {
-                let imgSrc = slides[i].querySelector("img").getAttribute("src");
-                let captionText = slides[i].querySelector("h3") ? slides[i].querySelector("h3").innerText : "Başlıqsız";
-                
-                html += `
-                    <div class="admin-gallery-item">
-                        <div class="admin-gallery-info">
-                            <img src="${imgSrc}" alt="">
-                            <span>${captionText}</span>
-                        </div>
-                        <button class="btn-delete-item" onclick="deleteGalleryItem(${i})">Sil</button>
-                    </div>
-                `;
-            }
-
-            if(html === "") {
-                html = "<p style='font-size:13px; color:#64748b;'>Hələ əlavə edilmiş xüsusi şəkil yoxdur.</p>";
-            }
-            listContainer.innerHTML = html;
-        }
-
-        // SEÇİLƏN ŞƏKLİ SİLMƏK FUNKSİYASI
-        function deleteGalleryItem(index) {
-            let slider = document.getElementById("dynamic-slider");
-            let slides = slider.querySelectorAll(".slide");
-            
-            if(slides[index]) {
-                slides[index].remove();
-                
-                // localStorage-i yeniləyirik
-                let customSlides = "";
-                let remainingSlides = slider.querySelectorAll(".slide");
-                for(let i = 2; i < remainingSlides.length; i++) {
-                    customSlides += remainingSlides[i].outerHTML;
-                }
-                
-                if(customSlides === "") {
-                    localStorage.removeItem("savedGallery");
-                } else {
-                    localStorage.setItem("savedGallery", customSlides);
-                }
-
-                renderAdminGalleryList();
-                alert("Şəkil qalereyadan silindi!");
-            }
         }
 
         let isSubmitted = false;
