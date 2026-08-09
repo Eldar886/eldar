@@ -413,11 +413,11 @@
                     </div>
 
                     <div class="contact-box">
-                        <form action="https://formspree.io/f/xljrjgpp" method="POST">
-                            <input type="text" name="name" placeholder="Ad və Soyadınız" required>
-                            <input type="email" name="email" placeholder="E-poçt ünvanınız" required>
-                            <textarea name="message" rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
-                            <button type="submit">Göndər</button>
+                        <form onsubmit="sendToWhatsApp(event)">
+                            <input type="text" id="wa-name" placeholder="Ad və Soyadınız" required>
+                            <input type="email" id="wa-email" placeholder="E-poçt ünvanınız" required>
+                            <textarea id="wa-msg" rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
+                            <button type="submit">WhatsApp ilə Göndər</button>
                         </form>
                     </div>
                 </div>
@@ -454,6 +454,21 @@
             
             document.getElementById('navLinks').classList.remove('show');
             window.scrollTo(0, 0);
+        }
+
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            
+            let name = document.getElementById('wa-name').value;
+            let email = document.getElementById('wa-email').value;
+            let msg = document.getElementById('wa-msg').value;
+            
+            let phone = "994103933218"; 
+            
+            let text = `Salam, saytdan yeni mesaj var:%0A*Ad:* ${name}%0A*E-poçt:* ${email}%0A*Mesaj:* ${msg}`;
+            
+            let url = `https://wa.me/${phone}?text=${text}`;
+            window.open(url, '_blank');
         }
 
         let slideIndex = 0;
