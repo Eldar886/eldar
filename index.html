@@ -607,32 +607,29 @@
         };
 
         document.addEventListener("keydown", function(event) {
-    // Mətn qutularında (input/textarea) yazarkən qarışmasın deyə
-    if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") return;
+            if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") return;
 
-    // 1. Ctrl + Shift + A + E (Dördü bir yerdə) - Şifrəsiz, birbaşa açılır
-    if (event.ctrlKey && event.shiftKey && (event.code === "KeyE" || event.key.toLowerCase() === "e")) {
-        event.preventDefault();
-        openPage('admin', null);
-        renderAdminAnswers();
-        renderAdminGalleryList();
-        renderAdminEventsList();
-    }
-    // 2. Ctrl + Shift + A (E hərfi olmadan) - Şifrə soruşur
-    else if (event.ctrlKey && event.shiftKey && (event.code === "KeyA" || event.key.toLowerCase() === "a")) {
-        event.preventDefault();
-        let pass = prompt("Admin şifrəsini daxil edin:");
-        if (pass === "Eldar12345@_*") {
-            openPage('admin', null);
-            renderAdminAnswers();
-            renderAdminGalleryList();
-            renderAdminEventsList();
-            alert("Admin panelə xoş gəldiniz!");
-        } else if (pass !== null) {
-            alert("Şifrə səhvdir!");
-        }
-    }
-});
+            if (event.ctrlKey && event.shiftKey && (event.code === "KeyE" || event.key.toLowerCase() === "e")) {
+                event.preventDefault();
+                openPage('admin', null);
+                renderAdminAnswers();
+                renderAdminGalleryList();
+                renderAdminEventsList();
+            }
+            else if (event.ctrlKey && event.shiftKey && (event.code === "KeyA" || event.key.toLowerCase() === "a")) {
+                event.preventDefault();
+                let pass = prompt("Admin şifrəsini daxil edin:");
+                if (pass === "Eldar12345@_*") {
+                    openPage('admin', null);
+                    renderAdminAnswers();
+                    renderAdminGalleryList();
+                    renderAdminEventsList();
+                    alert("Admin panelə xoş gəldiniz!");
+                } else if (pass !== null) {
+                    alert("Şifrə səhvdir!");
+                }
+            }
+        });
 
         function adminLogout() {
             openPage('home', document.querySelector('.nav-item'));
@@ -741,7 +738,7 @@
                 let remainingSlides = slider.querySelectorAll(".slide");
                 for(let i = 2; i < remainingSlides.length; i++) { customSlides += remainingSlides[i].outerHTML; }
                 if(customSlides === "") { localStorage.removeItem("savedGallery"); } else { localStorage.setItem("savedGallery", customSlides); }
-                renderAdminGalleryList();A
+                renderAdminGalleryList();
                 alert("Şəkil silindi!");
             }
         }
