@@ -6,6 +6,36 @@
     <title>İnnovativ Təşəbbüslər İctimai Birliyi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Standart (İşıqlı) Rejim Rəngləri */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --card-bg: #f9f9f9;
+    --nav-bg: #ffffff;
+}
+
+/* Qaranlıq (Dark) Rejim Rəngləri */
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --nav-bg: #1f1f1f;
+}
+
+/* Əsas elementlərə dəyişənləri tətbiq edirik */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+.event-row, .media-card, .news-card {
+    background-color: var(--card-bg) !important;
+}
+
+nav, footer {
+    background-color: var(--nav-bg) !important;
+}
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
         .content-wrap { flex: 1; }
@@ -134,7 +164,9 @@
     </style>
 </head>
 <body>
-
+<button onclick="toggleTheme()" class="theme-toggle-btn" style="background:none; border:none; cursor:pointer; font-size: 18px; color: inherit;">
+    <i class="fa-solid fa-moon"></i> 🌓
+</button>
     <div class="content-wrap">
         <header>
             <div class="container">
@@ -443,6 +475,23 @@
     </footer>
 
     <script>
+        // Rejimi dəyişmək üçün funksiya
+function toggleTheme() {
+    let currentTheme = document.documentElement.getAttribute("data-theme");
+    let newTheme = currentTheme === "dark" ? "light" : "dark";
+    
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("siteTheme", newTheme);
+    
+    // Düymənin ikonunu dəyişmək üçün (əgər varsa)
+    updateThemeIcon(newTheme);
+}
+
+// Səhifə açıldıqda yaddadakı rejimi oxumaq
+window.addEventListener("DOMContentLoaded", () => {
+    let savedTheme = localStorage.getItem("siteTheme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+});
         // --- DİL TƏRCÜMƏ Lüğəti ---
         const translations = {
             az: {
