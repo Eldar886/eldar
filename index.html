@@ -134,7 +134,36 @@
     </style>
 </head>
 <body>
+<!-- XƏBƏRLƏR PORTALI SƏHİFƏSİ -->
+<div id="page-xeberler" class="page">
+    <section class="hero">
+        <div class="hero-content">
+            <h1>İnnovativ Xəbərlər Portalı</h1>
+            <p>Əşrəf Əhmədov və "İnnovativ Təşəbbüslər" İctimai Birliyi haqqında son xəbərlər</p>
+        </div>
+    </section>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="newsSearchInput" placeholder="Xəbərlərdə axtarış..." onkeyup="searchNews()">
+        </div>
 
+        <h2 class="section-title">Fəaliyyət və Xəbərlər</h2>
+        <div class="media-grid" id="news-container-view">
+            <!-- Xəbər kartları bura avtomatik və ya əlavə olunacaq -->
+            <div class="media-card">
+                <img src="221.jpg" alt="Xəbər">
+                <div class="media-card-body">
+                    <div>
+                        <span style="font-size: 11px; font-weight: 700; color: #1e3a8a; text-transform: uppercase;">İnnovativ Təşəbbüslər</span>
+                        <h4 style="margin-top: 5px;">Gənclər üçün yeni layihələrə start verildi</h4>
+                        <p>Sədr Əşrəf Əhmədovun rəhbərliyi ilə həyata keçirilən təşəbbüslər barədə...</p>
+                    </div>
+                    <a href="#" class="btn-link">Ətraflı Bax <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="content-wrap">
         <header>
             <div class="container">
@@ -149,12 +178,13 @@
                     
                     <div class="nav-right-area">
                         <ul class="nav-links" id="navLinks">
-                            <li><a class="nav-item active" onclick="openPage('home', this)" data-i18n="nav_home">Ana Səhifə</a></li>
-                            <li><a class="nav-item" onclick="openPage('haqqinda', this)" data-i18n="nav_about">Haqqında</a></li>
-                            <li><a class="nav-item" onclick="openPage('tedbirler', this)" data-i18n="nav_events">Tədbirlər</a></li>
-                            <li><a class="nav-item" onclick="openPage('qalereya', this)" data-i18n="nav_gallery">Qalereya</a></li>
-                            <li><a class="nav-item" onclick="openPage('elaqe', this)" data-i18n="nav_contact">Əlaqə</a></li>
-                        </ul>
+    <li><a class="nav-item active" onclick="openPage('home', this)" data-i18n="nav_home">Ana Səhifə</a></li>
+    <li><a class="nav-item" onclick="openPage('haqqinda', this)" data-i18n="nav_about">Haqqında</a></li>
+    <li><a class="nav-item" onclick="openPage('xeberler', this)" data-i18n="nav_news">Xəbərlər</a></li>
+    <li><a class="nav-item" onclick="openPage('tedbirler', this)" data-i18n="nav_events">Tədbirlər</a></li>
+    <li><a class="nav-item" onclick="openPage('qalereya', this)" data-i18n="nav_gallery">Qalereya</a></li>
+    <li><a class="nav-item" onclick="openPage('elaqe', this)" data-i18n="nav_contact">Əlaqə</a></li>
+</ul>
                         <!-- Dil Seçimi Menyusu -->
                         <select id="langSelector" class="lang-select" onchange="changeLanguage(this.value)">
                             <option value="az">AZ</option>
@@ -436,6 +466,14 @@
     </a>
 
     <footer>
+        <footer>
+    <div class="container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+        <span data-i18n="footer_rights">© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi. Bütün hüquqlar qorunur.</span>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <a href="https://www.facebook.com/groups/436968776359919/user/100064714507365/?locale=az_AZ" target="_blank" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+    </div>
+</footer>
         <div class="container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
             <span data-i18n="footer_rights">© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi. Bütün hüquqlar qorunur.</span>
             <a href="https://www.facebook.com/groups/436968776359919/user/100064714507365/?locale=az_AZ" target="_blank" class="social-link"><i class="fa-brands fa-facebook"></i></a>
@@ -443,6 +481,46 @@
     </footer>
 
     <script>
+        // Xəbərləri idarə etmək və sayta əlavə etmək üçün skript
+function addNewNewsAdmin() {
+    let title = document.getElementById("news-title").value;
+    let category = document.getElementById("news-category").value; // Məsələn: İnnovasiya, İctimai Birlik, Əşrəf Əhmədov
+    let img = document.getElementById("news-img").value;
+    let desc = document.getElementById("news-desc").value;
+
+    if(!title || !desc) { 
+        alert("Zəhmət olmasa başlığı və mətni doldurun!"); 
+        return; 
+    }
+
+    let container = document.getElementById("news-container-view");
+    if (!container) return;
+
+    let newCard = document.createElement("div");
+    newCard.className = "news-card";
+    
+    newCard.innerHTML = `
+        <img src="${img || 'default-image.jpg'}" alt="Xəbər şəkli">
+        <div class="news-content">
+            <span class="news-tag">${category}</span>
+            <h3>${title}</h3>
+            <p>${desc}</p>
+            <span class="news-date">${new Date().toLocaleDateString()}</span>
+        </div>
+    `;
+    
+    container.prepend(newCard);
+
+    // Yaddaşda saxlamaq üçün (mövcud sisteminə uyğun)
+    localStorage.setItem("savedNews", container.innerHTML);
+
+    // Formu təmizləyirik
+    document.getElementById("news-title").value = "";
+    document.getElementById("news-desc").value = "";
+    if(document.getElementById("news-img")) document.getElementById("news-img").value = "";
+    
+    alert("Xəbər uğurla əlavə olundu!");
+}
         // --- DİL TƏRCÜMƏ Lüğəti ---
         const translations = {
             az: {
