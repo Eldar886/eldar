@@ -886,33 +886,37 @@
         }
 
         function addNewEventAdmin() {
-            let title = document.getElementById("admin-ev-title").value;
-            let img = document.getElementById("admin-ev-img").value;
-            let desc = document.getElementById("admin-ev-desc").value;
-            if(!title || !img || !desc) { alert("Bütün xanaları doldurun!"); return; }
+    let title = document.getElementById("admin-ev-title").value;
+    let img = document.getElementById("admin-ev-img").value;
+    let desc = document.getElementById("admin-ev-desc").value;
+    if(!title || !img || !desc) { alert("Bütün xanaları doldurun!"); return; }
 
-            let container = document.getElementById("events-container-view");
-            let newRow = document.createElement("div");
-            newRow.className = "event-row";
-            newRow.innerHTML = `
-                <img src="${img}" alt="">
-                <div class="event-info">
-                    <a href="#" class="event-title-link">${title}</a>
-                    <span class="event-desc">${desc}</span>
-                    <div class="share-box">
-                        <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(title)}" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                        <a href="https://t.me/share/url?url=&text=${encodeURIComponent(title)}" target="_blank" class="share-btn share-telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
-                    </div>
-                </div>`;
-            container.prepend(newRow);
+    let container = document.getElementById("events-container-view");
+    let newRow = document.createElement("div");
+    newRow.className = "event-row";
+    
+    // Hazırkı seçili dili yoxlayırıq
+    let currentLang = localStorage.getItem("siteLang") || "az";
 
-            localStorage.setItem("savedEvents", container.innerHTML);
-            document.getElementById("admin-ev-title").value = "";
-            document.getElementById("admin-ev-img").value = "";
-            document.getElementById("admin-ev-desc").value = "";
-            renderAdminEventsList();
-            alert("Yeni tədbir əlavə olundu!");
-        }
+    newRow.innerHTML = `
+        <img src="${img}" alt="">
+        <div class="event-info">
+            <a href="#" class="event-title-link">${title}</a>
+            <span class="event-desc">${desc}</span>
+            <div class="share-box">
+                <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(title)}" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://t.me/share/url?url=&text=${encodeURIComponent(title)}" target="_blank" class="share-btn share-telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            </div>
+        </div>`;
+    container.prepend(newRow);
+
+    localStorage.setItem("savedEvents", container.innerHTML);
+    document.getElementById("admin-ev-title").value = "";
+    document.getElementById("admin-ev-img").value = "";
+    document.getElementById("admin-ev-desc").value = "";
+    renderAdminEventsList();
+    alert("Yeni tədbir əlavə olundu!");
+}
 
         function renderAdminEventsList() {
             let listContainer = document.getElementById("admin-events-list-container");
