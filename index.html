@@ -22,9 +22,13 @@
         .logo-text { font-weight: 800; font-size: 16px; color: #0b1e3a; text-transform: uppercase; }
         .logo-text span { color: #1e3a8a; display: block; font-size: 10px; font-weight: 600; }
         
+        .nav-right-area { display: flex; align-items: center; gap: 15px; }
         .nav-links { display: flex; list-style: none; gap: 5px; align-items: center; }
         .nav-links a { display: block; text-decoration: none; color: #334155; font-size: 14px; font-weight: 600; cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: #0b1e3a; background: #f1f5f9; }
+
+        /* Dil seçimi stil */
+        .lang-select { padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc; font-size: 13px; font-weight: 600; color: #0b1e3a; cursor: pointer; outline: none; }
 
         .search-container { margin: 20px 0; display: flex; justify-content: flex-end; }
         .search-container input { width: 250px; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; }
@@ -142,13 +146,22 @@
                             <div class="logo-text">İnnovativ Təşəbbüslər<span>İctimai Birliyi</span></div>
                         </div>
                     </div>
-                    <ul class="nav-links" id="navLinks">
-                        <li><a class="nav-item active" onclick="openPage('home', this)">Ana Səhifə</a></li>
-                        <li><a class="nav-item" onclick="openPage('haqqinda', this)">Haqqında</a></li>
-                        <li><a class="nav-item" onclick="openPage('tedbirler', this)">Tədbirlər</a></li>
-                        <li><a class="nav-item" onclick="openPage('qalereya', this)">Qalereya</a></li>
-                        <li><a class="nav-item" onclick="openPage('elaqe', this)">Əlaqə</a></li>
-                    </ul>
+                    
+                    <div class="nav-right-area">
+                        <ul class="nav-links" id="navLinks">
+                            <li><a class="nav-item active" onclick="openPage('home', this)" data-i18n="nav_home">Ana Səhifə</a></li>
+                            <li><a class="nav-item" onclick="openPage('haqqinda', this)" data-i18n="nav_about">Haqqında</a></li>
+                            <li><a class="nav-item" onclick="openPage('tedbirler', this)" data-i18n="nav_events">Tədbirlər</a></li>
+                            <li><a class="nav-item" onclick="openPage('qalereya', this)" data-i18n="nav_gallery">Qalereya</a></li>
+                            <li><a class="nav-item" onclick="openPage('elaqe', this)" data-i18n="nav_contact">Əlaqə</a></li>
+                        </ul>
+                        <!-- Dil Seçimi Menyusu -->
+                        <select id="langSelector" class="lang-select" onchange="changeLanguage(this.value)">
+                            <option value="az">AZ</option>
+                            <option value="en">EN</option>
+                            <option value="ru">RU</option>
+                        </select>
+                    </div>
                 </nav>
             </div>
         </header>
@@ -157,60 +170,60 @@
         <div id="page-home" class="page active">
             <section class="hero">
                 <div class="hero-content">
-                    <h1 id="home-hero-title">"İnnovativ Təşəbbüslər"<br>Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</h1>
-                    <p id="home-hero-desc">Gənclərin milli-mənəvi ruhda tərbiyəsi, vətənpərvərlik və innovativ təhsil təşəbbüslərinin dəstəklənməsi platforması.</p>
-                    <a onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])" class="btn-main">Tədbirlərimizlə Tanış Olun</a>
+                    <h1 id="home-hero-title" data-i18n="hero_title">"İnnovativ Təşəbbüslər"<br>Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</h1>
+                    <p id="home-hero-desc" data-i18n="hero_desc">Gənclərin milli-mənəvi ruhda tərbiyəsi, vətənpərvərlik və innovativ təhsil təşəbbüslərinin dəstəklənməsi platforması.</p>
+                    <a onclick="openPage('tedbirler', document.querySelectorAll('.nav-item')[2])" class="btn-main" data-i18n="hero_btn">Tədbirlərimizlə Tanış Olun</a>
                 </div>
             </section>
             
             <div class="container">
                 <!-- Gələcəyin İdeya Generatoru -->
                 <div class="idea-generator-box">
-                    <h3>💡 Gələcəyin İdeya Generatoru</h3>
-                    <p>Düyməni bas və təşkilatımız üçün unikal innovativ layihə ideyası kəşf et!</p>
-                    <div class="idea-output" id="ideaOutputText">İdeya yaratmaq üçün aşağıdakı düyməni klikləyin...</div>
-                    <button class="btn-idea" onclick="generateIdea()"><i class="fa-solid fa-wand-magic-sparkles"></i> Yeni İdeya yarat</button>
+                    <h3 data-i18n="idea_title">💡 Gələcəyin İdeya Generatoru</h3>
+                    <p data-i18n="idea_desc">Düyməni bas və təşkilatımız üçün unikal innovativ layihə ideyası kəşf et!</p>
+                    <div class="idea-output" id="ideaOutputText" data-i18n="idea_output">İdeya yaratmaq üçün aşağıdakı düyməni klikləyin...</div>
+                    <button class="btn-idea" onclick="generateIdea()"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="idea_btn">Yeni İdeya yarat</span></button>
                 </div>
 
                 <!-- Günün Sualı və Fikir Bildirmə Bölməsi -->
                 <div class="daily-question-box">
-                    <h3>❓ Günün Sualı</h3>
-                    <p id="displayDailyQuestion">Məktəblilərdə kitaba və mütaliəyə marağı necə artıra bilərik?</p>
+                    <h3 data-i18n="dq_title">❓ Günün Sualı</h3>
+                    <p id="displayDailyQuestion" data-i18n="dq_question">Məktəblilərdə kitaba və mütaliəyə marağı necə artıra bilərik?</p>
                     
-                    <input type="text" id="userNameInput" placeholder="Ad və Soyadınız...">
-                    <textarea id="userAnswerInput" rows="3" placeholder="Sənin fikrin və ya təklifin..."></textarea>
-                    <button onclick="submitUserAnswer()">Fikrimi Göndər</button>
+                    <input type="text" id="userNameInput" placeholder="Ad və Soyadınız..." data-i18n-placeholder="dq_name_ph">
+                    <textarea id="userAnswerInput" rows="3" placeholder="Sənin fikrin və ya təklifin..." data-i18n-placeholder="dq_text_ph"></textarea>
+                    <button onclick="submitUserAnswer()" data-i18n="dq_submit_btn">Fikrimi Göndər</button>
 
                     <!-- Hamının görə biləcəyi rəylər siyahısı -->
                     <div class="public-answers-list">
-                        <h4 style="font-size:14px; color:#0b1e3a; margin-bottom:10px;">İştirakçıların Fikirləri:</h4>
+                        <h4 style="font-size:14px; color:#0b1e3a; margin-bottom:10px;" data-i18n="dq_answers_title">İştirakçıların Fikirləri:</h4>
                         <div id="publicAnswersContainer">
-                            <p style="font-size:13px; color:#64748b;">Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!</p>
+                            <p style="font-size:13px; color:#64748b;" data-i18n="dq_no_answers">Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!</p>
                         </div>
                     </div>
                 </div>
 
-                <h2 class="section-title">Önə Çıxan Tədbir və Xəbərlər</h2>
+                <h2 class="section-title" data-i18n="featured_title">Önə Çıxan Tədbir və Xəbərlər</h2>
                 <div class="media-grid">
                     <div class="media-card">
                         <img src="221.jpg" alt="Qərbi Azərbaycan">
                         <div class="media-card-body">
-                            <div><h4>Milli Vətənpərvərlik Tədbirlərimiz</h4><p>Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</p></div>
-                            <a href="https://qht.az/details/az/28080" target="_blank" class="btn-link">QHT.az Məqaləsi <i class="fa-solid fa-arrow-right"></i></a>
+                            <div><h4 data-i18n="card1_title">Milli Vətənpərvərlik Tədbirlərimiz</h4><p data-i18n="card1_desc">Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</p></div>
+                            <a href="https://qht.az/details/az/28080" target="_blank" class="btn-link"><span data-i18n="article_link">QHT.az Məqaləsi</span> <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="media-card">
                         <img src="1021010.jpg" alt="Bayrağa Sədaqət Andı">
                         <div class="media-card-body">
-                            <div><h4>Bayrağa Sədaqət Andı Tədbiri</h4><p>Məktəblərdə Bayrağa Sədaqət Andı və Sədaqət Möhürünün tətbiqi.</p></div>
-                            <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="btn-link">MOD Rəsmi Xəbəri <i class="fa-solid fa-arrow-right"></i></a>
+                            <div><h4 data-i18n="card2_title">Bayrağa Sədaqət Andı Tədbiri</h4><p data-i18n="card2_desc">Məktəblərdə Bayrağa Sədaqət Andı və Sədaqət Möhürünün tətbiqi.</p></div>
+                            <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="btn-link"><span data-i18n="mod_link">MOD Rəsmi Xəbəri</span> <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="media-card">
                         <img src="1010.jpg" alt="Sədrin Müsahibəsi">
                         <div class="media-card-body">
-                            <div><h4>Gənclər ilə İnteraktiv Görüşlər</h4><p>Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.</p></div>
-                            <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link">Day.az Müsahibəsi <i class="fa-solid fa-arrow-right"></i></a>
+                            <div><h4 data-i18n="card3_title">Gənclər ilə İnteraktiv Görüşlər</h4><p data-i18n="card3_desc">Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.</p></div>
+                            <a href="https://news.day.az/azerinews/1086906.html" target="_blank" class="btn-link"><span data-i18n="day_link">Day.az Müsahibəsi</span> <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -221,22 +234,22 @@
         <div id="page-haqqinda" class="page">
             <section class="hero">
                 <div class="hero-content">
-                    <h1>Təşkilat Haqqında</h1>
-                    <p>"İnnovativ Təşəbbüslər" Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</p>
+                    <h1 data-i18n="about_hero_title">Təşkilat Haqqında</h1>
+                    <p data-i18n="about_hero_desc">"İnnovativ Təşəbbüslər" Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi</p>
                 </div>
             </section>
             <div class="container">
-                <h2 class="section-title">Haqqımızda</h2>
-                <div class="about-text-content" id="about-text-view">
+                <h2 class="section-title" data-i18n="about_sec_title">Haqqımızda</h2>
+                <div class="about-text-content" id="about-text-view" data-i18n="about_text">
                     İnnovativ Təşəbbüslər Platforması — bütün inkişafı sürətləndirən yeniliklər, yaradıcı düşüncəni və praktiki halları bir araya gətirən müstəqil təşəbbüsdür. Fəaliyyətimizin ideyalarının gücünə, insan potensialının sərhədsizliyinə və sosial fayda yaradan layihələrin dəyərinə inam dayanır. Bu platformalar üçün elmi, yaradıcı və təşkilati mühitin formalaşdırılmasına qarşı məqsəd qoyur. Bizim üçün innovasiya yalnız texnologiya deyil. İnnovasiya - düşüncə tərzi, problemlərə yeni baxış, cəmiyyət üçün fayda yaradan dizaynlı.
                 </div>
-                <h2 class="section-title">Təşkilatın Sədri</h2>
+                <h2 class="section-title" data-i18n="leader_sec_title">Təşkilatın Sədri</h2>
                 <div class="about-card">
                     <img src="indir.jpg" alt="Əşrəf Əhmədov">
                     <div>
                         <h3 style="color:#0b1e3a; font-size:18px; margin-bottom:5px;">Əşrəf Əhmədov</h3>
-                        <p style="margin-bottom:10px; font-weight:600; color:#1e3a8a;">"İnnovativ Təşəbbüslər" İctimai Birliyinin sədri</p>
-                        <p style="margin-bottom:12px;">Təşkilatımız sədr Əşrəf Əhmədovun rəhbərliyi ilə gənclər arasında vətənpərvərlik ruhunun yüksəldilməsi istiqamətində uğurlu layihələr həyata keçirir.</p>
+                        <p style="margin-bottom:10px; font-weight:600; color:#1e3a8a;" data-i18n="leader_title">"İnnovativ Təşəbbüslər" İctimai Birliyinin sədri</p>
+                        <p style="margin-bottom:12px;" data-i18n="leader_desc">Təşkilatımız sədr Əşrəf Əhmədovun rəhbərliyi ilə gənclər arasında vətənpərvərlik ruhunun yüksəldilməsi istiqamətində uğurlu layihələr həyata keçirir.</p>
                     </div>
                 </div>
             </div>
@@ -246,22 +259,22 @@
         <div id="page-tedbirler" class="page">
             <section class="hero">
                 <div class="hero-content">
-                    <h1>Birliyin Tədbirləri</h1>
-                    <p>Müdafiə Nazirliyi, media və təhsil müəssisələri ilə birgə keçirilən tədbirlər</p>
+                    <h1 data-i18n="events_hero_title">Birliyin Tədbirləri</h1>
+                    <p data-i18n="events_hero_desc">Müdafiə Nazirliyi, media və təhsil müəssisələri ilə birgə keçirilən tədbirlər</p>
                 </div>
             </section>
             <div class="container">
                 <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="Tədbirlərdə axtarış..." onkeyup="searchEvents()">
+                    <input type="text" id="searchInput" placeholder="Tədbirlərdə axtarış..." data-i18n-placeholder="search_ph" onkeyup="searchEvents()">
                 </div>
 
-                <h2 class="section-title">Həyata Keçirilən Tədbirlər</h2>
+                <h2 class="section-title" data-i18n="events_list_title">Həyata Keçirilən Tədbirlər</h2>
                 <div class="events-list" id="events-container-view">
                     <div class="event-row">
                         <img src="1021010.jpg" alt="Bayrağa sədaqət andı">
                         <div class="event-info">
-                            <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="event-title-link">Bayrağa sədaqət andı</a>
-                            <span class="event-desc">Məktəblərdə vətənpərvərlik ruhunun aşılanması məqsədilə keçirilən tədbir.</span>
+                            <a href="https://mod.gov.az/az/pre/22951.html" target="_blank" class="event-title-link" data-i18n="ev1_title">Bayrağa sədaqət andı</a>
+                            <span class="event-desc" data-i18n="ev1_desc">Məktəblərdə vətənpərvərlik ruhunun aşılanması məqsədilə keçirilən tədbir.</span>
                             <div class="share-box">
                                 <a href="https://api.whatsapp.com/send?text=Bayrağa+sədaqət+andı" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
                                 <a href="https://t.me/share/url?url=https://mod.gov.az/az/pre/22951.html&text=Bayrağa+sədaqət+andı" target="_blank" class="share-btn share-telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
@@ -271,8 +284,8 @@
                     <div class="event-row">
                         <img src="221.jpg" alt="Milli Vətənpərvərlik Tədbirlərimiz">
                         <div class="event-info">
-                            <a href="https://qht.az/details/az/28080" target="_blank" class="event-title-link">Milli Vətənpərvərlik Tədbirlərimiz</a>
-                            <span class="event-desc">Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</span>
+                            <a href="https://qht.az/details/az/28080" target="_blank" class="event-title-link" data-i18n="ev2_title">Milli Vətənpərvərlik Tədbirlərimiz</a>
+                            <span class="event-desc" data-i18n="ev2_desc">Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.</span>
                             <div class="share-box">
                                 <a href="https://api.whatsapp.com/send?text=Milli+Vətənpərvərlik+Tədbirlərimiz" target="_blank" class="share-btn share-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
                                 <a href="https://t.me/share/url?url=https://qht.az/details/az/28080&text=Milli+Vətənpərvərlik+Tədbirlərimiz" target="_blank" class="share-btn share-telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
@@ -287,8 +300,8 @@
         <div id="page-qalereya" class="page">
             <section class="hero">
                 <div class="hero-content">
-                    <h1>Foto Qalereya</h1>
-                    <p>Tədbir və fəaliyyətlərimizdən fotoşəkillər</p>
+                    <h1 data-i18n="gallery_hero_title">Foto Qalereya</h1>
+                    <p data-i18n="gallery_hero_desc">Tədbir və fəaliyyətlərimizdən fotoşəkillər</p>
                 </div>
             </section>
             <div class="container">
@@ -298,11 +311,11 @@
                     
                     <div class="slide active-slide">
                         <img src="221.jpg" alt="Foto 1">
-                        <div class="slide-caption"><h3>Məktəblilərlə Keçirilən Maarifləndirmə Tədbiri</h3></div>
+                        <div class="slide-caption"><h3 data-i18n="slide1_cap">Məktəblilərlə Keçirilən Maarifləndirmə Tədbiri</h3></div>
                     </div>
                     <div class="slide">
                         <img src="1010.jpg" alt="Foto 2">
-                        <div class="slide-caption"><h3>Gənclər və Tələbələrlə İnteraktiv Görüş</h3></div>
+                        <div class="slide-caption"><h3 data-i18n="slide2_cap">Gənclər və Tələbələrlə İnteraktiv Görüş</h3></div>
                     </div>
                 </div>
             </div>
@@ -312,26 +325,26 @@
         <div id="page-elaqe" class="page">
             <section class="hero">
                 <div class="hero-content">
-                    <h1>Bizimlə Əlaqə</h1>
-                    <p>"İnnovativ Təşəbbüslər" İctimai Birliyi ilə əlaqə saxlayın</p>
+                    <h1 data-i18n="contact_hero_title">Bizimlə Əlaqə</h1>
+                    <p data-i18n="contact_hero_desc">"İnnovativ Təşəbbüslər" İctimai Birliyi ilə əlaqə saxlayın</p>
                 </div>
             </section>
             <div class="container">
                 <div class="contact-wrapper">
                     <div class="contact-info-box">
-                        <h2 class="section-title" style="border:none; padding:0; margin-bottom:15px;">Əlaqə Məlumatları</h2>
-                        <div class="contact-item"><i class="fa-solid fa-user-tie"></i><span id="contact-leader-view">Sədr: Əşrəf Əhmədov</span></div>
-                        <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span id="contact-address-view">Bakı şəhəri, Azərbaycan</span></div>
+                        <h2 class="section-title" style="border:none; padding:0; margin-bottom:15px;" data-i18n="contact_info_title">Əlaqə Məlumatları</h2>
+                        <div class="contact-item"><i class="fa-solid fa-user-tie"></i><span id="contact-leader-view" data-i18n="contact_leader">Sədr: Əşrəf Əhmədov</span></div>
+                        <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span id="contact-address-view" data-i18n="contact_address">Bakı şəhəri, Azərbaycan</span></div>
                     </div>
                     <div class="contact-box">
                         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted) { handleFormSuccess(); }"></iframe>
                         <form id="contact-form" action="https://formspree.io/f/xljrjgpp" method="POST" target="hidden_iframe" onsubmit="isSubmitted=true;">
-                            <input type="text" name="name" placeholder="Ad və Soyadınız" required>
-                            <input type="tel" name="phone" placeholder="Əlaqə nömrəniz" required>
-                            <textarea name="message" rows="4" placeholder="Mesajınızı bura yazın..." required></textarea>
-                            <button type="submit">Göndər</button>
+                            <input type="text" name="name" placeholder="Ad və Soyadınız" data-i18n-placeholder="form_name_ph" required>
+                            <input type="tel" name="phone" placeholder="Əlaqə nömrəniz" data-i18n-placeholder="form_phone_ph" required>
+                            <textarea name="message" rows="4" placeholder="Mesajınızı bura yazın..." data-i18n-placeholder="form_msg_ph" required></textarea>
+                            <button type="submit" data-i18n="form_submit_btn">Göndər</button>
                         </form>
-                        <p id="success-msg">Mesajınız uğurla göndərildi! 🎉</p>
+                        <p id="success-msg" data-i18n="form_success">Mesajınız uğurla göndərildi! 🎉</p>
                     </div>
                 </div>
             </div>
@@ -424,12 +437,215 @@
 
     <footer>
         <div class="container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-            <span>© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi. Bütün hüquqlar qorunur.</span>
+            <span data-i18n="footer_rights">© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi. Bütün hüquqlar qorunur.</span>
             <a href="https://www.facebook.com/groups/436968776359919/user/100064714507365/?locale=az_AZ" target="_blank" class="social-link"><i class="fa-brands fa-facebook"></i></a>
         </div>
     </footer>
 
     <script>
+        // --- DİL TƏRCÜMƏ Lüğəti ---
+        const translations = {
+            az: {
+                nav_home: "Ana Səhifə",
+                nav_about: "Haqqında",
+                nav_events: "Tədbirlər",
+                nav_gallery: "Qalereya",
+                nav_contact: "Əlaqə",
+                hero_title: '"İnnovativ Təşəbbüslər"<br>Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi',
+                hero_desc: "Gənclərin milli-mənəvi ruhda tərbiyəsi, vətənpərvərlik və innovativ təhsil təşəbbüslərinin dəstəklənməsi platforması.",
+                hero_btn: "Tədbirlərimizlə Tanış Olun",
+                idea_title: "💡 Gələcəyin İdeya Generatoru",
+                idea_desc: "Düyməni bas və təşkilatımız üçün unikal innovativ layihə ideyası kəşf et!",
+                idea_output: "İdeya yaratmaq üçün aşağıdakı düyməni klikləyin...",
+                idea_btn: "Yeni İdeya yarat",
+                dq_title: "❓ Günün Sualı",
+                dq_question: "Məktəblilərdə kitaba və mütaliəyə marağı necə artıra bilərik?",
+                dq_name_ph: "Ad və Soyadınız...",
+                dq_text_ph: "Sənin fikrin və ya təklifin...",
+                dq_submit_btn: "Fikrimi Göndər",
+                dq_answers_title: "İştirakçıların Fikirləri:",
+                dq_no_answers: "Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!",
+                featured_title: "Önə Çıxan Tədbir və Xəbərlər",
+                card1_title: "Milli Vətənpərvərlik Tədbirlərimiz",
+                card1_desc: "Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.",
+                card2_title: "Bayrağa Sədaqət Andı Tədbiri",
+                card2_desc: "Məktəblərdə Bayrağa Sədaqət Andı və Sədaqət Möhürünün tətbiqi.",
+                card3_title: "Gənclər ilə İnteraktiv Görüşlər",
+                card3_desc: "Gənclərin inkişafı istiqamətində həyata keçirilən təşəbbüslər.",
+                article_link: "QHT.az Məqaləsi",
+                mod_link: "MOD Rəsmi Xəbəri",
+                day_link: "Day.az Müsahibəsi",
+                about_hero_title: "Təşkilat Haqqında",
+                about_hero_desc: '"İnnovativ Təşəbbüslər" Sosial və İqtisadi İnkişafa Yardım İctimai Birliyi',
+                about_sec_title: "Haqqımızda",
+                about_text: "İnnovativ Təşəbbüslər Platforması — bütün inkişafı sürətləndirən yeniliklər, yaradıcı düşüncəni və praktiki halları bir araya gətirən müstəqil təşəbbüsdür. Fəaliyyətimizin ideyalarının gücünə, insan potensialının sərhədsizliyinə və sosial fayda yaradan layihələrin dəyərinə inam dayanır. Bu platformalar üçün elmi, yaradıcı və təşkilati mühitin formalaşdırılmasına qarşı məqsəd qoyur. Bizim üçün innovasiya yalnız texnologiya deyil. İnnovasiya - düşüncə tərzi, problemlərə yeni baxış, cəmiyyət üçün fayda yaradan dizaynlı.",
+                leader_sec_title: "Təşkilatın Sədri",
+                leader_title: '"İnnovativ Təşəbbüslər" İctimai Birliyinin sədri',
+                leader_desc: "Təşkilatımız sədr Əşrəf Əhmədovun rəhbərliyi ilə gənclər arasında vətənpərvərlik ruhunun yüksəldilməsi istiqamətində uğurlu layihələr həyata keçirir.",
+                events_hero_title: "Birliyin Tədbirləri",
+                events_hero_desc: "Müdafiə Nazirliyi, media və təhsil müəssisələri ilə birgə keçirilən tədbirlər",
+                search_ph: "Tədbirlərdə axtarış...",
+                events_list_title: "Həyata Keçirilən Tədbirlər",
+                ev1_title: "Bayrağa sədaqət andı",
+                ev1_desc: "Məktəblərdə vətənpərvərlik ruhunun aşılanması məqsədilə keçirilən tədbir.",
+                ev2_title: "Milli Vətənpərvərlik Tədbirlərimiz",
+                ev2_desc: "Məktəblilər və gənclər arasında keçirilən maarifləndirici görüşlər.",
+                gallery_hero_title: "Foto Qalereya",
+                gallery_hero_desc: "Tədbir və fəaliyyətlərimizdən fotoşəkillər",
+                slide1_cap: "Məktəblilərlə Keçirilən Maarifləndirmə Tədbiri",
+                slide2_cap: "Gənclər və Tələbələrlə İnteraktiv Görüş",
+                contact_hero_title: "Bizimlə Əlaqə",
+                contact_hero_desc: '"İnnovativ Təşəbbüslər" İctimai Birliyi ilə əlaqə saxlayın',
+                contact_info_title: "Əlaqə Məlumatları",
+                contact_leader: "Sədr: Əşrəf Əhmədov",
+                contact_address: "Bakı şəhəri, Azərbaycan",
+                form_name_ph: "Ad və Soyadınız",
+                form_phone_ph: "Əlaqə nömrəniz",
+                form_msg_ph: "Mesajınızı bura yazın...",
+                form_submit_btn: "Göndər",
+                form_success: "Mesajınız uğurla göndərildi! 🎉",
+                footer_rights: '© 2026 "İnnovativ Təşəbbüslər" İctimai Birliyi. Bütün hüquqlar qorunur.'
+            },
+            en: {
+                nav_home: "Home",
+                nav_about: "About",
+                nav_events: "Events",
+                nav_gallery: "Gallery",
+                nav_contact: "Contact",
+                hero_title: '"Innovative Initiatives"<br>Public Association for Social and Economic Development Assistance',
+                hero_desc: "A platform for supporting youth national-spiritual education, patriotism, and innovative educational initiatives.",
+                hero_btn: "Explore Our Events",
+                idea_title: "💡 Future Idea Generator",
+                idea_desc: "Click the button and discover a unique innovative project idea for our organization!",
+                idea_output: "Click the button below to generate an idea...",
+                idea_btn: "Generate New Idea",
+                dq_title: "❓ Question of the Day",
+                dq_question: "How can we increase students' interest in books and reading?",
+                dq_name_ph: "Your Name and Surname...",
+                dq_text_ph: "Your opinion or suggestion...",
+                dq_submit_btn: "Submit Opinion",
+                dq_answers_title: "Participant Opinions:",
+                dq_no_answers: "No opinions have been expressed yet. Be the first to write!",
+                featured_title: "Featured Events & News",
+                card1_title: "National Patriotism Events",
+                card1_desc: "Educational meetings held among schoolchildren and youth.",
+                card2_title: "Oath of Allegiance to the Flag",
+                card2_desc: "Implementation of the Flag Oath and Seal in schools.",
+                card3_title: "Interactive Youth Meetings",
+                card3_desc: "Initiatives implemented towards youth development.",
+                article_link: "QHT.az Article",
+                mod_link: "MOD Official News",
+                day_link: "Day.az Interview",
+                about_hero_title: "About the Organization",
+                about_hero_desc: '"Innovative Initiatives" Public Association for Social and Economic Development Assistance',
+                about_sec_title: "About Us",
+                about_text: "Innovative Initiatives Platform is an independent initiative bringing together accelerators of development, creative thinking, and practical cases. Belief in the power of ideas, boundless human potential, and the value of socially beneficial projects stands behind our activities. It aims to form a scientific, creative, and organizational environment for these platforms. For us, innovation is not just technology. Innovation is a mindset, a new perspective on problems, and design creating societal value.",
+                leader_sec_title: "Chairman of the Organization",
+                leader_title: 'Chairman of "Innovative Initiatives" Public Association',
+                leader_desc: "Under the leadership of Chairman Ashraf Ahmadov, our organization implements successful projects aimed at raising the spirit of patriotism among youth.",
+                events_hero_title: "Association Events",
+                events_hero_desc: "Events held jointly with the Ministry of Defense, media, and educational institutions",
+                search_ph: "Search events...",
+                events_list_title: "Implemented Events",
+                ev1_title: "Oath of allegiance to the flag",
+                ev1_desc: "An event held to instill a spirit of patriotism in schools.",
+                ev2_title: "Our National Patriotism Events",
+                ev2_desc: "Educational meetings held among schoolchildren and youth.",
+                gallery_hero_title: "Photo Gallery",
+                gallery_hero_desc: "Photos from our events and activities",
+                slide1_cap: "Awareness Event Held with Schoolchildren",
+                slide2_cap: "Interactive Meeting with Youth and Students",
+                contact_hero_title: "Contact Us",
+                contact_hero_desc: 'Get in touch with "Innovative Initiatives" Public Association',
+                contact_info_title: "Contact Information",
+                contact_leader: "Chairman: Ashraf Ahmadov",
+                contact_address: "Baku city, Azerbaijan",
+                form_name_ph: "Your Name and Surname",
+                form_phone_ph: "Your Phone Number",
+                form_msg_ph: "Write your message here...",
+                form_submit_btn: "Send",
+                form_success: "Your message was sent successfully! 🎉",
+                footer_rights: '© 2026 "Innovative Initiatives" Public Association. All rights reserved.'
+            },
+            ru: {
+                nav_home: "Главная",
+                nav_about: "О нас",
+                nav_events: "Мероприятия",
+                nav_gallery: "Галерея",
+                nav_contact: "Контакты",
+                hero_title: 'Общественное объединение содействия социально-экономическому развитию<br>"Инновационные инициативы"',
+                hero_desc: "Платформа поддержки духовно-нравственного воспитания молодежи, патриотизма и инновационных образовательных инициатив.",
+                hero_btn: "Ознакомьтесь с нашими мероприятиями",
+                idea_title: "💡 Генератор идей будущего",
+                idea_desc: "Нажмите кнопку и откройте для себя уникальную инновационную идею проекта для нашей организации!",
+                idea_output: "Нажмите кнопку ниже, чтобы сгенерировать идею...",
+                idea_btn: "Создать новую идею",
+                dq_title: "❓ Вопрос дня",
+                dq_question: "Как мы можем повысить интерес школьников к книгам и чтению?",
+                dq_name_ph: "Ваше имя и фамилия...",
+                dq_text_ph: "Ваше мнение или предложение...",
+                dq_submit_btn: "Отправить мнение",
+                dq_answers_title: "Мнения участников:",
+                dq_no_answers: "Мнений пока нет. Напишите первым!",
+                featured_title: "Избранные мероприятия и новости",
+                card1_title: "Мероприятия национального патриотизма",
+                card1_desc: "Познавательные встречи среди школьников и молодежи.",
+                card2_title: "Присяга на верность флагу",
+                card2_desc: "Внедрение присяги и печати верности флагу в школах.",
+                card3_title: "Интерактивные встречи с молодежью",
+                card3_desc: "Инициативы, реализуемые в направлении развития молодежи.",
+                article_link: "Статья QHT.az",
+                mod_link: "Официальная новость MOD",
+                day_link: "Интервью Day.az",
+                about_hero_title: "Об организации",
+                about_hero_desc: 'Общественное объединение содействия социально-экономическому развитию "Инновационные инициативы"',
+                about_sec_title: "О нас",
+                about_text: "Платформа инновационных инициатив — это независимая инициатива, объединяющая ускорители развития, творческое мышление и практические кейсы. В основе нашей деятельности лежит вера в силу идей, безграничный человеческий потенциал и ценность социально полезных проектов. Она направлена на формирование научной, творческой и организационной среды для этих платформ. Для нас инновация — это не просто технология. Инновация — это образ мышления, новый взгляд на проблемы и дизайн, приносящий пользу обществу.",
+                leader_sec_title: "Председатель организации",
+                leader_title: 'Председатель ОО "Инновационные инициативы"',
+                leader_desc: "Под руководством председателя Ашрафа Ахмедова наша организация реализует успешные проекты, направленные на повышение духа патриотизма среди молодежи.",
+                events_hero_title: "Мероприятия ассоциации",
+                events_hero_desc: "Мероприятия, проводимые совместно с Министерством обороны, СМИ и учебными заведениями",
+                search_ph: "Поиск мероприятий...",
+                events_list_title: "Реализованные мероприятия",
+                ev1_title: "Присяга верности флагу",
+                ev1_desc: "Мероприятие, проведенное с целью привития духа патриотизма в школах.",
+                ev2_title: "Наши мероприятия по национальному патриотизму",
+                ev2_desc: "Познавательные встречи среди школьников и молодежи.",
+                gallery_hero_title: "Фотогалерея",
+                gallery_hero_desc: "Фотографии с наших мероприятий и деятельности",
+                slide1_cap: "Просветительское мероприятие со школьниками",
+                slide2_cap: "Интерактивная встреча с молодежью и студентами",
+                contact_hero_title: "Свяжитесь с нами",
+                contact_hero_desc: 'Свяжитесь с Общественным объединением "Инновационные инициативы"',
+                contact_info_title: "Контактная информация",
+                contact_leader: "Председатель: Ашраф Ахмедов",
+                contact_address: "город Баку, Азербайджан",
+                form_name_ph: "Ваше имя и фамилия",
+                form_phone_ph: "Ваш номер телефона",
+                form_msg_ph: "Напишите ваше сообщение здесь...",
+                form_submit_btn: "Отправить",
+                form_success: "Ваше сообщение успешно отправлено! 🎉",
+                footer_rights: '© 2026 Общественное объединение "Инновационные инициативы". Все права защищены.'
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem("siteLang", lang);
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                let key = el.getAttribute("data-i18n");
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+                let key = el.getAttribute("data-i18n-placeholder");
+                if (translations[lang] && translations[lang][key]) {
+                    el.setAttribute("placeholder", translations[lang][key]);
+                }
+            });
+        }
+
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('show'); }
 
         function openPage(pageName, element) {
@@ -458,15 +674,34 @@
 
         // Gələcəyin İdeya Generatoru
         function generateIdea() {
-            let subjects = ["Məktəblilər arasında", "Gənclər üçün", "Tələbələr arasında", "Bölgələrdə", "Onlayn platformada"];
-            let actions = ["süni intellekt yönümlü", "vətənpərvərlik mövzusunda", "ekoloji təmiz", "intellektual bilik yarışması", "könüllü sosial layihə"];
-            let results = ["intellektual inkişafa təkan verəcək", "liderlik bacarıqlarını artıracaq", "milli-mənəvi dəyərləri gücləndirəcək", "yenilikçi düşüncəni formalaşdıracaq"];
+            let lang = localStorage.getItem("siteLang") || "az";
+            let subjects, actions, results;
+            
+            if(lang === 'en') {
+                subjects = ["Among schoolchildren", "For youth", "Among students", "In regions", "On online platforms"];
+                actions = ["AI-oriented", "patriotic themed", "eco-friendly", "intellectual quiz", "volunteer social project"];
+                results = ["will boost intellectual development", "will enhance leadership skills", "will strengthen national-spiritual values", "will shape innovative thinking"];
+            } else if(lang === 'ru') {
+                subjects = ["Среди школьников", "Для молодежи", "Среди студентов", "В регионах", "На онлайн-платформе"];
+                actions = ["с акцентом на ИИ", "патриотической тематики", "экологически чистый", "интеллектуальная викторина", "волонтерский социальный проект"];
+                results = ["стимулирует интеллектуальное развитие", "повысит лидерские навыки", "укрепит национально-духовные ценности", "сформирует инновационное мышление"];
+            } else {
+                subjects = ["Məktəblilər arasında", "Gənclər üçün", "Tələbələr arasında", "Bölgələrdə", "Onlayn platformada"];
+                actions = ["süni intellekt yönümlü", "vətənpərvərlik mövzusunda", "ekoloji təmiz", "intellektual bilik yarışması", "könüllü sosial layihə"];
+                results = ["intellektual inkişafa təkan verəcək", "liderlik bacarıqlarını artıracaq", "milli-mənəvi dəyərləri gücləndirəcək", "yenilikçi düşüncəni formalaşdıracaq"];
+            }
 
             let rand1 = subjects[Math.floor(Math.random() * subjects.length)];
             let rand2 = actions[Math.floor(Math.random() * actions.length)];
             let rand3 = results[Math.floor(Math.random() * results.length)];
 
-            document.getElementById("ideaOutputText").innerText = `Sənin İdeyan: ${rand1} ${rand2} təşkil etmək və bu layihə gənclərdə ${rand3}!`;
+            if(lang === 'en') {
+                document.getElementById("ideaOutputText").innerText = `Your Idea: Organize ${rand1} a ${rand2} and this project ${rand3}!`;
+            } else if(lang === 'ru') {
+                document.getElementById("ideaOutputText").innerText = `Ваша идея: Организовать ${rand1} ${rand2} и этот проект ${rand3}!`;
+            } else {
+                document.getElementById("ideaOutputText").innerText = `Sənin İdeyan: ${rand1} ${rand2} təşkil etmək və bu layihə gənclərdə ${rand3}!`;
+            }
         }
 
         // Günün Sualına Rəy Göndərmək
@@ -491,9 +726,11 @@
         function renderPublicAnswers() {
             let container = document.getElementById("publicAnswersContainer");
             let answers = JSON.parse(localStorage.getItem("savedAnswers") || "[]");
+            let lang = localStorage.getItem("siteLang") || "az";
             
             if(answers.length === 0) {
-                container.innerHTML = "<p style='font-size:13px; color:#64748b;'>Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!</p>";
+                let noText = lang === 'en' ? "No opinions yet. Be the first!" : (lang === 'ru' ? "Мнений пока нет. Напишите первым!" : "Hələ heç bir rəy bildirilməyib. İlk rəyi sən yaz!");
+                container.innerHTML = `<p style='font-size:13px; color:#64748b;'>${noText}</p>`;
                 return;
             }
 
@@ -582,6 +819,10 @@
         }
 
         window.onload = function() {
+            let savedLang = localStorage.getItem("siteLang") || "az";
+            document.getElementById("langSelector").value = savedLang;
+            changeLanguage(savedLang);
+
             if(localStorage.getItem("homeTitle")) document.getElementById("home-hero-title").innerHTML = localStorage.getItem("homeTitle");
             if(localStorage.getItem("homeDesc")) document.getElementById("home-hero-desc").innerText = localStorage.getItem("homeDesc");
             if(localStorage.getItem("aboutText")) document.getElementById("about-text-view").innerText = localStorage.getItem("aboutText");
@@ -687,7 +928,7 @@
         function deleteEventItem(index) {
             let rows = document.querySelectorAll("#events-container-view .event-row");
             if(rows[index]) {
-                rows[index].remove();
+                rows.remove();
                 localStorage.setItem("savedEvents", document.getElementById("events-container-view").innerHTML);
                 renderAdminEventsList();
                 alert("Tədbir silindi!");
