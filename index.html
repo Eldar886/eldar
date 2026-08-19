@@ -140,9 +140,42 @@ footer span { font-size: 13px; color: #64748b; }
     .nav-links li { width: 100%; }
     .nav-links a { display: block; padding: 15px 25px; font-size: 16px; border-radius: 0; }
 }
+        .share-buttons-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px; /* Ehtiyaca görə dəyişə bilərsən */
+}
+.share-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out, opacity 0.2s;
+}
+.share-icon.fb { background: #1877f2; }
+.share-icon.wa { background: #25d366; }
+.share-icon.tg { background: #0088cc; }
+.share-icon.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+.share-icon:hover { 
+    transform: scale(1.1); 
+    opacity: 0.9; 
+    color: white;
+}
     </style>
 </head>
 <body>
+    <div class="share-buttons-box">
+    <a href="#" class="share-icon fb" onclick="shareSocial('facebook', event)"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" class="share-icon wa" onclick="shareSocial('whatsapp', event)"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" class="share-icon tg" onclick="shareSocial('telegram', event)"><i class="fab fa-telegram-plane"></i></a>
+    <a href="#" class="share-icon ig" onclick="shareSocial('instagram', event)"><i class="fab fa-instagram"></i></a>
+</div>
 
     <div class="content-wrap">
         <header>
@@ -1006,6 +1039,29 @@ footer span { font-size: 13px; color: #64748b; }
             setTimeout(() => { msg.style.display = "none"; }, 5000);
             isSubmitted = false;
         }
+        function shareSocial(platform, event) {
+    event.preventDefault(); 
+    const currentUrl = encodeURIComponent(window.location.href); 
+    const text = encodeURIComponent("İnnovativ Təşəbbüslər İctimai Birliyi - Tədbirdən görüntülər:");
+    
+    let shareUrl = "";
+
+    if (platform === 'facebook') {
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+    } else if (platform === 'whatsapp') {
+        shareUrl = `https://api.whatsapp.com/send?text=${text}%20${currentUrl}`;
+    } else if (platform === 'telegram') {
+        shareUrl = `https://t.me/share/url?url=${currentUrl}&text=${text}`;
+    } else if (platform === 'instagram') {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Saytın linki kopyalandı! Instagram hekayəsində və ya mesajda paylaşa bilərsən.");
+        return;
+    }
+
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+}
     </script>
 </body>
 </html>
