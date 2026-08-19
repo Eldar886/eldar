@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
        
-       * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+      * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
 body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
 .content-wrap { flex: 1; }
 .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
@@ -38,8 +38,16 @@ nav { display: flex; align-items: center; justify-content: space-between; positi
 .page.active { display: block; animation: fadeIn 0.3s ease-in-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-.hero { background: linear-gradient(rgba(11, 30, 58, 0.90), rgba(11, 30, 58, 0.90)), url('221.jpg') center/cover; color: white; padding: 85px 20px; text-align: left; margin-bottom: 40px; }
+/* Hero Bölməsi (Sola çəkilib və hündürlüyü artırılıb) */
+.hero {
+    background: linear-gradient(rgba(11, 30, 58, 0.90), rgba(11, 30, 58, 0.90)), url('221.jpg') center top 20% / cover;
+    color: white;
+    padding: 150px 20px;
+    text-align: left;
+    margin-bottom: 40px;
+}
 .hero-content { max-width: 750px; margin: 0; padding-left: 50px; }
+
 .hero h1 { font-size: 30px; font-weight: 800; margin-bottom: 15px; }
 .hero p { font-size: 15px; opacity: 0.9; margin-bottom: 25px; }
 .btn-main { background-color: #1e3a8a; color: white; padding: 12px 28px; border-radius: 6px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; border: none; }
